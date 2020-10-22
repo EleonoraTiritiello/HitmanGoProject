@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Game_Manager
 {
     public class GameManager : MonoBehaviour
     {
 
-        #region VARIABLES
+        #region Public Variables
+
+        #endregion
+
+        #region Private Variables 
 
         #endregion
 
         public void Awake()
         {
-        
+
         }
 
         private void Update()
@@ -25,12 +28,13 @@ namespace ET.Game_Manager
 
         public void VictoryCondition()
         {
-        
+
         }
 
         public void LoseCondition()
         {
-        
+
         }
     }
 }
+
