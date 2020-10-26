@@ -528,9 +528,9 @@ TextureImporter:
       name: ICON UI 2_15
       rect:
         serializedVersion: 2
-        x: 0
+        x: 31
         y: 738
-        width: 826
+        width: 795
         height: 1030
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
