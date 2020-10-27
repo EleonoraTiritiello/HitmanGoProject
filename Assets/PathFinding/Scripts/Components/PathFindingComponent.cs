@@ -47,9 +47,10 @@ namespace HitmanGO
 
         #region Unity Callbacks
 
-        private void Awake()
+        private void Start()
         {
-            _currentNode = GridManager.GetInstance.GetNode(0, 0); //TODO: bisogna prendere le coordinate del player e convertirle in coordinate su griglia per settare il nodo iniziale
+            _currentNode = GridManager.GetInstance.GetNode(GridManager.GetInstance.GetGridPosition(transform.position, snapToNearestNode: true));
+            transform.position = new Vector3(_currentNode.transform.position.x, transform.position.y, _currentNode.transform.position.z);
             _targetNode = _currentNode;
         }
 
@@ -92,14 +93,23 @@ namespace HitmanGO
         /// <returns> Returns the connected <c> Node </c> if found, otherwise it returns <c> null </c> </returns>
         private Node GetAdjacentConnectedNode(Vector2Int direction)
         {
-            //Check all connections of the current Node
-            foreach (Connection connection in _currentNode.Connections)
-            {
-                //Check if the Node is in the correct direction
-                if (connection.To.GridPosition == _currentNode.GridPosition + direction)
-                    return connection.To;
-            }
+            if (_currentNode == null)
+                throw new NoNodeException($"The 'currentNode' of the 'PathFindingComponent' on the object '{name}' does not exist");
 
+            if (_currentNode.Connections == null)
+                throw new NodeConnectionException($"The 'currentNode' connection list of the 'PathFindingComponent' on the object '{name}' is non-existent");
+
+            if (_currentNode.Connections.Count > 0)
+            {
+                //Check all connections of the current Node
+                foreach (Connection connection in _currentNode.Connections)
+                {
+                    //Check if the Node is in the correct direction
+                    if (connection.To.GridPosition == _currentNode.GridPosition + direction)
+                        return connection.To;
+                }
+            }
+                
             return null;
         }
 

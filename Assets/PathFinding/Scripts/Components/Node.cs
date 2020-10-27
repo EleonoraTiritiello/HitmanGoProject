@@ -17,7 +17,7 @@ namespace HitmanGO
         /// <summary>
         /// With what color the Gizmos will draw the node and its connections
         /// </summary>
-        private Color _gizmosColor; //DEBUG
+        private Color _gizmosColor = Color.black; //DEBUG
 
         #endregion
 
@@ -56,7 +56,9 @@ namespace HitmanGO
             _gizmosColor = Random.ColorHSV(); //DEBUG
 
             AddToGrid();
-            CalculateGridPosition();
+
+            //Calculate the grid position of the Node using the global position of the object
+            GridPosition = GridManager.GetInstance.GetGridPosition(transform.position);
         }
 
         private void Start()
@@ -71,8 +73,7 @@ namespace HitmanGO
             Gizmos.color = _gizmosColor;
 
             //Draw the Node
-            if (GridPosition != null)
-                Gizmos.DrawWireCube(transform.position, Vector3.one * 0.1f);
+            Gizmos.DrawWireCube(transform.position, Vector3.one * 0.1f);
 
             //Draw the connections
             if (Connections != null && Connections.Count > 0)
@@ -95,27 +96,8 @@ namespace HitmanGO
         /// </summary>
         private void AddToGrid()
         {
-            if(!GridManager.GetInstance.Contains(this))
+            if (!GridManager.GetInstance.Contains(this))
                 GridManager.GetInstance.AddNode(this);
-        }
-
-        /// <summary>
-        /// Calculate the grid position of the <c> Node </c> using the global position of the object
-        /// </summary>
-        private void CalculateGridPosition()
-        {
-            int x = 0;
-            int y = 0;
-
-            //Divide the object's global coordinates by a defined value to get the grid coordinates
-            if ((int)transform.position.x % GridManager.GetInstance.WorldTransformDivider == 0)
-                x = (int)transform.position.x / GridManager.GetInstance.WorldTransformDivider;
-
-            if ((int)transform.position.z % GridManager.GetInstance.WorldTransformDivider == 0)
-                y = (int)transform.position.z / GridManager.GetInstance.WorldTransformDivider;
-
-            //Assign coordinates to the variable
-            GridPosition = new Vector2Int(x, y);
         }
 
         #region Connections Creation
@@ -143,10 +125,17 @@ namespace HitmanGO
         /// <param name="node"> The <c> Node </c> this <c> Node </c> connects to </param>
         private void CreateConnection(Node node)
         {
+            if (node == null)
+                throw new NoNodeException("You are trying to create a connection with a nonexistent node");
+
+            if (Connections == null)
+                throw new NodeConnectionException("The node connection list is non-existent");
+
             Connections.Add(new Connection(this, node));
 
             //Offset the connection to prevent them from overlapping when drawn in Gizmos
             node.ConnectionOffset = ConnectionOffset + new Vector3(0, 0.06f, 0); //DEBUG
+               
         }
 
         #endregion

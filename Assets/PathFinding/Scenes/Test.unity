@@ -1634,6 +1634,11 @@ PrefabInstance:
       propertyPath: _enabledConnections.Right
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8936032564691762506, guid: 357b56cf6b7dbe34280400de9ef845ac,
+        type: 3}
+      propertyPath: _enabledConnections.Up
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357b56cf6b7dbe34280400de9ef845ac, type: 3}
 --- !u!4 &1349483401 stripped
@@ -2488,7 +2493,7 @@ PrefabInstance:
     - target: {fileID: 5752930662186927935, guid: c33727f46e941b845b110805445ec985,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 5752930662186927935, guid: c33727f46e941b845b110805445ec985,
         type: 3}
@@ -2498,7 +2503,7 @@ PrefabInstance:
     - target: {fileID: 5752930662186927935, guid: c33727f46e941b845b110805445ec985,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.38
       objectReference: {fileID: 0}
     - target: {fileID: 5752930662186927935, guid: c33727f46e941b845b110805445ec985,
         type: 3}
@@ -2554,6 +2559,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6223602020259617900, guid: d5185774f6936354e89ce172295246aa,
+        type: 3}
+      propertyPath: WorldTransformDivider
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6223602020259617901, guid: d5185774f6936354e89ce172295246aa,
         type: 3}
       propertyPath: m_LocalPosition.x

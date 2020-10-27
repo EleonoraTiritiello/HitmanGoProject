@@ -36,6 +36,47 @@ namespace HitmanGO
         #region Public Methods
 
         /// <summary>
+        /// Converts global coordinates to grid coordinates
+        /// </summary>
+        /// <param name="worldPosition"> The position in world coordinates </param>
+        /// <returns> The position in grid coordinates </returns>
+        public Vector2Int GetGridPosition(Vector3 worldPosition, bool snapToNearestNode = false)
+        {
+            if (snapToNearestNode)
+            {
+                Node nearestNode = GetNearestNode(worldPosition);
+                return nearestNode.GridPosition;
+            }
+
+            Vector2Int gridPosition = Vector2Int.zero;
+
+            if ((int)worldPosition.x % WorldTransformDivider == 0)
+                gridPosition.x = (int)worldPosition.x / WorldTransformDivider;
+            else
+                throw new GridCoordinatesException($"An error occurred while converting the x of the global coordinates {worldPosition} to grid coordinates");
+
+            if ((int)worldPosition.z % WorldTransformDivider == 0)
+                gridPosition.y = (int)worldPosition.z / WorldTransformDivider;
+            else
+                throw new GridCoordinatesException($"An error occurred while converting the y of the global coordinates {worldPosition} to grid coordinates");
+
+            return gridPosition;
+        }
+
+        public Node GetNearestNode(Vector3 worldPosition)
+        {
+            Node _nearestNode = _nodes[0];
+
+            foreach (Node node in _nodes)
+            {
+                if (Vector3.Distance(worldPosition, node.transform.position) < Vector3.Distance(worldPosition, _nearestNode.transform.position))
+                    _nearestNode = node;
+            }
+
+            return _nearestNode;
+        }
+
+        /// <summary>
         /// Check if a <c> Node </c> is present in the list of nodes
         /// </summary>
         /// <param name="node"> A given <c> Node </c> </param>
@@ -63,9 +104,7 @@ namespace HitmanGO
                     return node;
             }
 
-            Debug.LogWarning(gridPosition);
-
-            return null;
+            throw new NoNodeException($"You are trying to get a nonexistent node in position {gridPosition}");
         }
 
         /// <summary>
