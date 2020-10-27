@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SB.HitmanGO
+namespace HitmanGO
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {

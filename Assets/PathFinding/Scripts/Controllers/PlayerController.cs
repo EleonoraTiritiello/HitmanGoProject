@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace SB.HitmanGO
+namespace HitmanGO
 {
     public class PlayerController : MonoBehaviour
     {
@@ -24,7 +24,6 @@ namespace SB.HitmanGO
 
         private PathFindingComponent _pfc;
 
-        private Vector3 _targetPosition;
         private bool _isMoving;
 
         #endregion
@@ -37,14 +36,12 @@ namespace SB.HitmanGO
         {
             if(_pfc == null) _pfc = GetComponent<PathFindingComponent>();
 
-            _targetPosition = transform.position;
             _isMoving = false;
         }
 
         private void Update()
         {
             CheckInputs();
-            Debug.Log(_targetPosition);
         }
 
         #endregion
@@ -55,70 +52,66 @@ namespace SB.HitmanGO
         {
             if (Input.GetKeyDown(MoveUpKey) && !_isMoving)
             {
-                TargetTopNode();
-                StopAllCoroutines();
-                StartCoroutine("MoveTowardsTargetPosition");
+                _pfc.SetTargetNode(_pfc.UpNode);
+
+                if (_pfc.GetTargetNode() != null)
+                {
+                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
+                }
             }
             else if (Input.GetKeyDown(MoveDownKey) && !_isMoving)
             {
-                TargetBottomNode();
-                StopAllCoroutines();
-                StartCoroutine("MoveTowardsTargetPosition");
+                _pfc.SetTargetNode(_pfc.DownNode);
+
+                if (_pfc.GetTargetNode() != null)
+                {
+                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
+                }
             }
             else if (Input.GetKeyDown(MoveLeftKey) && !_isMoving)
             {
-                TargetLeftNode();
-                StopAllCoroutines();
-                StartCoroutine("MoveTowardsTargetPosition");
+                _pfc.SetTargetNode(_pfc.LeftNode);
+
+                if (_pfc.GetTargetNode() != null)
+                {
+                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
+                }
             }
             else if (Input.GetKeyDown(MoveRightKey) && !_isMoving)
             {
-                TargetRightNode();
-                StopAllCoroutines();
-                StartCoroutine("MoveTowardsTargetPosition");
+                _pfc.SetTargetNode(_pfc.RightNode);
+
+                if (_pfc.GetTargetNode() != null)
+                {
+                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
+                }
             }
         }
 
-        private IEnumerator MoveTowardsTargetPosition()
+        private void StartMovementCoroutine(Vector3 targetPosition)
         {
+            StopAllCoroutines();
+            StartCoroutine(MoveTowards(targetPosition));
+        }
+
+        private IEnumerator MoveTowards(Vector3 targetPosition)
+        {
+            targetPosition.y += 0.5f;
+
             _isMoving = true;
 
-            while (Mathf.Abs(Vector3.Distance(transform.position, _targetPosition)) >= 1.5f) {
-                transform.Translate((_targetPosition - transform.position) * MovementSpeed * Time.deltaTime);
+            while (Mathf.Abs(Vector3.Distance(transform.position, targetPosition)) >= 1.5f) {
+                transform.Translate((targetPosition - transform.position) * MovementSpeed * Time.deltaTime);
                 yield return new WaitForEndOfFrame();
             }
 
-            transform.position = _targetPosition;
+            transform.position = targetPosition;
             _isMoving = false;
         }
-
-        #region Target Node
-
-        private void TargetTopNode()
-        {
-            _targetPosition = _pfc.GetNearestNodePosition(transform.localPosition, Vector3.forward);
-            Debug.LogWarning("Top Node");
-        }
-
-        private void TargetBottomNode()
-        {
-            _targetPosition = _pfc.GetNearestNodePosition(transform.localPosition, Vector3.back);
-            Debug.LogWarning("Bottom Node");
-        }
-
-        private void TargetLeftNode()
-        {
-            _targetPosition = _pfc.GetNearestNodePosition(transform.localPosition, Vector3.left);
-            Debug.LogWarning("Left Node");
-        }
-
-        private void TargetRightNode()
-        {
-            _targetPosition = _pfc.GetNearestNodePosition(transform.localPosition, Vector3.right);
-            Debug.LogWarning("Right Node");
-        }
-
-        #endregion
 
         #endregion
     }
