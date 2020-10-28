@@ -56,7 +56,7 @@ namespace HitmanGO
 
                 if (_pfc.GetTargetNode() != null)
                 {
-                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
                     _pfc.SetCurrentNode(_pfc.GetTargetNode());
                 }
             }
@@ -66,7 +66,7 @@ namespace HitmanGO
 
                 if (_pfc.GetTargetNode() != null)
                 {
-                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
                     _pfc.SetCurrentNode(_pfc.GetTargetNode());
                 }
             }
@@ -76,7 +76,7 @@ namespace HitmanGO
 
                 if (_pfc.GetTargetNode() != null)
                 {
-                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
                     _pfc.SetCurrentNode(_pfc.GetTargetNode());
                 }
             }
@@ -86,7 +86,7 @@ namespace HitmanGO
 
                 if (_pfc.GetTargetNode() != null)
                 {
-                    StartMovementCoroutine(_pfc.GetTargetNode().transform.position);
+                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
                     _pfc.SetCurrentNode(_pfc.GetTargetNode());
                 }
             }

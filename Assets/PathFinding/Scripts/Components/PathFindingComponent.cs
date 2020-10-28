@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace HitmanGO
 {
@@ -28,6 +29,25 @@ namespace HitmanGO
         /// </summary>
         public Node RightNode { get { return GetAdjacentConnectedNode(Vector2Int.right); } }
 
+        /// <summary>
+        /// Returns how many <c> PathFindingComponent </c> has as target node the same one that has this component
+        /// </summary>
+        public List<PathFindingComponent> TargetNodePopulation
+        {
+            get
+            {
+                List<PathFindingComponent> population = new List<PathFindingComponent>();
+
+                foreach (PathFindingComponent pfc in PathFindingManager.GetInstance.GetPFCList())
+                {
+                    if (pfc.GetTargetNode() == _targetNode)
+                        population.Add(pfc);
+                }
+
+                return population;
+            }
+        }
+
         #endregion
 
         #region Private Variables
@@ -47,6 +67,12 @@ namespace HitmanGO
 
         #region Unity Callbacks
 
+        private void Awake()
+        {
+            if (!PathFindingManager.GetInstance.Contains(this))
+                PathFindingManager.GetInstance.AddPFC(this);
+        }
+
         private void Start()
         {
             _currentNode = GridManager.GetInstance.GetNode(GridManager.GetInstance.GetGridPosition(transform.position, snapToNearestNode: true));
@@ -59,6 +85,50 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public Vector3 GetTargetPosition(bool dynamicArrangement)
+        {
+            if (!dynamicArrangement)
+                return _targetNode.transform.position;
+
+            List<PathFindingComponent> targetNodePopulation = TargetNodePopulation;
+
+            if (targetNodePopulation.Count <= 1)
+                return _targetNode.transform.position;
+
+            Vector3 targetPosition = Vector3.zero;
+            Vector3 otherElementPosition = Vector3.zero;
+
+            PathFindingComponent currentPFC;
+
+            for(int i = 0; i < targetNodePopulation.Count; i++)
+            {
+                currentPFC = targetNodePopulation[i];
+
+                if (currentPFC == this)
+                {
+                    float angle = 360f / targetNodePopulation.Count * i;
+
+                    targetPosition.x = Mathf.Cos(angle * Mathf.Deg2Rad);
+                    targetPosition.z = Mathf.Sin(angle * Mathf.Deg2Rad);
+
+                    targetPosition += _targetNode.transform.position;
+                }
+                else
+                {
+                    float angle = 360f / targetNodePopulation.Count * i;
+
+                    otherElementPosition.x = Mathf.Cos(angle * Mathf.Deg2Rad);
+                    otherElementPosition.z = Mathf.Sin(angle * Mathf.Deg2Rad);
+
+                    otherElementPosition += _targetNode.transform.position;
+
+                    currentPFC.transform.position = new Vector3(otherElementPosition.x, currentPFC.transform.position.y, otherElementPosition.z);
+                }
+            }
+
+            return targetPosition;
+        }
 
         /// <summary>
         /// Get the <c> Node </c> you want to get to
