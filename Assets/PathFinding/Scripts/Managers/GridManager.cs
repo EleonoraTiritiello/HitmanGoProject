@@ -36,6 +36,58 @@ namespace HitmanGO
         #region Public Methods
 
         /// <summary>
+        /// Get an array of nodes adjacent and connected to a given <c> Node </c>
+        /// </summary>
+        /// <param name="node"> The given <c> Node </c> </param>
+        /// <returns> An array of nodes </returns>
+        public Node[] GetAdjacentConnectedNodes(Node node)
+        {
+            if (node == null)
+                throw new NoNodeException($"You're trying to get a node connected to a node that doesn't exist");
+
+            if (node.Connections == null)
+                throw new NodeConnectionException($"You're trying to get a node connected to a node that doesn't have a connection list");
+
+            if (node.Connections.Count > 0)
+            {
+                List<Node> nodes = new List<Node>();
+
+                //Check all connections of the current Node
+                foreach (Connection connection in node.Connections)
+                {
+                    if (connection.To.GridPosition == node.GridPosition + Vector2Int.up
+                        || connection.To.GridPosition == node.GridPosition + Vector2Int.down
+                        || connection.To.GridPosition == node.GridPosition + Vector2Int.left
+                        || connection.To.GridPosition == node.GridPosition + Vector2Int.right)
+                        nodes.Add(connection.To);
+                }
+
+                return nodes.ToArray();
+            }
+            else
+                throw new NodeConnectionException($"You are trying to get a node connected to a node that has no connections"); 
+        }
+
+        /// <summary>
+        /// Get the adjacent <c> Node </c> and connected to a given <c> Node </c>
+        /// </summary>
+        /// <param name="node"> The given <c> Node </c> </param>
+        /// <param name="direction"> The direction in which to look for the <c> Node </c> </param>
+        /// <returns> The <c> Node </c> </returns>
+        public Node GetAdjacentConnectedNode(Node node, Vector2Int direction)
+        {
+            Node[] adjacentConnectedNodes = GetAdjacentConnectedNodes(node);
+
+            foreach (Node adjacentNode in adjacentConnectedNodes)
+            {
+                if (node.GridPosition + direction == adjacentNode.GridPosition)
+                    return adjacentNode;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Converts global coordinates to grid coordinates
         /// </summary>
         /// <param name="worldPosition"> The position in world coordinates </param>
@@ -63,6 +115,11 @@ namespace HitmanGO
             return gridPosition;
         }
 
+        /// <summary>
+        /// Get the <c> Node </c> closest to global coordinates
+        /// </summary>
+        /// <param name="worldPosition"> The global coordinates </param>
+        /// <returns> The closest <c> Node </c> </returns>
         public Node GetNearestNode(Vector3 worldPosition)
         {
             Node _nearestNode = _nodes[0];
@@ -96,13 +153,16 @@ namespace HitmanGO
         /// </summary>
         /// <param name="gridPosition"> The grid coordinates of the <c> Node </c> </param>
         /// <returns> Returns the <c> Node </c> if it is present in the list, otherwise it returns <c> null </c> </returns>
-        public Node GetNode(Vector2Int gridPosition)
+        public Node GetNode(Vector2Int gridPosition, bool bypassError = false)
         {
             foreach(Node node in _nodes)
             {
                 if (node.GridPosition == gridPosition)
                     return node;
             }
+
+            if (bypassError)
+                return null;
 
             throw new NoNodeException($"You are trying to get a nonexistent node in position {gridPosition}");
         }
@@ -113,9 +173,9 @@ namespace HitmanGO
         /// <param name="gridPositionX"> The x coordinate of the <c> Node </c> </param>
         /// /// <param name="gridPositionY"> The y coordinate of the <c> Node </c> </param>
         /// <returns> Returns the <c> Node </c> if it is present in the list, otherwise it returns <c> null </c> </returns>
-        public Node GetNode(int gridPositionX, int gridPositionY)
+        public Node GetNode(int gridPositionX, int gridPositionY, bool bypassError = false)
         {
-            return GetNode(new Vector2Int(gridPositionX, gridPositionY));
+            return GetNode(new Vector2Int(gridPositionX, gridPositionY), bypassError: bypassError);
         }
 
         #endregion

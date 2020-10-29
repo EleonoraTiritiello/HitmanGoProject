@@ -13,6 +13,7 @@ namespace HitmanGO
         /// <summary>
         /// Apply an offset to the Gizmos to prevent the lines from overlapping
         /// </summary>
+        [HideInInspector]
         public Vector3 ConnectionOffset = Vector3.zero; //DEBUG
         /// <summary>
         /// With what color the Gizmos will draw the node and its connections
@@ -42,7 +43,7 @@ namespace HitmanGO
         /// A structure that saves in which directions the node can connect to other nodes
         /// </summary>
         [SerializeField]
-        private EnabledConnections _enabledConnections; 
+        private EnabledConnections _enabledConnections = default; 
 
         #endregion
 
@@ -63,10 +64,9 @@ namespace HitmanGO
 
         private void Start()
         {
-            SetupConnections();
+            if (_enabledConnections.Up || _enabledConnections.Down || _enabledConnections.Left || _enabledConnections.Right)
+                StartConnectionsCreation();
         }
-
-        #region DEBUG
 
         private void OnDrawGizmos() //DEBUG
         {
@@ -75,17 +75,40 @@ namespace HitmanGO
             //Draw the Node
             Gizmos.DrawWireCube(transform.position, Vector3.one * 0.1f);
 
-            //Draw the connections
-            if (Connections != null && Connections.Count > 0)
+            if (Application.isPlaying)
             {
-                foreach (Connection connection in Connections)
+                //Draw the connections
+                if (Connections != null && Connections.Count > 0)
                 {
-                    Gizmos.DrawLine(connection.From.transform.position + ConnectionOffset, connection.To.transform.position + ConnectionOffset);
+                    foreach (Connection connection in Connections)
+                    {
+                        Gizmos.DrawLine(connection.From.transform.position + ConnectionOffset, connection.To.transform.position + ConnectionOffset);
+                    }
                 }
-            }
-        }
 
-        #endregion
+                Gizmos.color = Color.yellow;
+
+                //Draw connections error
+                if (_enabledConnections.Up)
+                    if (!GridManager.GetInstance.GetNode(GridPosition + Vector2Int.up, bypassError: true))
+                        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.4f);
+                if (_enabledConnections.Down)
+                    if (!GridManager.GetInstance.GetNode(GridPosition + Vector2Int.down, bypassError: true))
+                        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.4f);
+                if (_enabledConnections.Left)
+                    if (!GridManager.GetInstance.GetNode(GridPosition + Vector2Int.left, bypassError: true))
+                        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.4f);
+                if (_enabledConnections.Right)
+                    if (!GridManager.GetInstance.GetNode(GridPosition + Vector2Int.right, bypassError: true))
+                        Gizmos.DrawWireCube(transform.position, Vector3.one * 0.4f);
+            }
+
+            Gizmos.color = Color.yellow;
+
+            //Draw connections warning
+            if (!_enabledConnections.Up && !_enabledConnections.Down && !_enabledConnections.Left && !_enabledConnections.Right)
+                Gizmos.DrawWireCube(transform.position, Vector3.one * 0.4f);    
+        }
 
         #endregion
 
@@ -105,18 +128,49 @@ namespace HitmanGO
         /// <summary>
         /// Check which sides the <c> Node </c> can connect on and create the connections
         /// </summary>
-        private void SetupConnections()
+        private void StartConnectionsCreation()
         {
-            if (Connections == null) Connections = new List<Connection>();
+            List<Node> targetNodes = GetTargetNodes();
+            CreateConnections(targetNodes);
+            VerifyConnections();
+        }
+
+        /// <summary>
+        /// Try to get the nodes this <c> Node </c> needs to connect to
+        /// </summary>
+        /// <returns> The list of nodes </returns>
+        private List<Node> GetTargetNodes()
+        {
+            List<Node> targetNodes = new List<Node>();
 
             if (_enabledConnections.Up)
-                CreateConnection(GridManager.GetInstance.GetNode(GridPosition.x, GridPosition.y + 1));
+                targetNodes.Add(GridManager.GetInstance.GetNode(GridPosition + Vector2Int.up, bypassError: true));
             if (_enabledConnections.Down)
-                CreateConnection(GridManager.GetInstance.GetNode(GridPosition.x, GridPosition.y - 1));
+                targetNodes.Add(GridManager.GetInstance.GetNode(GridPosition + Vector2Int.down, bypassError: true));
             if (_enabledConnections.Left)
-                CreateConnection(GridManager.GetInstance.GetNode(GridPosition.x - 1, GridPosition.y));
+                targetNodes.Add(GridManager.GetInstance.GetNode(GridPosition + Vector2Int.left, bypassError: true));
             if (_enabledConnections.Right)
-                CreateConnection(GridManager.GetInstance.GetNode(GridPosition.x + 1, GridPosition.y));
+                targetNodes.Add(GridManager.GetInstance.GetNode(GridPosition + Vector2Int.right, bypassError: true));
+
+            return targetNodes;
+        }
+
+        /// <summary>
+        /// Create a connection between this <c> Node </c> and every <c> Node </c> in an array
+        /// </summary>
+        /// <param name="nodes"> The array of nodes </param>
+        private void CreateConnections(List<Node> nodes)
+        {
+            foreach (Node node in nodes)
+            {
+                if (node == null)
+                {
+                    Debug.LogWarning($"Failed to create a connection between node '{name}' and an adjacent node");
+                    continue;
+                }
+
+                CreateConnection(node);
+            }
         }
 
         /// <summary>
@@ -125,17 +179,23 @@ namespace HitmanGO
         /// <param name="node"> The <c> Node </c> this <c> Node </c> connects to </param>
         private void CreateConnection(Node node)
         {
-            if (node == null)
-                throw new NoNodeException("You are trying to create a connection with a nonexistent node");
-
             if (Connections == null)
-                throw new NodeConnectionException("The node connection list is non-existent");
+                Connections = new List<Connection>();
 
             Connections.Add(new Connection(this, node));
 
             //Offset the connection to prevent them from overlapping when drawn in Gizmos
             node.ConnectionOffset = ConnectionOffset + new Vector3(0, 0.06f, 0); //DEBUG
                
+        }
+
+        /// <summary>
+        /// Check if any connections have been created
+        /// </summary>
+        private void VerifyConnections()
+        {
+            if (Connections == null)
+                Debug.LogWarning($"The node '{name}' does not have a connection list");
         }
 
         #endregion

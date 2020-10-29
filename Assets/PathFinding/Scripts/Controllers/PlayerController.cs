@@ -37,6 +37,8 @@ namespace HitmanGO
             if(_pfc == null) _pfc = GetComponent<PathFindingComponent>();
 
             _isMoving = false;
+
+            if (_pfc.AdjustPosition == null) _pfc.AdjustPosition = StartMovementCoroutine;
         }
 
         private void Update()
@@ -51,46 +53,58 @@ namespace HitmanGO
         private void CheckInputs()
         {
             if (Input.GetKeyDown(MoveUpKey) && !_isMoving)
-            {
-                _pfc.SetTargetNode(_pfc.UpNode);
-
-                if (_pfc.GetTargetNode() != null)
-                {
-                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
-                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
-                }
-            }
+                MoveUp();
             else if (Input.GetKeyDown(MoveDownKey) && !_isMoving)
-            {
-                _pfc.SetTargetNode(_pfc.DownNode);
-
-                if (_pfc.GetTargetNode() != null)
-                {
-                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
-                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
-                }
-            }
+                MoveDown();
             else if (Input.GetKeyDown(MoveLeftKey) && !_isMoving)
-            {
-                _pfc.SetTargetNode(_pfc.LeftNode);
-
-                if (_pfc.GetTargetNode() != null)
-                {
-                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
-                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
-                }
-            }
+                MoveLeft();
             else if (Input.GetKeyDown(MoveRightKey) && !_isMoving)
-            {
-                _pfc.SetTargetNode(_pfc.RightNode);
+                MoveRight();
+        }
 
-                if (_pfc.GetTargetNode() != null)
-                {
-                    StartMovementCoroutine(_pfc.GetTargetPosition(true));
-                    _pfc.SetCurrentNode(_pfc.GetTargetNode());
-                }
+        #region Movement
+
+        private void MoveUp()
+        {
+            if (_pfc.UpNode != null)
+            {
+                _pfc.SetTargetNode.Invoke(_pfc.UpNode);
+                StartMovementCoroutine(_pfc.GetTargetPosition());
+                _pfc.SetCurrentNode.Invoke(_pfc.GetTargetNode());
             }
         }
+
+        private void MoveDown()
+        {
+            if (_pfc.DownNode != null)
+            {
+                _pfc.SetTargetNode.Invoke(_pfc.DownNode);
+                StartMovementCoroutine(_pfc.GetTargetPosition());
+                _pfc.SetCurrentNode.Invoke(_pfc.GetTargetNode());
+            }
+        }
+
+        private void MoveLeft()
+        {
+            if (_pfc.LeftNode != null)
+            {
+                _pfc.SetTargetNode.Invoke(_pfc.LeftNode);
+                StartMovementCoroutine(_pfc.GetTargetPosition());
+                _pfc.SetCurrentNode.Invoke(_pfc.GetTargetNode());
+            }
+        }
+
+        private void MoveRight()
+        {
+            if (_pfc.RightNode != null)
+            {
+                _pfc.SetTargetNode.Invoke(_pfc.RightNode);
+                StartMovementCoroutine(_pfc.GetTargetPosition());
+                _pfc.SetCurrentNode.Invoke(_pfc.GetTargetNode());
+            }
+        }
+
+        #region Coroutine
 
         private void StartMovementCoroutine(Vector3 targetPosition)
         {
@@ -112,6 +126,10 @@ namespace HitmanGO
             transform.position = targetPosition;
             _isMoving = false;
         }
+
+        #endregion
+
+        #endregion
 
         #endregion
     }

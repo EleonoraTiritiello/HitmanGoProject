@@ -681,6 +681,11 @@ PrefabInstance:
       propertyPath: _enabledConnections.Down
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8936032564691762506, guid: 357b56cf6b7dbe34280400de9ef845ac,
+        type: 3}
+      propertyPath: _enabledConnections.Left
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357b56cf6b7dbe34280400de9ef845ac, type: 3}
 --- !u!4 &557249516 stripped
@@ -3283,6 +3288,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _enabledConnections.Down
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8936032564691762506, guid: 357b56cf6b7dbe34280400de9ef845ac,
+        type: 3}
+      propertyPath: _enabledConnections.Right
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 357b56cf6b7dbe34280400de9ef845ac, type: 3}
