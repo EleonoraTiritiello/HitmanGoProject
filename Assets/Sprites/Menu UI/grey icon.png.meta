@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: d3efd6b084ab3f54b8545dbd15fb8886
+guid: 6c43a1d68a0acb24dac1b8a8ba97ed3b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7012838252845531729
-    second: FRECCIE UI PC_0
+      213: -6783739387548550761
+    second: grey icon_0
   - first:
-      213: 5527817625454600867
-    second: FRECCIE UI PC_1
+      213: -753053454053191256
+    second: grey icon_1
+  - first:
+      213: 2002297756407692691
+    second: grey icon_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -93,13 +96,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FRECCIE UI PC_0
+      name: grey icon_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 417
-        height: 417
+        y: 2
+        width: 418
+        height: 418
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -107,20 +110,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15201204c3b925160800000000000000
-      internalID: 7012838252845531729
+      spriteID: 799b75408f05bd1a0800000000000000
+      internalID: -6783739387548550761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FRECCIE UI PC_1
+      name: grey icon_1
       rect:
         serializedVersion: 2
-        x: 488
-        y: 0
+        x: 428
+        y: 2
         width: 417
-        height: 417
+        height: 418
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a26d5cb7d0c6bc40800000000000000
-      internalID: 5527817625454600867
+      spriteID: 8a157469fdd9c85f0800000000000000
+      internalID: -753053454053191256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grey icon_2
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 0
+        width: 418
+        height: 418
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39dfd39633799cb10800000000000000
+      internalID: 2002297756407692691
       vertices: []
       indices: 
       edges: []
@@ -137,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 680529625f3111144b07c3188104f023
+    spriteID: 5690d1576adc7af4cad62b52275b2e39
     internalID: 0
     vertices: []
     indices: 
