@@ -25,9 +25,9 @@ namespace HitmanGO
             {States.GameplayIntro,"GoToGameplayIntro"},
             {States.WaitingForInput, "GoToWaitingForInput"},
             {States.OnCalculatingPlayerAction, "GoToOnCalculatingPlayerAction"},
-            {States.OnCalculatingEnemyAction, "GoToCalculatingEnemyAction"},
-            {States.OnPlayerAction, "GoToPlayerAction"},
-            {States.OnEnemyAction, "GoToEnemyAction"},
+            {States.OnCalculatingEnemyAction, "GoToOnCalculatingEnemyAction"},
+            {States.OnPlayerAction, "GoToOnPlayerAction"},
+            {States.OnEnemyAction, "GoToOnEnemyAction"},
             {States.GameOver, "GoToGameOver"}
               
         };

@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ET.Game_Manager
+namespace HitmanGO
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singleton<GameManager>
     {
 
         #region Public Variables
@@ -13,11 +12,33 @@ namespace ET.Game_Manager
 
         #region Private Variables 
 
+        private Animator _animator;
+
         #endregion
+
+        public enum State
+        {
+            Gameplay
+        }
+
+        private readonly Dictionary<State, string> _animatorTriggers = new Dictionary<State, string>
+        {
+            {State.Gameplay, "GoToGameplay"}
+        };
+
+
+        public void ChangeState(State state)
+        {
+            _animator.SetTrigger(_animatorTriggers[state]);
+        }
 
         public void Awake()
         {
-
+            if(_animator == null)
+            {
+                _animator = GetComponent<Animator>();
+            }
+            
         }
 
         private void Update()
@@ -37,54 +58,5 @@ namespace ET.Game_Manager
         }
     }
 
-    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
-    {
-        #region Singleton
 
-        private static T Instance;
-
-        public static T GetInstance
-        {
-            get
-            {
-                if (Instance == null)
-                {
-                    Instance = FindObjectOfType(typeof(T)) as T;
-
-                    if (Instance != null) Instance.Init();
-                }
-
-                return Instance;
-            }
-        }
-
-        #endregion
-
-        #region Unity Callbacks
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this as T;
-                Instance.Init();
-            }
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public static bool Exists() => Instance != null;
-
-        public virtual void Init() { }
-
-        #endregion
-
-        #region Private Methods
-
-        private void OnApplicationQuit() => Instance = null;
-
-        #endregion
-    }
 }
