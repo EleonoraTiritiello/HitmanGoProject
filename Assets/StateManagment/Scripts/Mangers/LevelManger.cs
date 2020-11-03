@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace HitmanGO
 {
     /// <summary>
-    /// Class <c> LevelManager </c> Manages the Gameplay
+    /// Class <c> LevelManager </c> Manages the current level 
     /// </summary>
     [RequireComponent(typeof(Animator))]
     public sealed class LevelManger : Singleton<LevelManger>

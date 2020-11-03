@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HitmanGO
 {
     /// <summary>
-    /// Class <c> GameManager </c> Manages the Game manager
+    /// Class <c> GameManager </c> manages the game flow
     /// </summary>
     public class GameManager : Singleton<GameManager>
     {
@@ -13,7 +13,7 @@ namespace HitmanGO
 
         #region Public Variables
         /// <summary>
-        /// GameManager State
+        /// Game states
         /// </summary>
         public enum State
         {
@@ -23,7 +23,7 @@ namespace HitmanGO
 
         #region Private Variables 
         /// <summary>
-        /// Component that contains the states of the gameplay
+        /// Component that contains the states of the game
         /// </summary>
         private Animator _animator;
 
@@ -49,11 +49,6 @@ namespace HitmanGO
             }
             
         }
-        private void Update()
-        {
-            VictoryCondition();
-            LoseCondition();
-        }
 
         #endregion
 
@@ -68,22 +63,6 @@ namespace HitmanGO
             _animator.SetTrigger(_animatorTriggers[state]);
         }
 
-
-        /// <summary>
-        /// Victory condition
-        /// </summary>
-        public void VictoryCondition()
-        {
-
-        }
-
-        /// <summary>
-        /// Lose condition
-        /// </summary>
-        public void LoseCondition()
-        {
-
-        }
         #endregion
     }
 
