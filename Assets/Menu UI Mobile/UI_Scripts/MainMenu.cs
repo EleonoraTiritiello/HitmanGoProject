@@ -44,7 +44,6 @@ public class MainMenu : MonoBehaviour
         Invoke("FadeOut", 0.5f);
         Invoke("BlackPanelDisappears", 1f);
         Debug.Log("OptionButtonClicked");
-
     }
 
     private void MainMenuDisappears()
@@ -63,6 +62,7 @@ public class MainMenu : MonoBehaviour
     }
     private void OptionsMenuAppears()
     {
+        //attiva immagini e pulsanti del menu opzioni
         optionsMenu.SetActive(true);
     }
     private void FadeIn()
@@ -74,14 +74,17 @@ public class MainMenu : MonoBehaviour
     private void FadeOut()
     {
         //cambia l'alpha del pannello nero a 0(totalmente trasparente) in X secondi(secondo paramentro)
-        blackPanelImage.CrossFadeAlpha(0, 0.5f, false);
+        blackPanelImage.CrossFadeAlpha(0, 0.4f, false);
     }
     private void BlackPanelAppears()
     {
+        //disattiva il gameobject del pannello nero
+
         blackPanelObject.SetActive(true);
     }
     private void BlackPanelDisappears()
     {
+        //attiva il gameobject del pannello nero
         blackPanelObject.SetActive(false);
     }
 }
