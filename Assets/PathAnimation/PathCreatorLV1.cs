@@ -27,10 +27,9 @@ public class PathCreatorLV1 : MonoBehaviour
         node3.fillAmount = 0;
         segment1.fillAmount = 0;
         segment2.fillAmount = 0;
-        PathCreationCycle();
     }
 
-    public void PathCreationCycle()
+    public void Update()
     {
         for (phaseNumber = 0; phaseNumber < 5;)
         {
