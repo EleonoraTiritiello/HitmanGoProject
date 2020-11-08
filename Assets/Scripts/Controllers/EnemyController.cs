@@ -29,12 +29,12 @@ namespace HitmanGO
         /// Variable to determine the animation speed when the player is dying
         /// </summary>
         [SerializeField]
-        private Vector3 _dieAnimationVector;
+        private Vector3 _dieAnimationVector = Vector3.zero;
         /// <summary>
         /// Variable to determine the animation speed when the player is dying
         /// </summary>
         [SerializeField]
-        private float _dieAnimationSpeed;
+        private float _dieAnimationSpeed = 1f;
 
         #endregion
 

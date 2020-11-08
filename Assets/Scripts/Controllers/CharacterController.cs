@@ -7,7 +7,6 @@ namespace HitmanGO
     /// <summary>
     /// Class <c> CharacterController </c>
     /// </summary>
-    
     public abstract class CharacterController : MonoBehaviour
     {
         #region Variables
@@ -30,14 +29,13 @@ namespace HitmanGO
         /// Virtual method for generic movement
         /// </summary>
         /// <param name="targetPosition"></param>
-        /// <param name="movementSpeed"></param>
+        /// <param name="movementDuration"></param>
         /// <param name="snapping"></param>
-        public virtual void MoveToPosition(Vector3 targetPosition, float movementSpeed, bool snapping = false)
+        public virtual void MoveToPosition(Vector3 targetPosition, float movementDuration)
         {
-
-            Debug.Log("Mi sto muovendo verso: " + targetPosition);
-            transform.DOMove(targetPosition, movementSpeed, snapping);
+            transform.DOMove(targetPosition, movementDuration);
         }
+
         /// <summary>
         /// Virtual method for generic death
         /// </summary>
@@ -45,6 +43,5 @@ namespace HitmanGO
         {
             Destroy(gameObject);
         }
-
     }
 }
