@@ -7,10 +7,24 @@ namespace HitmanGO
     /// <summary>
     /// Class <c> CharacterController </c>
     /// </summary>
+    [RequireComponent(typeof(PathFindingComponent))]
     public abstract class CharacterController : MonoBehaviour
     {
-        #region Variables
+        #region Public Variables
 
+        /// <summary>
+        /// The reference to the <c> PathFindingComponent </c>
+        /// </summary>
+        public PathFindingComponent PFC { get; protected set; }
+
+        /// <summary>
+        /// The duration of the movement
+        /// </summary>
+        public readonly float MovementDuration = 0.5f;
+
+        /// <summary>
+        /// A callback that is called when the character dies
+        /// </summary>
         public Action Die;
 
         #endregion
@@ -19,8 +33,9 @@ namespace HitmanGO
 
         private void Awake()
         {
-            if (Die == null)
-                Die = OnDie;
+            if (PFC == null) PFC = GetComponent<PathFindingComponent>();
+
+            if (Die == null) Die = OnDie;      
         }
 
         #endregion

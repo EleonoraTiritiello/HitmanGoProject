@@ -12,6 +12,9 @@ namespace HitmanGO
         #region Variables
 
         #region Public Variables 
+
+        public List<EnemyController> Enemies = new List<EnemyController>();
+
         /// <summary>
         /// Gameplay states
         /// </summary>
@@ -26,6 +29,7 @@ namespace HitmanGO
             GameOver
 
         }
+
         #endregion
 
         #region Private Variables
@@ -58,7 +62,6 @@ namespace HitmanGO
         {
             if (_animator == null)
                 _animator = GetComponent<Animator>();
-
         }
 
         private void Start()
@@ -79,8 +82,8 @@ namespace HitmanGO
         public void ChangeState(States state)
         {
             _animator.SetTrigger(_animatorTriggers[state]);
-
         }
+
         #endregion
 
         #region Private Methods

@@ -5,7 +5,6 @@ using DG.Tweening;
 
 namespace HitmanGO
 {
-    [RequireComponent(typeof(PathFindingComponent))]
     /// <summary>
     /// Class <c> PlayerController </c> contains the methods for player movement and its animations, inherits from <c> CharacterController </c>
     /// </summary>
@@ -14,16 +13,6 @@ namespace HitmanGO
         #region Variables
 
         #region Public Variables
-
-        /// <summary>
-        /// The reference to the <c> PathFindingComponent </c>
-        /// </summary>
-        public PathFindingComponent PFC { get; private set; }
-
-        /// <summary>
-        /// The duration of the movement
-        /// </summary>
-        public readonly float MovementDuration = 0.5f;
 
         /// <summary>
         /// The actions that the Player can perform
@@ -48,13 +37,12 @@ namespace HitmanGO
         /// <summary>
         /// The states that the Player can have
         /// </summary>
-        public enum States {SetupState, Idle, Selected, Moving}
+        public enum States {Setup, Idle, Selected, Moving}
 
         /// <summary>
         /// The current state of the Player
         /// </summary>
-        [HideInInspector]
-        public States CurrentState = States.SetupState;
+        public States CurrentState { get; private set; }
 
         #region Events
 
@@ -127,10 +115,10 @@ namespace HitmanGO
 
         private void Awake()
         {
+            if (PFC == null) PFC = GetComponent<PathFindingComponent>();
+
             if (Select == null) Select = OnSelected;
             if (Die == null) Die = OnDie;
-
-            if (PFC == null) PFC = GetComponent<PathFindingComponent>();
 
             if (GameManager.GetInstance.Player != this) GameManager.GetInstance.Player = this;
         }
@@ -161,10 +149,7 @@ namespace HitmanGO
         /// Set the current state
         /// </summary>
         /// <param name="state"> The state you want to set </param>
-        public void SetCurrentState(States state)
-        {
-            CurrentState = state;
-        }
+        public void SetCurrentState(States state) => CurrentState = state;
 
         /// <summary>
         /// A callback that is called when the player dies

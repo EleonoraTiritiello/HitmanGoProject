@@ -3,7 +3,7 @@
     /// Struct <c> EnabledConnections </c> tells which directions a <c> Node </c> can make connections
     /// </summary>
     [System.Serializable]
-    public struct EnabledConnections
+    public struct Directions
     {
         /// <summary>
         /// If the <c> Node </c> connects with a <c> Node </c> above
