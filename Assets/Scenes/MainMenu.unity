@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 42876422}
+  - component: {fileID: 42876423}
   m_Layer: 5
   m_Name: ResetConfirm
   m_TagString: Untagged
@@ -294,6 +295,96 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &42876423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42876421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e4eecc912a593488aa5b18d0384cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsMenu: {fileID: 1989517191}
+  resetConfirmMenu: {fileID: 198580800}
+  blackPanelObject: {fileID: 67923142}
+  blackPanelImage: {fileID: 67923144}
+--- !u!1 &67923142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 67923143}
+  - component: {fileID: 67923145}
+  - component: {fileID: 67923144}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &67923143
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67923142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 932168082}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &67923144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67923142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &67923145
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67923142}
+  m_CullTransparentMesh: 0
 --- !u!1 &71857229
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +584,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 198580803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42876423}
+        m_MethodName: Confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &198580803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +715,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 204107624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: QualityButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &204107624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +956,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 331953513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 42876423}
+        m_MethodName: Refuse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &331953513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +1085,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 351213062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: BackButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &351213062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1579,7 +1714,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 592814153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1328549908}
+        m_MethodName: OptionButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &592814153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,7 +1845,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 670755639}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: QualityButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &670755639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2027,7 +2184,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 771221426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: SoundButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &771221426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2402,6 +2570,7 @@ RectTransform:
   - {fileID: 1328549907}
   - {fileID: 1989517192}
   - {fileID: 42876422}
+  - {fileID: 67923143}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2625,7 +2794,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1002360705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: MusicButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1002360705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3042,6 +3222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1328549907}
+  - component: {fileID: 1328549908}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -3071,6 +3252,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -3738, y: -2056}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1328549908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328549906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca74887ef7eea4439c9d41af50bf845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuTopLeftZone: {fileID: 245806086}
+  mainMenuTopRightZone: {fileID: 1145320753}
+  mainMenuMiddleCenterZone: {fileID: 1481377498}
+  optionsMenu: {fileID: 1989517191}
+  boxSelectionTopLeftZone: {fileID: 0}
+  boxSelectionTopRightZone: {fileID: 0}
+  boxSelectionBottomMiddleZone: {fileID: 0}
+  blackPanelObject: {fileID: 67923142}
+  blackPanelImage: {fileID: 67923144}
 --- !u!1 &1373025082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4464,7 +4666,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1979823208}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: SoundButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1979823208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4646,6 +4859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989517192}
+  - component: {fileID: 1989517193}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -4675,6 +4889,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -3738, y: -2056}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1989517193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989517191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a5a08cda90737438bfe718ffc897c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuTopLeftZone: {fileID: 245806086}
+  mainMenuTopRightZone: {fileID: 1145320753}
+  mainMenuMiddleCenterZone: {fileID: 1481377498}
+  optionsMenu: {fileID: 1989517191}
+  resetConfirmMenu: {fileID: 42876421}
+  blackPanelObject: {fileID: 67923142}
+  blackPanelImage: {fileID: 67923144}
+  soundOnObject: {fileID: 1979823205}
+  soundOffObject: {fileID: 771221423}
+  musicOnObject: {fileID: 1002360702}
+  musicOffObject: {fileID: 1995735786}
+  qualityHighObject: {fileID: 204107621}
+  qualityLowObject: {fileID: 670755636}
 --- !u!1 &1995735786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4756,7 +4995,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1995735789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1989517193}
+        m_MethodName: MusicButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1995735789
 MonoBehaviour:
   m_ObjectHideFlags: 0
