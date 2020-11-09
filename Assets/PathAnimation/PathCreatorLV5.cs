@@ -164,7 +164,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node1.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Node2fill()
@@ -173,7 +173,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node2.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -184,7 +184,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node3.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -194,7 +194,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node4.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -204,7 +204,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node5.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -214,7 +214,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node6.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -224,7 +224,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node7.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -234,7 +234,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node8.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -244,7 +244,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node9.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -254,7 +254,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node10.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -264,7 +264,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node11.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -274,7 +274,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (node12.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -285,7 +285,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment1.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
 
         }
     }
@@ -295,7 +295,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment2.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment3fill()
@@ -304,7 +304,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment3.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment4fill()
@@ -313,7 +313,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment4.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment5fill()
@@ -322,7 +322,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment5.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment6fill()
@@ -331,7 +331,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment6.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment7fill()
@@ -340,7 +340,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment7.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment8fill()
@@ -349,7 +349,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment8.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment9fill()
@@ -358,7 +358,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment9.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment10fill()
@@ -367,7 +367,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment10.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment11fill()
@@ -376,7 +376,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment11.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
     private void Segment12fill()
@@ -385,7 +385,7 @@ public class PathCreatorLV5 : MonoBehaviour
         if (segment12.fillAmount == 1)
         {
             phaseNumber++;
-            Debug.Log("+1");
+
         }
     }
 
