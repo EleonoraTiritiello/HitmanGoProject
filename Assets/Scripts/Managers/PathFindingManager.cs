@@ -8,14 +8,22 @@ namespace HitmanGO
     /// </summary>
     public class PathFindingManager : Singleton<PathFindingManager>
     {
-        #region Private Variables
+        #region Variables
+
+        #region Public Variables
 
         /// <summary>
         /// The list that contains all the <c> PathFindingComponents </c> in the scene
         /// </summary>
-        private readonly List<PathFindingComponent> _pfcList = new List<PathFindingComponent>();
+        public readonly List<PathFindingComponent> PFCList = new List<PathFindingComponent>();
+
+        #endregion
+
+        #region Private Variables
 
         private Node _lastNode;
+
+        #endregion
 
         #endregion
 
@@ -23,9 +31,9 @@ namespace HitmanGO
 
         private void Start()
         {
-            foreach (PathFindingComponent pfc in _pfcList)
+            foreach (PathFindingComponent pfc in PFCList)
             {
-                if (pfc != this)
+                if(pfc.GetComponent<EnemyController>() != null)
                     pfc.SetTargetNode += ArrangePFCComponents;
             }
         }
@@ -51,8 +59,7 @@ namespace HitmanGO
 
             if (nodePopulation.Length == 1)
             {
-                ResetPFCTargetPosition(nodePopulation[0]);
-                RequestPositionAdjustment(nodePopulation[0], nodePopulation[0].GetTargetNode().transform.position);
+                RequestPositionAdjustment(nodePopulation[0], nodePopulation[0].GetCurrentNode().transform.position);
 
                 _lastNode = node;
                 return;
@@ -71,7 +78,6 @@ namespace HitmanGO
 
                 targetPosition += node.transform.position;
 
-                nodePopulation[i].SetTargetPosition(targetPosition);
                 RequestPositionAdjustment(nodePopulation[i], targetPosition);
             }
 
@@ -87,33 +93,14 @@ namespace HitmanGO
         {
             List<PathFindingComponent> population = new List<PathFindingComponent>();
 
-            foreach (PathFindingComponent pfc in _pfcList)
+            foreach (PathFindingComponent pfc in PFCList)
             {
-                if (pfc.GetTargetNode() == targetNode)
+                if (pfc.GetCurrentNode() == targetNode)
                     population.Add(pfc);
             }
 
             return population.ToArray();
         }
-
-        /// <summary>
-        /// Get the <c> PathFindingComponent </c> array
-        /// </summary>
-        /// <returns> A <c> PathFindingComponent </c> array </returns>
-        public PathFindingComponent[] GetPFCArray() => _pfcList.ToArray();
-
-        /// <summary>
-        /// Checks if the <c> PathFindingComponent </c> list contains a given element
-        /// </summary>
-        /// <param name="pfc"> A given <c> PathFindingComponent </c> </param>
-        /// <returns> Returns true if the item is in the list, otherwise returns false </returns>
-        public bool Contains(PathFindingComponent pfc) => _pfcList.Contains(pfc);
-
-        /// <summary>
-        /// Add a <c> PathFindingComponent </c> to the list
-        /// </summary>
-        /// <param name="pfc"> A given <c> PathFindingComponent </c> </param>
-        public void AddPFC(PathFindingComponent pfc) => _pfcList.Add(pfc);
 
         #endregion
 

@@ -26,24 +26,48 @@ namespace HitmanGO
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.UpNode);
                     if (_player.PFC.GetTargetNode() == null)
                         _player.CurrentAction = PlayerController.Actions.None;
+                    else
+                        VerifyKills();
                     break;
                 case PlayerController.Actions.MoveDown:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.DownNode);
                     if (_player.PFC.GetTargetNode() == null)
                         _player.CurrentAction = PlayerController.Actions.None;
+                    else
+                        VerifyKills();
                     break;
                 case PlayerController.Actions.MoveLeft:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.LeftNode);
                     if (_player.PFC.GetTargetNode() == null)
                         _player.CurrentAction = PlayerController.Actions.None;
+                    else
+                        VerifyKills();
                     break;
                 case PlayerController.Actions.MoveRight:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.RightNode);
                     if (_player.PFC.GetTargetNode() == null)
                         _player.CurrentAction = PlayerController.Actions.None;
+                    else
+                        VerifyKills();
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void VerifyKills()
+        {
+            PathFindingComponent[] targetNodePopulation = _player.PFC.TargetNodePopulation;
+
+            if (targetNodePopulation.Length > 0)
+            {
+                for (int i = 0; i < targetNodePopulation.Length; i++)
+                {
+                    EnemyController enemy = targetNodePopulation[i].GetComponent<EnemyController>();
+
+                    if (enemy != null)
+                        enemy.CurrentAction = EnemyController.Actions.Die;
+                }
             }
         }
     }

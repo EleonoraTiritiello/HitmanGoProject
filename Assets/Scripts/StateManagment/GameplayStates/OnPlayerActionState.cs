@@ -21,29 +21,31 @@ namespace HitmanGO
             {
                 case PlayerController.Actions.MoveUp:
                     _player.SetCurrentState(PlayerController.States.Moving);
-                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position, _player.MovementDuration);
+                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
                     break;
                 case PlayerController.Actions.MoveDown:
                     _player.SetCurrentState(PlayerController.States.Moving);
-                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position, _player.MovementDuration);
+                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
                     break;
                 case PlayerController.Actions.MoveLeft:
                     _player.SetCurrentState(PlayerController.States.Moving);
-                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position, _player.MovementDuration);
+                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
                     break;
                 case PlayerController.Actions.MoveRight:
                     _player.SetCurrentState(PlayerController.States.Moving);
-                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position, _player.MovementDuration);
+                    _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
                     break;
                 case PlayerController.Actions.Select:
-                    _player.Select.Invoke();
+                    if(_player.Select != null)
+                        _player.Select.Invoke();
                     break;
                 case PlayerController.Actions.Die:
-                    _player.Die.Invoke();
+                    if(_player.Die != null)
+                        _player.Die.Invoke();
                     break;
                 default:
                     break;

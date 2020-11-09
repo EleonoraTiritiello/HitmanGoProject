@@ -36,6 +36,10 @@ namespace HitmanGO
             }
         }
 
+        /// <summary>
+        /// Set the action to be performed by the player
+        /// </summary>
+        /// <param name="action"> The action that needs to be performed </param>
         private void SetPlayerAction(PlayerController.Actions action)
         {
             _player.CurrentAction = action;

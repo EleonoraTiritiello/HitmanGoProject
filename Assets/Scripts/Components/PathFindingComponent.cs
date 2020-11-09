@@ -76,8 +76,8 @@ namespace HitmanGO
 
         private void Awake()
         {
-            if (!PathFindingManager.GetInstance.Contains(this))
-                PathFindingManager.GetInstance.AddPFC(this);
+            if (!PathFindingManager.GetInstance.PFCList.Contains(this))
+                PathFindingManager.GetInstance.PFCList.Add(this);
 
             if (SetCurrentNode == null) SetCurrentNode = OnCurrentNodeSetted;
             if (SetTargetNode == null) SetTargetNode = OnTargetNodeSetted;
@@ -86,6 +86,18 @@ namespace HitmanGO
         private void Start()
         {
             Initialize();
+
+            PathFindingManager.GetInstance.ArrangePFCComponents(_currentNode);
+        }
+
+        private void OnDestroy()
+        {
+            if (PathFindingManager.GetInstance.PFCList.Contains(this))
+                PathFindingManager.GetInstance.PFCList.Remove(this);
+
+            if (AdjustPosition != null) AdjustPosition = null;
+            if (SetCurrentNode != null) SetCurrentNode = null;
+            if (SetTargetNode != null) SetTargetNode = null;
         }
 
         #endregion

@@ -21,6 +21,10 @@ namespace HitmanGO
         /// The duration of the movement
         /// </summary>
         public readonly float MovementDuration = 0.5f;
+        /// <summary>
+        /// The duration of the rotation
+        /// </summary>
+        public readonly float RotationDuration = 0.5f;
 
         /// <summary>
         /// A callback that is called when the character dies
@@ -29,26 +33,24 @@ namespace HitmanGO
 
         #endregion
 
-        #region Unity Callbacks
-
-        private void Awake()
-        {
-            if (PFC == null) PFC = GetComponent<PathFindingComponent>();
-
-            if (Die == null) Die = OnDie;      
-        }
-
-        #endregion
-
         /// <summary>
         /// Virtual method for generic movement
         /// </summary>
-        /// <param name="targetPosition"></param>
-        /// <param name="movementDuration"></param>
-        /// <param name="snapping"></param>
-        public virtual void MoveToPosition(Vector3 targetPosition, float movementDuration)
+        /// <param name="targetPosition"> The target position </param>
+        /// <param name="movementDuration"> The duration of the movement </param>
+        public virtual void MoveToPosition(Vector3 targetPosition)
         {
-            transform.DOMove(targetPosition, movementDuration);
+            transform.DOMove(targetPosition, MovementDuration);
+        }
+
+        /// <summary>
+        /// Virtual method for generic rotation
+        /// </summary>
+        /// <param name="targetRotation"> The target rotation </param>
+        /// <param name="rotationDuration"> The duration of the movement </param>
+        public virtual void RotateTowards(Vector3 targetRotation)
+        {
+            transform.DORotate(targetRotation, RotationDuration);
         }
 
         /// <summary>
@@ -56,7 +58,7 @@ namespace HitmanGO
         /// </summary>
         public virtual void OnDie()
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 0.5f);
         }
     }
 }

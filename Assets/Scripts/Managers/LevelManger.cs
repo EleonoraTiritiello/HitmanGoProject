@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace HitmanGO
 {
@@ -13,7 +14,7 @@ namespace HitmanGO
 
         #region Public Variables 
 
-        public List<EnemyController> Enemies = new List<EnemyController>();
+        public Action EnemyListModifyed;
 
         /// <summary>
         /// Gameplay states
@@ -33,6 +34,12 @@ namespace HitmanGO
         #endregion
 
         #region Private Variables
+
+        /// <summary>
+        /// The list of enemies in the level
+        /// </summary>
+        private List<EnemyController> _enemies;
+
         /// <summary>
         /// Component that contains the states of the gameplay
         /// </summary>
@@ -62,6 +69,9 @@ namespace HitmanGO
         {
             if (_animator == null)
                 _animator = GetComponent<Animator>();
+
+            if (_enemies == null)
+                _enemies = new List<EnemyController>();
         }
 
         private void Start()
@@ -74,6 +84,26 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public bool IsEnemyInList(EnemyController enemy) => _enemies.Contains(enemy);
+
+        public void AddEnemyToList(EnemyController enemy)
+        {
+            _enemies.Add(enemy);
+
+            if (EnemyListModifyed != null)
+                EnemyListModifyed.Invoke();
+        }
+
+        public void RemoveEnemyFromList(EnemyController enemy)
+        {
+            _enemies.Remove(enemy);
+
+            if (EnemyListModifyed != null)
+                EnemyListModifyed.Invoke();
+        }
+
+        public EnemyController[] GetEnemiesArray() => _enemies.ToArray();
 
         /// <summary>
         /// Change the current Gameplay state
@@ -100,5 +130,3 @@ namespace HitmanGO
     }
 
 }
-
-

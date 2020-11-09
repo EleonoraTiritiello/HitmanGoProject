@@ -128,6 +128,12 @@ namespace HitmanGO
             SetCurrentState(States.Idle);
         }
 
+        private void OnDestroy()
+        {
+            if (Select != null) Select = null;
+            if (Die != null) Die = null;
+        }
+
         #endregion
 
         #region Methods
@@ -139,9 +145,9 @@ namespace HitmanGO
         /// </summary>
         /// <param name="targetPosition"> The position that the Player must reach </param>
         /// <param name="movementDuration"> The duration of the movement </param>
-        public override void MoveToPosition(Vector3 targetPosition, float movementDuration)
+        public override void MoveToPosition(Vector3 targetPosition)
         {
-            base.MoveToPosition(targetPosition, movementDuration);
+            base.MoveToPosition(targetPosition);
             StartCoroutine(PlayMovementAnimation(targetPosition));
         }
 
