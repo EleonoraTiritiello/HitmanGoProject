@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionsMenu : MonoBehaviour
+public class OptionsMenuPC : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainMenuTopLeftZone;
+    private GameObject mainMenuBottomLeftZone;
     [SerializeField]
-    private GameObject mainMenuTopRightZone;
+    private GameObject mainMenuBottomRightZone;
     [SerializeField]
     private GameObject mainMenuMiddleCenterZone;
     [SerializeField]
@@ -31,10 +31,16 @@ public class OptionsMenu : MonoBehaviour
     private bool musicEnabled = true;
 
     [SerializeField]
-    private GameObject qualityHighObject;
+    private GameObject vSyncHighObject;
     [SerializeField]
-    private GameObject qualityLowObject;
+    private GameObject vSyncLowObject;
     private bool qualityHigh = true;
+
+    [SerializeField]
+    private GameObject fullscreenObject;
+    [SerializeField]
+    private GameObject windowedObject;
+    private bool isFillscreen = true;
 
     public void BackButtonPressed()
     {
@@ -101,32 +107,48 @@ public class OptionsMenu : MonoBehaviour
         Debug.Log("ResetButtonClicked");
     }
 
-    public void QualityButtonPressed()
+    public void vSyncButtonPressed()
     {
         //Se si clicca sul pulsante qualità quando i suoni sono attivi viene aggiornata l'image e il testo
         //Da aggiungere il behaviour effettivo sulla qualità del gioco
         if (qualityHigh == true)
         {
             qualityHigh = false;
-            qualityHighObject.SetActive(false);
-            qualityLowObject.SetActive(true);
+            vSyncHighObject.SetActive(false);
+            vSyncLowObject.SetActive(true);
         }
         //Se si clicca sul pulsante qualità quando i suoni sono attivi viene aggiornata l'image e il testo
         //Da aggiungere il behaviour sulla qualità del gioco
         else if (qualityHigh == false)
         {
             qualityHigh = true;
-            qualityLowObject.SetActive(false);
-            qualityHighObject.SetActive(true);
+            vSyncLowObject.SetActive(false);
+            vSyncHighObject.SetActive(true);
         }
-        Debug.Log("QualityButtonClicked");
+    }
 
+    public void fullScreenButtonPressed()
+    {
+        if (isFillscreen == true)
+        {
+            isFillscreen = false;
+            fullscreenObject.SetActive(false);
+            windowedObject.SetActive(true);
+        }
+        //se si clicca il pulsante mentre si è in fullscreen, aggiornare il testo e l'immagine
+        //manca l'effettivo behavior
+        else if (isFillscreen == false)
+        {
+            isFillscreen = true;
+            fullscreenObject.SetActive(true);
+            windowedObject.SetActive(false);
+        }
     }
     private void MainMenuAppears()
     {
         //Attiva immagini e pulsanti del menu inziale
-        mainMenuTopLeftZone.SetActive(true);
-        mainMenuTopRightZone.SetActive(true);
+        mainMenuBottomLeftZone.SetActive(true);
+        mainMenuBottomRightZone.SetActive(true);
         mainMenuMiddleCenterZone.SetActive(true);
     }
     private void OptionsMenuDisappears()
