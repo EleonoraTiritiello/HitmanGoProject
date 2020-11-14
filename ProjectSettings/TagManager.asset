@@ -8,6 +8,8 @@ TagManager:
   - S
   - E
   - W
+  - Enemy
+  - checker
   layers:
   - Default
   - TransparentFX
