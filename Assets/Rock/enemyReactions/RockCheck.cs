@@ -2,12 +2,15 @@
 
 public class RockCheck : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject alertedIcon;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("checker"))
         {
+            alertedIcon.SetActive(true);
             Debug.Log("ALLARMATO");
-            this.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         }
     }
 }
