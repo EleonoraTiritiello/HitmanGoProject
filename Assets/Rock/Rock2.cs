@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock2 : MonoBehaviour
 {
     [SerializeField]
     private bool rockHere;
@@ -24,7 +24,7 @@ public class Rock : MonoBehaviour
     public Transform _selection;
 
     [SerializeField]
-    private GameObject throwableRock;
+    private GameObject throwableRock2;
     [SerializeField]
     private GameObject rockInHand;
     //[HideInInspector]
@@ -97,7 +97,7 @@ public class Rock : MonoBehaviour
                 normalStance.SetActive(true);
                 rockStance.SetActive(false);
                 throwPosition.SetActive(false);
-                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Instantiate(throwableRock2).transform.position = rockInHand.transform.position;
                 Invoke("RockHit", 1f);
             }
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("S"))
@@ -107,7 +107,7 @@ public class Rock : MonoBehaviour
                 normalStance.SetActive(true);
                 rockStance.SetActive(false);
                 throwPosition.SetActive(false);
-                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Instantiate(throwableRock2).transform.position = rockInHand.transform.position;
                 Invoke("RockHit", 1f);
             }
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("W"))
@@ -117,7 +117,7 @@ public class Rock : MonoBehaviour
                 normalStance.SetActive(true);
                 rockStance.SetActive(false);
                 throwPosition.SetActive(false);
-                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Instantiate(throwableRock2).transform.position = rockInHand.transform.position;
                 Invoke("RockHit", 1f);
             }
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("E"))
@@ -127,7 +127,7 @@ public class Rock : MonoBehaviour
                 normalStance.SetActive(true);
                 rockStance.SetActive(false);
                 throwPosition.SetActive(false);
-                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Instantiate(throwableRock2).transform.position = rockInHand.transform.position;
                 Invoke("RockHit", 1f);
             }
 
