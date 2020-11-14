@@ -1619,6 +1619,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 430889529}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &467381893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f2b2a69958877749a55a02f8a52f883,
+    type: 3}
+  m_PrefabInstance: {fileID: 398088018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &485572289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,10 +1824,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rockHere: 0
+  rockAoEResizing: 0
   throwPosition: {fileID: 955009966}
   rockAoE: {fileID: 1946852881}
+  rockModel: {fileID: 467381893}
+  normalStance: {fileID: 870128726}
+  rockStance: {fileID: 870128725}
+  rock1Stuff: {fileID: 1337271563}
   cam: {fileID: 1041431765}
   _selection: {fileID: 0}
+  throwableRock: {fileID: 3326056075988759880, guid: e18feb7a2a8a23a42826bd4d7dd6c8be,
+    type: 3}
+  rockInHand: {fileID: 870128727}
 --- !u!65 &563959278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2546,6 +2560,24 @@ PrefabInstance:
 --- !u!4 &870128724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4950576351030590601, guid: 3bb0094145e25854194280f44065e68e,
+    type: 3}
+  m_PrefabInstance: {fileID: 870128723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &870128725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5486627281882568599, guid: 3bb0094145e25854194280f44065e68e,
+    type: 3}
+  m_PrefabInstance: {fileID: 870128723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &870128726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8882754698512195455, guid: 3bb0094145e25854194280f44065e68e,
+    type: 3}
+  m_PrefabInstance: {fileID: 870128723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &870128727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9113113261763848857, guid: 3bb0094145e25854194280f44065e68e,
     type: 3}
   m_PrefabInstance: {fileID: 870128723}
   m_PrefabAsset: {fileID: 0}
@@ -3960,7 +3992,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306551814}
-  m_LocalRotation: {x: 0.46022207, y: -0.030254424, z: 0.015694937, w: 0.8871494}
+  m_LocalRotation: {x: 0.46022207, y: -0.030254377, z: 0.015694909, w: 0.8871494}
   m_LocalPosition: {x: 3.25, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5819,7 +5851,7 @@ Transform:
   m_GameObject: {fileID: 1946852881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 9, y: 0.01, z: 9}
+  m_LocalScale: {x: 1, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 1337271564}
   m_RootOrder: 1

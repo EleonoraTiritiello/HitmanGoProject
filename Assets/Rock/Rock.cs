@@ -5,35 +5,72 @@ public class Rock : MonoBehaviour
     [SerializeField]
     private bool rockHere;
     [SerializeField]
+    private bool rockAoEResizing;
+    [SerializeField]
     private GameObject throwPosition;
     [SerializeField]
     private GameObject rockAoE;
+    [SerializeField]
+    private GameObject rockModel;
+    [SerializeField]
+    private GameObject normalStance;
+    [SerializeField]
+    private GameObject rockStance;
+    [SerializeField]
+    private GameObject rock1Stuff;
     [SerializeField]
     private Camera cam;
     [HideInInspector]
     public Transform _selection;
 
+    [SerializeField]
+    private GameObject throwableRock;
+    [SerializeField]
+    private GameObject rockInHand;
+
+    public bool rockThrowedNorth;
+    public bool rockThrowedSouth;
+    public bool rockThrowedEast;
+    public bool rockThrowedWest;
+
     private void Start()
     {
         rockHere = false;
+        rockAoEResizing = false;
     }
     private void Update()
     {
+        if (rockAoEResizing == true)
+        {
+            var finalScale = new Vector3(9f, 0.01f, 9f);
+            rockAoE.transform.localScale = Vector3.Lerp(rockAoE.transform.localScale, finalScale, 2f * Time.deltaTime);
+        }
         if (rockHere)
         {
-            throwPosition.SetActive(true);
-            RockThrowIfPossible();
+            RockThrowSelection();
         }
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            throwPosition.SetActive(true);
             rockHere = true;
+            rockModel.SetActive(false);
+            normalStance.SetActive(false);
+            rockStance.SetActive(true);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Destroy(rock1Stuff);
         }
     }
 
-    private void RockThrowIfPossible()
+
+    private void RockThrowSelection()
     {
         int layermask = 1 << 8;
         var ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -43,37 +80,64 @@ public class Rock : MonoBehaviour
             var selection = hit.transform;
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("N"))
             {
+                rockThrowedNorth = true;
                 rockAoE.transform.position = selection.position;
-                rockAoE.SetActive(true);
-                //ricerca nemici
-                rockHere = false;
-                Debug.Log("click");
+                normalStance.SetActive(true);
+                rockStance.SetActive(false);
+                throwPosition.SetActive(false);
+                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Invoke("RockHit", 1f);
             }
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("S"))
             {
+                rockThrowedSouth = true;
                 rockAoE.transform.position = selection.position;
-                rockAoE.SetActive(true);
-                //ricerca nemici
-                rockHere = false;
-
-            }
-            if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("E"))
-            {
-                rockAoE.transform.position = selection.position;
-                rockAoE.SetActive(true);
-                //ricerca nemici
-                rockHere = false;
-
+                normalStance.SetActive(true);
+                rockStance.SetActive(false);
+                throwPosition.SetActive(false);
+                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Invoke("RockHit", 1f);
             }
             if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("W"))
             {
+                rockThrowedWest = true;
                 rockAoE.transform.position = selection.position;
-                rockAoE.SetActive(true);
-                //ricerca nemici
-                rockHere = false;
-
+                normalStance.SetActive(true);
+                rockStance.SetActive(false);
+                throwPosition.SetActive(false);
+                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Invoke("RockHit", 1f);
+            }
+            if (Input.GetMouseButtonDown(0) && rockHere && selection.CompareTag("E"))
+            {
+                rockThrowedEast = true;
+                rockAoE.transform.position = selection.position;
+                normalStance.SetActive(true);
+                rockStance.SetActive(false);
+                throwPosition.SetActive(false);
+                Instantiate(throwableRock).transform.position = rockInHand.transform.position;
+                Invoke("RockHit", 1f);
             }
 
         }
+    }
+
+    private void ExitRockAoE()
+    {
+        rockAoEResizing = false;
+        rockAoE.SetActive(false);
+    }
+
+    private void RockHit()
+    {
+        rockAoE.SetActive(true);
+        rockAoEResizing = true;
+        //ricerca nemici
+        rockHere = false;
+        rockThrowedNorth = false;
+        rockThrowedSouth = false;
+        rockThrowedWest = false;
+        rockThrowedEast = false;
+        Invoke("ExitRockAoE", 3f);
     }
 }
