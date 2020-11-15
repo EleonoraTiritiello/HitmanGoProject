@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BoxSelectionMenu : MonoBehaviour
@@ -21,7 +22,6 @@ public class BoxSelectionMenu : MonoBehaviour
     private GameObject blackPanelObject;
     [SerializeField]
     private Image blackPanelImage;
-
     public void BackButtonPressed()
     {
         //Sequenza quando viene premuto il pulsante back(forse era meglio una coroutine ma sono designer)
@@ -37,7 +37,16 @@ public class BoxSelectionMenu : MonoBehaviour
 
     public void BoxSelected()
     {
-        //inserire interazione con lo SceneManager. Il tasto con questa funzione sarà l'immagine della box
+        BlackPanelAppears();
+        FadeIn();
+        Invoke("BoxSelectionDisappears", 0.4f);
+        Invoke("ScenePlusOne", 0.4f);
+        Invoke("FadeOut", 0.5f);
+        Invoke("BlackPanelDisappears", 1f);
+    }
+    public void ScenePlusOne()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void MainMenuAppears()
