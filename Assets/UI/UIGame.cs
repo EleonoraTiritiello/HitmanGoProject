@@ -24,6 +24,15 @@ public class UIGame : MonoBehaviour
     private GameObject boxImage;
     [SerializeField]
     private GameObject loading;
+    [SerializeField]
+    private GameObject completed1;
+    [SerializeField]
+    private GameObject completed2;
+    [SerializeField]
+    private GameObject completed3;
+    [SerializeField]
+    private GameObject completed4;
+
 
     [SerializeField]
     private GameObject blackPanelObject;
@@ -40,6 +49,7 @@ public class UIGame : MonoBehaviour
         BlackPanelAppears();
         FadeIn();
         Invoke("UI1Disappears", 0.4f);
+        Invoke("UI4Disappears", 0.4f);
         Invoke("UI3Appears", 0.4f);
         Invoke("FadeOut", 0.5f);
         Invoke("FadeIn", 3f);
@@ -57,6 +67,7 @@ public class UIGame : MonoBehaviour
         BlackPanelAppears();
         FadeIn();
         Invoke("UI1Disappears", 0.4f);
+        Invoke("UI4Disappears", 0.4f);
         Invoke("UI3Appears", 0.4f);
         Invoke("FadeOut", 0.5f);
         Invoke("FadeIn", 3f);
@@ -77,6 +88,7 @@ public class UIGame : MonoBehaviour
         restartButton.SetActive(false);
         hintsButton.SetActive(false);
     }
+
     private void UI1Appears()
     {
         optionButton.SetActive(true);
@@ -112,6 +124,14 @@ public class UIGame : MonoBehaviour
         loading.SetActive(false);
     }
 
+    private void UI4Disappears()
+    {
+        completed1.SetActive(false);
+        completed2.SetActive(false);
+        completed3.SetActive(false);
+        completed4.SetActive(false);
+
+    }
 
 
 
