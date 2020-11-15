@@ -13,7 +13,7 @@ public class LevelSelection : MonoBehaviour
     {
         BlackPanelAppears();
         FadeOut();
-        Invoke("BlackPanelDisappears", 1f);
+        Invoke("BlackPanelDisappears", 0.5f);
     }
 
     public void BackButtonPressed()
