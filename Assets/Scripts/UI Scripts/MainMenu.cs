@@ -73,6 +73,11 @@ namespace HitmanGO
             GameManager.GetInstance.ChangeState(GameManager.States.SelectLevel);
         }
 
+        public void OnExitButtonClicked()
+        {
+            Debug.Log("Exit");
+        }
+
     }
 
 }

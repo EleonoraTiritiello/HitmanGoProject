@@ -37,6 +37,13 @@ namespace HitmanGO
         private GameObject qualityLowObject;
         private bool qualityHigh = true;
 
+        [SerializeField]
+        private GameObject vSyncOnObject;
+        [SerializeField]
+        private GameObject vSyncOffObject;
+        private bool vSyncEnable = true;
+
+
         #endregion
 
         public void BackButtonPressed()
@@ -74,6 +81,7 @@ namespace HitmanGO
             OnSoundOnButtonClicked();
             OnMusicOnButtonClicked();
             OnQualityHighButtonClicked();
+            OnVSyncOnButtonClicked();
         }
 
         public void OnBackButtonClicked()
@@ -108,6 +116,20 @@ namespace HitmanGO
             musicEnabled = false;
             musicOffObject.SetActive(true);
             musicOnObject.SetActive(false);
+        }
+
+        public void OnVSyncOnButtonClicked()
+        {
+            vSyncEnable = true;
+            vSyncOffObject.SetActive(false);
+            vSyncOnObject.SetActive(true);
+        }
+
+        public void OnVSyncOffButtonClicked()
+        {
+            vSyncEnable = false;
+            vSyncOffObject.SetActive(true);
+            vSyncOnObject.SetActive(false);
         }
 
         public void OnSupportButtonClicked()
