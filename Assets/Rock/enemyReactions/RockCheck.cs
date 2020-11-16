@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
-
-public class RockCheck : MonoBehaviour
+namespace HitmanGO
 {
-    [SerializeField]
-    private GameObject alertedIcon;
-
-    private void OnTriggerEnter(Collider other)
+    public class RockCheck : MonoBehaviour
     {
-        if (other.CompareTag("checker"))
+        [SerializeField]
+        private GameObject alertedIcon;
+
+        private void OnTriggerEnter(Collider other)
         {
-            alertedIcon.SetActive(true);
-            Debug.Log("ALLARMATO");
+            if (other.CompareTag("checker"))
+            {
+                alertedIcon.SetActive(true);
+                Debug.Log("ALLARMATO");
+            }
         }
     }
 }

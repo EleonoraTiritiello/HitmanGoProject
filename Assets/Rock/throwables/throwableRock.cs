@@ -1,51 +1,53 @@
 ﻿using UnityEngine;
-
-public class throwableRock : MonoBehaviour
+namespace HitmanGO
 {
-    [SerializeField]
-    private GameObject rock;
-    [SerializeField]
-    private Rigidbody rb;
-    [SerializeField]
-    private float strenght = 10f;
-    private Rock rockScript;
-
-    void Start()
+    public class throwableRock : MonoBehaviour
     {
-        rockScript = FindObjectOfType<Rock>();
-        if (rockScript.rockThrowedNorth == true)
+        [SerializeField]
+        private GameObject rock;
+        [SerializeField]
+        private Rigidbody rb;
+        [SerializeField]
+        private float strenght = 10f;
+        private Rock rockScript;
+
+        void Start()
         {
-            Vector3 _throw = new Vector3(0.125f, 1.5f, 1.5f);
+            rockScript = FindObjectOfType<Rock>();
+            if (rockScript.rockThrowedNorth == true)
+            {
+                Vector3 _throw = new Vector3(0.125f, 1.5f, 1.5f);
 
-            rb.AddForce(_throw * strenght);
-            rb.useGravity = true;
+                rb.AddForce(_throw * strenght);
+                rb.useGravity = true;
+            }
+            if (rockScript.rockThrowedSouth == true)
+            {
+                Vector3 _throw = new Vector3(0.125f, 1.5f, -1.5f);
+
+                rb.AddForce(_throw * strenght);
+                rb.useGravity = true;
+            }
+            if (rockScript.rockThrowedEast == true)
+            {
+                Vector3 _throw = new Vector3(1.65f, 1.5f, 0f);
+
+                rb.AddForce(_throw * strenght);
+                rb.useGravity = true;
+            }
+            if (rockScript.rockThrowedWest == true)
+            {
+                Vector3 _throw = new Vector3(-1.4f, 1.5f, 0f);
+
+                rb.AddForce(_throw * strenght);
+                rb.useGravity = true;
+            }
+
+
         }
-        if (rockScript.rockThrowedSouth == true)
+        private void OnCollisionEnter(Collision collision)
         {
-            Vector3 _throw = new Vector3(0.125f, 1.5f, -1.5f);
-
-            rb.AddForce(_throw * strenght);
-            rb.useGravity = true;
+            Destroy(rock);
         }
-        if (rockScript.rockThrowedEast == true)
-        {
-            Vector3 _throw = new Vector3(1.65f, 1.5f, 0f);
-
-            rb.AddForce(_throw * strenght);
-            rb.useGravity = true;
-        }
-        if (rockScript.rockThrowedWest == true)
-        {
-            Vector3 _throw = new Vector3(-1.4f, 1.5f, 0f);
-
-            rb.AddForce(_throw * strenght);
-            rb.useGravity = true;
-        }
-
-
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(rock);
     }
 }

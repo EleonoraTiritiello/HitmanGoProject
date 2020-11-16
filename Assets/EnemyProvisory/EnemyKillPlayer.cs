@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class EnemyKillPlayer : MonoBehaviour
+namespace HitmanGO
 {
-    [SerializeField]
-    private GameObject player;
-
-    private void OnTriggerEnter(Collider other)
+    public class EnemyKillPlayer : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        [SerializeField]
+        private GameObject player;
+
+        private void OnTriggerEnter(Collider other)
         {
-            Destroy(player);
-            Invoke("ReloadScene", 3f);
+            if (other.CompareTag("Player"))
+            {
+                Destroy(player);
+                Invoke("ReloadScene", 3f);
+            }
+
+
         }
-
-
-    }
-    public void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
