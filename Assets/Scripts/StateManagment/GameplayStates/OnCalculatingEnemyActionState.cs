@@ -33,6 +33,22 @@ namespace HitmanGO
 
         private void CalculateEnemyAction(EnemyController enemy)
         {
+            if (enemy.ToDoActions.Count > 0)
+                enemy.CurrentAction = enemy.ToDoActions.Pop();
+
+            //DEBUG
+
+            enemy.PFC.SetTargetNode(_player.PFC.GetCurrentNode());
+
+            PathFindingNode[] path = PathFindingManager.GetInstance.CalculatePath(enemy.PFC.GetCurrentNode(), enemy.PFC.GetTargetNode());
+
+            if (path == null || path.Length <= 0)
+                Debug.LogWarning($"Non è stato trovato un percorso che vada da {enemy.PFC.GetCurrentNode().name} a {enemy.PFC.GetTargetNode().name}");
+
+            enemy.StartFollowPath(path);
+
+            //DEBUG
+
             if (enemy.PFC.GetTargetNode() == _player.PFC.GetTargetNode())
             {
                 if (enemy.PFC.GetTargetNode() == enemy.PFC.UpNode)
@@ -43,25 +59,6 @@ namespace HitmanGO
                     enemy.CurrentAction = EnemyController.Actions.MoveLeft;
                 else if (enemy.PFC.GetTargetNode() == enemy.PFC.RightNode)
                     enemy.CurrentAction = EnemyController.Actions.MoveRight;
-            }
-            else
-            {
-                if (enemy.CurrentAction != EnemyController.Actions.Die)
-                {
-                    if (_player.CurrentAction == PlayerController.Actions.Select)
-                    {
-                        if (enemy.FacingDirection == EnemyController.FacingDirections.Up)
-                            enemy.CurrentAction = EnemyController.Actions.FaceRight;
-                        else if (enemy.FacingDirection == EnemyController.FacingDirections.Right)
-                            enemy.CurrentAction = EnemyController.Actions.FaceDown;
-                        else if (enemy.FacingDirection == EnemyController.FacingDirections.Down)
-                            enemy.CurrentAction = EnemyController.Actions.FaceLeft;
-                        else if (enemy.FacingDirection == EnemyController.FacingDirections.Left)
-                            enemy.CurrentAction = EnemyController.Actions.FaceUp;
-                        else
-                            Debug.LogError($"Il nemico '{enemy.name}' non sta guardando in nessuna direzione (?) LOL");
-                    }
-                }
             }
 
             switch (enemy.CurrentAction)

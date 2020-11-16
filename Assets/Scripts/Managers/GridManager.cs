@@ -21,6 +21,8 @@ namespace HitmanGO
             "Es. If the nodes have been placed at a distance of 4 units from each other, this value must be set to 4")]
         public byte WorldTransformDivider = 1;
 
+        public Node[] Nodes { get { return _nodes.ToArray(); } }
+
         #endregion
 
         #region Private Variables

@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace HitmanGO
 {
@@ -32,7 +34,10 @@ namespace HitmanGO
         [HideInInspector]
         public Actions CurrentAction = Actions.None;
 
+        public Stack<Actions> ToDoActions = new Stack<Actions>();
+
         public enum States { Setup, Idle, Moving }
+        public bool IsAlerted = false;
 
         public States CurrentState { get; private set; }
 
@@ -72,6 +77,26 @@ namespace HitmanGO
         #endregion
 
         #region Public Methods
+
+        public void StartFollowPath(PathFindingNode[] path)
+        {
+            StartCoroutine(FollowPath(path));
+        }
+
+        public IEnumerator FollowPath(PathFindingNode[] path)
+        {
+           foreach(PathFindingNode node in path)
+           {
+                StartCoroutine(Move(GridManager.GetInstance.GetNode(node.GridPosition).transform.position));
+                yield return new WaitForSeconds(1f);
+           }
+        }
+
+        public IEnumerator Move(Vector3 target)
+        {
+            MoveToPosition(target);
+            yield return new WaitForSeconds(1f);
+        }
 
         /// <summary>
         /// Set the current state
