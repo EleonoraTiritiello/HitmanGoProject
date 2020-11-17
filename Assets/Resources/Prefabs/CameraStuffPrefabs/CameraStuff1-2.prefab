@@ -236,7 +236,7 @@ MonoBehaviour:
   player: {fileID: 0}
   arrive: {fileID: 1542352235224539960}
   Cam: {fileID: 1542352234836426524}
-  speed: 5
+  speed: 3
 --- !u!114 &1542352234662684860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   player: {fileID: 0}
   arrive: {fileID: 1542352235708992088}
   Cam: {fileID: 1542352234744728500}
-  speed: 5
+  speed: 3
 --- !u!1 &1542352234744728500
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +817,7 @@ MonoBehaviour:
   player: {fileID: 0}
   arrive: {fileID: 1542352236479415366}
   Cam: {fileID: 1542352234836426524}
-  speed: 5
+  speed: 3
 --- !u!114 &1542352235832810373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,7 +833,7 @@ MonoBehaviour:
   player: {fileID: 0}
   arrive: {fileID: 1542352234748352312}
   Cam: {fileID: 1542352234744728500}
-  speed: 5
+  speed: 3
 --- !u!1 &1542352235848232586
 GameObject:
   m_ObjectHideFlags: 0
