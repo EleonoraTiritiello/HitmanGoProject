@@ -45,14 +45,31 @@ public class SoundMethos : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("EndCinematic");
     }
-    // 
+    // Quando la pedina si sposta da un nodo ad un altro produce questo suono
     public void MovingPlayerPlay()
     {
         AudioManager.Instance.PlaySound("MovingPlayer");
     }
-
-
-
+    //quando il giocatore passa davanti ad un nemico e la pedina di agente 47 cade a terra 
+    public void DefeatPlayerPlay()
+    {
+        AudioManager.Instance.PlaySound("DefeatPlayer");
+    }
+    //quando il giocatore uccide un nemico 
+    public void DefeatOpponentPlay()
+    {
+        AudioManager.Instance.PlaySound("DefeatOpponent");
+    }
+    //quando il giocatore va sopra un noto su cui vi è un sasso e agente 47 lo prende in mano vi è questo suono
+    public void TakeStonePlay()
+    {
+        AudioManager.Instance.PlaySound("TakeStone");
+    }
+    // la musica che vi è nel livello 1-5 (esclusiva di questo livello)
+    public void GameSoundtrack_1_5Play()
+    {
+        AudioManager.Instance.PlaySound("GameSoundtrack_1_5");
+    }
 
 }
 

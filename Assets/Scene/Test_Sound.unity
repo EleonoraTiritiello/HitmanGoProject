@@ -186,55 +186,55 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: StartCinematic
+    clip: {fileID: 8300000, guid: eda5866a996b20e42bed0a69a9ed298a, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: EndCinematic
+    clip: {fileID: 8300000, guid: 490c30cdd7f7e3b42b64cd9362bfaf7b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: MovingPlayer
+    clip: {fileID: 8300000, guid: 8195d4772929a39469b9c91d18885e6e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: DefeatPlayer
+    clip: {fileID: 8300000, guid: 7cd2a1599a773184e897156d37990f84, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: DefeatOpponent
+    clip: {fileID: 8300000, guid: a79ab414abb50ae459a26ffaa2583954, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: TakeStone
+    clip: {fileID: 8300000, guid: 0d028d031db61054f8c47e422982d292, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: GameSoundtrack_1_5
+    clip: {fileID: 8300000, guid: b12df7362ed10604ea25c267d1984846, type: 3}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     playOnAwake: 0
-    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+    mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
   - clipName: LevelComplete
     clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
     volume: 1
