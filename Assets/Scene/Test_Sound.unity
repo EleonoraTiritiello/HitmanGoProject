@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clipName: LevelComplete
+  - clipName: LevelComplete_OneCard
     clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
     volume: 1
     pitch: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: MainMenuSoundtrack
+  - clipName: MenuSoundtrack
     clip: {fileID: 8300000, guid: cd4a7229cc86c5c41af629c5ee3fc162, type: 3}
     volume: 1
     pitch: 1
@@ -256,8 +256,29 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: GameSoundtrack
+    clip: {fileID: 8300000, guid: 76b36bec87c7e2045ad07cfa6965b9df, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: LevelComplete_ThreeCards
+    clip: {fileID: 8300000, guid: 63a94ad6110b31f44a89f4cfe3da0deb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: ThreeEnemyDefeated
+    clip: {fileID: 8300000, guid: 9c768786cade7c04798e895ae68cae1e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: EnemyRotation
+    clip: {fileID: 8300000, guid: bd7434505c856ff4d8d961c9ba5eadd1, type: 3}
     volume: 1
     pitch: 1
     loop: 0

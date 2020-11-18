@@ -5,9 +5,9 @@ using UnityEngine;
 public class SoundMethos : MonoBehaviour
 {
     //questo è il suono che si sente quando il giocatore arriva alla fine del livello e compare 1 sola carta ( quindi si usa per tutti i livelli dall 1-1 all 1-5) 
-    public void LevelCompletePlay() 
+    public void LevelComplete_OneCardPlay() 
     {
-        AudioManager.Instance.PlaySound("LevelComplete");
+        AudioManager.Instance.PlaySound("LevelComplete_OneCard");
     }
     // questo è quando i nodi (percorso che deve fare agente47) vengono creati ad inizio livello 
     public void CreationNodesPlay()
@@ -15,17 +15,17 @@ public class SoundMethos : MonoBehaviour
         AudioManager.Instance.PlaySound("CreationNodes");
     }
 
-    //Questa è la musica che vi è nel menu iniziale(in pratica quando si deve premere su "go" o quando si gira per le impostazioni) 
-    public void MainMenuSoundtrackPlay()
+    //Questa è la musica che vi è nel menu iniziale(in pratica quando si deve premere su "go", quando si gira per le impostazioni, quando si sceglie" la scatola" e per la selezione dei livelli) 
+    public void MenuSoundtrackPlay()
     {
-        AudioManager.Instance.PlaySound("MainMenuSoundtrack");
+        AudioManager.Instance.PlaySound("MenuSoundtrack");
     }
     // StopSound va messo solo per le musiche che quindi vanno in loop  
     public void MainMenuSoundtrackStop()
     {
-        AudioManager.Instance.StopSound("MainMenuSoundtrack");
+        AudioManager.Instance.StopSound("MenuSoundtrack");
     }
-    //é il suono di quando premi il tasto "go" nel main menu E di quando selezioni uno dei livelli (i cerchi neri con scritto il numero del livello)
+    //é il suono di quando premi i pulsanti: compreso il tasto "go" nel main menu, selezione di una scatola, di quando selezioni uno dei livelli (i cerchi neri con scritto il numero del livello)
     public void SelectedButtonPlay()
     {
         AudioManager.Instance.PlaySound("SelectedButton");
@@ -84,10 +84,34 @@ public class SoundMethos : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("InterrogativeSound");
     }
-    // quando il giocatore completa uno degli obbiettivi del livello e compare il simbolo rosso che si "stampa" sul foglio di carta
+    // quando il giocatore completa uno degli obbiettivi del livello e compare il simbolo rosso che si "stampa" sul foglio di carta (necessario solo nei primi 5 livelli)
     public void StampPlay()
     {
         AudioManager.Instance.PlaySound("Stamp");
+    }
+    // la musica che vi è in tutti i livelli (escluso il 1-5 che ne ha una propria) 
+    public void GameSoundtrackPlay()
+    {
+        AudioManager.Instance.PlaySound("GameSoundtrack");
+    }
+    public void GameSoundtrackStop()
+    {
+        AudioManager.Instance.StopSound("GameSoundtrack");
+    }
+    // questo è il suono che si sente quando il giocatore arriva alla fine del livello 1-6 e compaiono 3 carte
+    public void LevelComplete_ThreeCardsPlay()
+    {
+        AudioManager.Instance.PlaySound("LevelComplete_ThreeCards");
+    }
+    // Nel livello 1-6 c'è la possibilità che vengano sconfitti 3 nemici contemporaneamente, quando succede si sente questo suono
+    public void ThreeEnemyDefeatedPlay()
+    {
+        AudioManager.Instance.PlaySound("ThreeEnemyDefeated");
+    }
+    // Quando un nemico sente un siono e si gira nella direzione di dove è stato lanciato il sasso
+    public void EnemyRotationPlay()
+    {
+        AudioManager.Instance.PlaySound("EnemyRotation");
     }
 
 }
