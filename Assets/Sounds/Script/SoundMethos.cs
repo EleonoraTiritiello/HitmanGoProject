@@ -70,6 +70,25 @@ public class SoundMethos : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("GameSoundtrack_1_5");
     }
+    public void GameSoundtrack_1_5Stop()
+    {
+        AudioManager.Instance.StopSound("GameSoundtrack_1_5");
+    }
+    // Quando agente 47 lancia il sasso e questo colpisce per terra
+    public void ThrowsStonePlay()
+    {
+        AudioManager.Instance.PlaySound("ThrowsStone");
+    }
+    // Il suono di quando uno dei nemici sente che è stato lanciato un sasso
+    public void InterrogativeSoundPlay()
+    {
+        AudioManager.Instance.PlaySound("InterrogativeSound");
+    }
+    // quando il giocatore completa uno degli obbiettivi del livello e compare il simbolo rosso che si "stampa" sul foglio di carta
+    public void StampPlay()
+    {
+        AudioManager.Instance.PlaySound("Stamp");
+    }
 
 }
 

@@ -235,22 +235,22 @@ MonoBehaviour:
     loop: 1
     playOnAwake: 0
     mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: ThrowsStone
+    clip: {fileID: 8300000, guid: 72bf893126242a744ac5e6eb674a9a1b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: InterrogativeSound
+    clip: {fileID: 8300000, guid: 5f40ce4188f6d2b479cee3243feba80f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: Stamp
+    clip: {fileID: 8300000, guid: 5decc9c3b6397e54790bd4cd1c0b8f99, type: 3}
     volume: 1
     pitch: 1
     loop: 0
