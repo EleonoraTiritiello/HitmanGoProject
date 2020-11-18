@@ -15,19 +15,27 @@ public class SoundMethos : MonoBehaviour
         AudioManager.Instance.PlaySound("CreationNodes");
     }
 
+    //Questa è la musica che vi è nel menu iniziale(in pratica quando si deve premere su "go" o quando si gira per le impostazioni) 
+    public void MainMenuSoundtrackPlay()
+    {
+        AudioManager.Instance.PlaySound("MainMenuSoundtrack");
+    }
+    // StopSound va messo solo per le musiche che quindi vanno in loop  
+    public void MainMenuSoundtrackStop()
+    {
+        AudioManager.Instance.StopSound("MainMenuSoundtrack");
+    }
+    //é il suono di quando premi il tasto "go" nel main menu E di quando selezioni uno dei livelli (i cerchi neri con scritto il numero del livello)
+    public void SelectedButtonPlay()
+    {
+        AudioManager.Instance.PlaySound("SelectedButton");
+    }
     //
-    public void CreationNodesPlay()
+    public void SelectedButtonPlay()
     {
-        AudioManager.Instance.PlaySound("CreationNodes");
+        AudioManager.Instance.PlaySound("SelectedButton");
     }
 
-
-
-    // StopSound va messo solo per le musiche che quindi vanno in loop (questo sotto andrà eliminato) 
-    public void LevelCompleteStop()
-    {
-        AudioManager.Instance.StopSound("LevelComplete");
-    }
 
 }
 
