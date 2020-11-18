@@ -179,8 +179,8 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
-  - clipName: LevelComplete
-    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+  - clipName: FinishLevel
+    clip: {fileID: 8300000, guid: 80a60aa56da236040a4afdd94881df4d, type: 3}
     volume: 1
     pitch: 1
     loop: 0

@@ -30,11 +30,28 @@ public class SoundMethos : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("SelectedButton");
     }
-    //
-    public void SelectedButtonPlay()
+    //é il suono di quando il giocatore finisce un livello e ritorna nella mappa di selezione livello, se è la prima volta che avviene il completamento di un livello allora all'icona circolare del livello compaiono delle seghettature e questo è il suono che fa  
+    public void FinishLevelPlay()
     {
-        AudioManager.Instance.PlaySound("SelectedButton");
+        AudioManager.Instance.PlaySound("FinishLevel");
     }
+    //appena finisce il caricamento e si vede il livello vi è questo suono ad aprire la "cut scene" 
+    public void StartCinematicPlay()
+    {
+        AudioManager.Instance.PlaySound("StartCinematic");
+    }
+    // appena finisce la "cut scene" iniziale e vi è la transizione tra telecamera "cinematografica" e quella che si usa in game vi è questo suono 
+    public void EndCinematicPlay()
+    {
+        AudioManager.Instance.PlaySound("EndCinematic");
+    }
+    // 
+    public void MovingPlayerPlay()
+    {
+        AudioManager.Instance.PlaySound("MovingPlayer");
+    }
+
+
 
 
 }
