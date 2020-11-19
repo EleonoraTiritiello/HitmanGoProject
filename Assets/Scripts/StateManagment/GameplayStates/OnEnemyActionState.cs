@@ -28,7 +28,13 @@ namespace HitmanGO
         {
             for(int i = 0; i < _enemies.Length; i++)
             {
+                Debug.Log($"{_enemies[i].name} -> {_enemies[i].ToDoAction}");
                 PerformEnemyAction(_enemies[i]);
+            }
+
+            foreach(EnemyController enemy in _enemies)
+            {
+                PathFindingManager.GetInstance.ArrangePFCComponents(enemy.PFC.GetCurrentNode());
             }
         }
 
@@ -38,7 +44,7 @@ namespace HitmanGO
         /// <param name="enemy"> A given enemy </param>
         private void PerformEnemyAction(EnemyController enemy)
         {
-            switch (enemy.CurrentAction)
+            switch (enemy.ToDoAction)
             {
                 case EnemyController.Actions.MoveUp:
                     enemy.SetCurrentState(EnemyController.States.Moving);
@@ -68,25 +74,21 @@ namespace HitmanGO
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.zero);
                     enemy.FacingDirection = EnemyController.FacingDirections.Up;
-                    enemy.PFC.SetTargetNode.Invoke(enemy.PFC.UpNode);
                     break;
                 case EnemyController.Actions.FaceDown:
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.up * 180f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Down;
-                    enemy.PFC.SetTargetNode.Invoke(enemy.PFC.DownNode);
                     break;
                 case EnemyController.Actions.FaceLeft:
                     enemy.SetCurrentState(EnemyController.States.Idle);
-                    enemy.RotateTowards(Vector3.up * -90f);
+                    enemy.RotateTowards(Vector3.up * 90f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Left;
-                    enemy.PFC.SetTargetNode.Invoke(enemy.PFC.LeftNode);
                     break;
                 case EnemyController.Actions.FaceRight:
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.up * 90f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Right;
-                    enemy.PFC.SetTargetNode.Invoke(enemy.PFC.RightNode);
                     break;
                 case EnemyController.Actions.Die:
                     if(enemy.Die != null)

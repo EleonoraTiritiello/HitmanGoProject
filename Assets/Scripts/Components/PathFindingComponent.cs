@@ -48,7 +48,7 @@ namespace HitmanGO
         /// <summary>
         /// Returns the list of <c> PathFindingComponent </c> which have as <c> _targetNode </c> the same node as this component
         /// </summary>
-        public PathFindingComponent[] TargetNodePopulation { get { return PathFindingManager.GetInstance.GetNodePopulation(_targetNode); } }
+        public PathFindingComponent[] TargetNodePopulation { get { return PathFindingManager.GetInstance.GetNodePopulation(_targetNode).ToArray(); } }
 
         #endregion
 
@@ -105,6 +105,25 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public EnemyController.FacingDirections GetAdjacentNodeDirection(Node node)
+        {
+            if (_currentNode == null)
+                Debug.LogError("Non è stato settato nessun nodo corrente");
+
+            if (node == UpNode)
+                return EnemyController.FacingDirections.Up;
+            else if (node == DownNode)
+                return EnemyController.FacingDirections.Down;
+            else if (node == LeftNode)
+                return EnemyController.FacingDirections.Left;
+            else if (node == RightNode)
+                return EnemyController.FacingDirections.Right;
+            else
+                Debug.LogError($"Il nodo '{node}' non è un nodo adiacente al nodo '{_currentNode}'");
+
+            return EnemyController.FacingDirections.Up;
+        }
 
         #region Getters
 

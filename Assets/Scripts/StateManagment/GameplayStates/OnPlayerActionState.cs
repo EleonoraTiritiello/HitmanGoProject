@@ -10,6 +10,8 @@ namespace HitmanGO
         {
             if (_player == null) _player = GameManager.GetInstance.Player;
 
+            Debug.Log($"Player -> {_player.ToDoAction}");
+
             PerformPlayerAction();
 
             LevelManger.GetInstance.ChangeState(LevelManger.States.OnEnemyAction);
@@ -17,7 +19,7 @@ namespace HitmanGO
 
         private void PerformPlayerAction()
         {
-            switch (_player.CurrentAction)
+            switch (_player.ToDoAction)
             {
                 case PlayerController.Actions.MoveUp:
                     _player.SetCurrentState(PlayerController.States.Moving);

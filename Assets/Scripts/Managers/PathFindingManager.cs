@@ -21,25 +21,15 @@ namespace HitmanGO
 
         #region Private Variables
 
+        [SerializeField]
+        [Min(0.1f)]
+        private float arrangeComponentsMultiplier = 1f; 
+
         private Node _lastNode;
 
         private const byte _moveStraightCost = 10;
-        private const byte _moveDiagonalCost = 14;
 
         #endregion
-
-        #endregion
-
-        #region Unity Callbacks
-
-        private void Start()
-        {
-            foreach (PathFindingComponent pfc in PFCList)
-            {
-                if(pfc.GetComponent<EnemyController>() != null)
-                    pfc.SetTargetNode += ArrangePFCComponents;
-            }
-        }
 
         #endregion
 
@@ -47,26 +37,31 @@ namespace HitmanGO
 
         #region Public Methods
 
-        public PathFindingNode[] CalculatePath(Node startingNode, Node targetNode)
+        /// <summary>
+        /// Calculate the shortest path from one node to another node
+        /// </summary>
+        /// <param name="startingNode"> The starting node </param>
+        /// <param name="targetNode"> The target node </param>
+        /// <returns> If a path is found it returns an array of <c> PathFindingNode </c>, otherwise it returns null </returns>
+        public Node[] CalculatePath(Node startingNode, Node targetNode)
         {
-            //Setup liste e variabili
-            //Nodo di partenza
+            //The starting node
             PathFindingNode startingPathFindingNode = new PathFindingNode(startingNode.GridPosition);
-            //Nodo di arrivo
+            //The target node
             PathFindingNode targetPathFindingNode = new PathFindingNode(targetNode.GridPosition);
 
-            //Lista di nodi virtuali
+            //List of virtual nodes
             List<PathFindingNode> pathFindingNodes = new List<PathFindingNode>();
 
-            //Lista di nodi da verificare
+            //List of nodes to check
             List<PathFindingNode> openList = new List<PathFindingNode>() { startingPathFindingNode };
-            //Lista di nodi già verificati
+            //List of nodes already verified
             List<PathFindingNode> closedList = new List<PathFindingNode>();
 
             PathFindingNode currentPathFindingNode;
 
-            //Inizializza i nodi virtuali dove sono i nodi reali
-            foreach(Node node in GridManager.GetInstance.Nodes)
+            //Initialize the virtual nodes where the real nodes are
+            foreach (Node node in GridManager.GetInstance.Nodes)
             {
                 currentPathFindingNode = new PathFindingNode(node.GridPosition)
                 {
@@ -77,92 +72,181 @@ namespace HitmanGO
                 pathFindingNodes.Add(currentPathFindingNode);
             }
 
-            //Calcola la distanza più breve da inizio a fine
+            //Calculate the shortest distance from start to finish
             startingPathFindingNode.GCost = 0;
             startingPathFindingNode.HCost = CalculateDistanceCost(startingPathFindingNode, targetPathFindingNode);
 
-            //Fino a quando ci sono nodi da controllare
-            while(openList.Count > 0)
+            //As long as there are nodes to check
+            while (openList.Count > 0)
             {
-                //Salva il nodo con il costo combinato minore
+                //Save the node with the lowest combined cost
                 currentPathFindingNode = GetLowestFCostNode(openList.ToArray());
-
-                Debug.LogWarning($"Veryfing node in position: {currentPathFindingNode.GridPosition}");
 
                 PathFindingNode tmpNode = currentPathFindingNode;
                 while(tmpNode.PreviousNode != null)
                 {
-                    Debug.Log($"With previous node in position: {tmpNode.PreviousNode.GridPosition}");
                     tmpNode = tmpNode.PreviousNode;
                 }
 
-                //Se il nodo trovato è il nodo di arrivo
+                //If the node found is the destination node
                 if (currentPathFindingNode.GridPosition == targetNode.GridPosition)
                 {
                     targetPathFindingNode = currentPathFindingNode;
-                    //Calcola il percorso fino a quel nodo
-                    return CalculatePath(targetPathFindingNode);
+                    //Retrace the route to the starting node
+                    return ConvertPath(RetracePath(targetPathFindingNode));
                 }
 
-                //Altrimenti togli il nodo verificato dalla lista di nodi da verificare
+                //Otherwise remove the verified node from the list of nodes to be verified
                 openList.Remove(currentPathFindingNode);
-                //E aggiungilo alla lista di nodi controllati
+                //And add it to the list of checked nodes
                 closedList.Add(currentPathFindingNode);
 
                 Node currentNode = GridManager.GetInstance.GetNode(currentPathFindingNode.GridPosition);
                 PathFindingNode connectedPathFindingNode = null;
                 int tentativeGCost;
 
-                //Per ogni nodo connesso al nodo trovato
-                foreach(Connection connection in currentNode.Connections)
+                //For each node connected to the found node
+                foreach (Connection connection in currentNode.Connections)
                 {
-                    //Verifica il nodo virtuale corrispondente al nodo "fisico"
-                    foreach(PathFindingNode pathFindingNode in pathFindingNodes)
+                    //Check the virtual node corresponding to the "physical" node
+                    foreach (PathFindingNode pathFindingNode in pathFindingNodes)
                     {
                         if(pathFindingNode.GridPosition == connection.To.GridPosition)
                         {
-                            //Quando trovi il nodo virtuale giusto salvalo
+                            //When you find the right virtual node save it
                             connectedPathFindingNode = pathFindingNode;
                             break;
                         }
                     }
 
-                    //Se non è stato trovato il nodo virtuale corrispondente al nodo corrente dai un errore
+                    //If the virtual node corresponding to the current node has not been found, give an error
                     if (connectedPathFindingNode == null)
                         Debug.LogError($"Non è stato trovato il nodo virtuale corrispondente al nodo {currentNode.name}");
 
-                    //Se il nodo virtuale corrente è già stato verificato passa al prossimo nodo
+                    //If the current virtual node has already been verified go to the next node
                     if (closedList.Contains(connectedPathFindingNode)) continue;
 
-                    //Calcola il costo partendo dal nodo trovato
+                    //Calculate the cost starting from the found node
                     tentativeGCost = currentPathFindingNode.GCost + CalculateDistanceCost(currentPathFindingNode, connectedPathFindingNode);
 
-                    //Se partendo dal nodo trovato costa meno arrivare alla fine
-                    //rispetto a partire dal nodo verificato nella precedente iterazione
-                    if(tentativeGCost < connectedPathFindingNode.GCost)
+                    //If starting from the found node it is cheaper to get to the end
+                    //than starting from the node verified in the previous iteration
+                    if (tentativeGCost < connectedPathFindingNode.GCost)
                     {
-
-                        if (connectedPathFindingNode.PreviousNode != null)
-                            Debug.LogError($"Sovrascrivendo il nodo precedente al nodo in posizione: {connectedPathFindingNode.GridPosition}");
-                        else
-                            Debug.Log($"Impostando il nodo precedente al nodo in posizione: {connectedPathFindingNode.GridPosition}");
-
-                        //Setta i valori del nodo trovato
+                        //Sets the values ​​of the found node
                         connectedPathFindingNode.PreviousNode = currentPathFindingNode;
                         connectedPathFindingNode.GCost = tentativeGCost;
                         connectedPathFindingNode.HCost = CalculateDistanceCost(connectedPathFindingNode, targetPathFindingNode);
 
-                        //Se il nodo non è presente nella lista di nodi da verificare aggiungilo
+                        //If the node is not present in the list of nodes to check add it
                         if (!openList.Contains(connectedPathFindingNode))
                             openList.Add(connectedPathFindingNode);
                     }
                 }
             }
 
-            //Se non è stato trovato un percorso ritorna "null"
+            //If a path was not found, it returns "null"
             return null;
         }
 
+        /// <summary>
+        /// Get all the <c> PathFindingComponents </c> that target the given <c> Node </c>
+        /// </summary>
+        /// <param name="targetNode"> A given node </param>
+        /// <returns> A <c> PathFindingComponent </c> array </returns>
+        public List<PathFindingComponent> GetNodePopulation(Node targetNode)
+        {
+            List<PathFindingComponent> population = new List<PathFindingComponent>();
+
+            foreach (PathFindingComponent pfc in PFCList)
+            {
+                if (pfc.GetCurrentNode() == targetNode)
+                    population.Add(pfc);
+            }
+
+            return population;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Convert an array of <c> PathFindingNode </c> to an array of <c> Node </c>
+        /// </summary>
+        /// <param name="path"> The <c> PathFindingNode </c> array </param>
+        /// <returns> The <c> Node </c> array </returns>
+        private Node[] ConvertPath(PathFindingNode[] path)
+        {
+            Node[] convertedPath = new Node[path.Length];
+
+            for(int i = 0; i < convertedPath.Length; i++)
+            {
+                convertedPath[i] = GridManager.GetInstance.GetNode(path[i].GridPosition);
+            }
+
+            return convertedPath;
+        }
+
+        /// <summary>
+        /// Recalculate the route starting from the target node to arrive at the starting node
+        /// </summary>
+        /// <param name="endNode"> The target node </param>
+        /// <returns> Return the list of nodes of the path from the starting node to the target node </returns>
+        private PathFindingNode[] RetracePath(PathFindingNode endNode)
+        {
+            List<PathFindingNode> path = new List<PathFindingNode> { endNode };
+
+            PathFindingNode currentNode = endNode;
+
+            while(currentNode.PreviousNode != null)
+            {
+                path.Add(currentNode.PreviousNode);
+                currentNode = currentNode.PreviousNode;
+            }
+            path.Reverse();
+
+            return path.ToArray();
+        }
+
+        /// <summary>
+        /// Get the node that is most convenient to go through to get to the target node
+        /// </summary>
+        /// <param name="nodes"> The list of nodes to check </param>
+        /// <returns> The node with the lowest overall cost </returns>
+        private PathFindingNode GetLowestFCostNode(PathFindingNode[] nodes)
+        {
+            PathFindingNode lowestFCostNode = nodes[0];
+
+            foreach(PathFindingNode node in nodes)
+            {
+                if (node.FCost < lowestFCostNode.FCost)
+                    lowestFCostNode = node;
+            }
+
+            return lowestFCostNode;
+        }
+
+        /// <summary>
+        /// Calculate the cost of getting from node 'a' to node 'b'
+        /// </summary>
+        /// <param name="a"> The current node </param>
+        /// <param name="b"> The target node </param>
+        /// <returns> Returns the minimum number of moves to get to the target node multiplied by the cost for each move </returns>
+        private int CalculateDistanceCost(PathFindingNode a, PathFindingNode b)
+        {
+            //Calculate the number of nodes to do horizontally to get from "a" to "b"
+            int xDistance = Mathf.Abs(b.GridPosition.x - a.GridPosition.x);
+            //Calculate the number of nodes to do vertically to get from "a" to "b"
+            int yDistance = Mathf.Abs(b.GridPosition.y - a.GridPosition.y);
+            //Multiply the minimum number of moves to get to the target node by the cost of each move
+            return (xDistance + yDistance) * _moveStraightCost;
+        }
+
+        /// <summary>
+        /// Calculate how the <c> PathFinding Component </c> should arrange on a node
+        /// </summary>
+        /// <param name="node"> A given node </param>
         public void ArrangePFCComponents(Node node)
         {
             if (_lastNode != node)
@@ -174,9 +258,21 @@ namespace HitmanGO
                 return;
             }
 
-            PathFindingComponent[] nodePopulation = GetNodePopulation(node);
+            List<PathFindingComponent> nodePopulation = GetNodePopulation(node);
 
-            if (nodePopulation.Length == 1)
+            if (nodePopulation.Count <= 0)
+            {
+                _lastNode = node;
+                return;
+            }
+
+            for (int j = 0; j < nodePopulation.Count; j++)
+            {
+                if (nodePopulation[j] == GameManager.GetInstance.Player.PFC)
+                    nodePopulation.Remove(nodePopulation[j]);
+            }
+
+            if (nodePopulation.Count == 1)
             {
                 RequestPositionAdjustment(nodePopulation[0], nodePopulation[0].GetCurrentNode().transform.position);
 
@@ -184,16 +280,16 @@ namespace HitmanGO
                 return;
             }
 
-            int i;   
+            int i;
             float angle;
             Vector3 targetPosition = Vector3.zero;
 
-            for (i = 0; i < nodePopulation.Length; i++)
+            for (i = 0; i < nodePopulation.Count; i++)
             {
-                angle = 360f / nodePopulation.Length * i;
+                angle = 360f / nodePopulation.Count * i;
 
-                targetPosition.x = Mathf.Cos(angle * Mathf.Deg2Rad);
-                targetPosition.z = Mathf.Sin(angle * Mathf.Deg2Rad);
+                targetPosition.x = Mathf.Cos(angle * Mathf.Deg2Rad) * arrangeComponentsMultiplier;
+                targetPosition.z = Mathf.Sin(angle * Mathf.Deg2Rad) * arrangeComponentsMultiplier;
 
                 targetPosition += node.transform.position;
 
@@ -204,88 +300,10 @@ namespace HitmanGO
         }
 
         /// <summary>
-        /// Get all the <c> PathFindingComponents </c> that target the given <c> Node </c>
+        /// Send a request to a <c> PathFinding Component </c> to settle into a defined position
         /// </summary>
-        /// <param name="targetNode"> A given node </param>
-        /// <returns> A <c> PathFindingComponent </c> array </returns>
-        public PathFindingComponent[] GetNodePopulation(Node targetNode)
-        {
-            List<PathFindingComponent> population = new List<PathFindingComponent>();
-
-            foreach (PathFindingComponent pfc in PFCList)
-            {
-                if (pfc.GetCurrentNode() == targetNode)
-                    population.Add(pfc);
-            }
-
-            return population.ToArray();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private PathFindingNode[] CalculatePath(PathFindingNode endNode)
-        {
-            //Inizializza una lista di nodi che parte dal nodo target
-            List<PathFindingNode> path = new List<PathFindingNode>
-            {
-                endNode
-            };
-
-            //Salva il nodo corrente come il nodo target
-            PathFindingNode currentNode = endNode;
-
-            Debug.LogWarning($"Trovato il target in posizione: {currentNode.GridPosition}");
-
-            //Fino a quando il nodo corrente deriva da un nodo
-            while(currentNode.PreviousNode != null)
-            {
-                Debug.Log($"With previous node in position: {currentNode.PreviousNode.GridPosition}");
-                //Aggiungi il nodo derivato alla lista dei nodi percorso
-                path.Add(currentNode.PreviousNode);
-                //Setta il nodo corrente al nodo derivato
-                currentNode = currentNode.PreviousNode;
-            }
-
-            //Inverti la lista
-            path.Reverse();
-
-            //Ritorna la lista di nodi percorso
-            return path.ToArray();
-        }
-
-        private PathFindingNode GetLowestFCostNode(PathFindingNode[] nodes)
-        {
-            //Salva il primo nodo della lista come il nodo con il costo minore
-            PathFindingNode lowestFCostNode = nodes[0];
-
-            //Per ogni nodo della lista
-            foreach(PathFindingNode node in nodes)
-            {
-                //Se il nodo corrente ha un costo totale minore del nodo salvato
-                if (node.FCost < lowestFCostNode.FCost)
-                    //Aggiorna il nodo con il costo totale minore
-                    lowestFCostNode = node;
-            }
-
-            //Ritorna il nodo con il costo totale minore
-            return lowestFCostNode;
-        }
-
-        private int CalculateDistanceCost(PathFindingNode a, PathFindingNode b)
-        {
-            //Calcola il numero di nodi da fare in orizzontale per arrivare da "a" a "b"
-            int xDistance = Mathf.Abs(b.GridPosition.x - a.GridPosition.x);
-            //Calcola il numero di nodi da fare in verticale per arrivare da "a" a "b"
-            int yDistance = Mathf.Abs(b.GridPosition.y - a.GridPosition.y);
-            //Calcola i movimenti orizzontale che rimangono da fare dopo i movimenti diagonali
-            /*int remaining = Mathf.Abs(xDistance - yDistance);
-            //Ritorna il costo di tutto il movimento
-            return _moveDiagonalCost * Mathf.Min(xDistance, yDistance) + _moveStraightCost * remaining;*/
-            return (xDistance + yDistance) * _moveStraightCost;
-        }
-
+        /// <param name="pfc"> A given PathFindingComponent </param>
+        /// <param name="adjustedPosition"> The location where the <c> athFindingComponenet </c> should be </param>
         private void RequestPositionAdjustment(PathFindingComponent pfc, Vector3 adjustedPosition)
         {
             if (pfc.AdjustPosition != null)

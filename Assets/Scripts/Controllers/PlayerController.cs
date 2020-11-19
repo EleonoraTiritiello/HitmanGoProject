@@ -32,7 +32,7 @@ namespace HitmanGO
         /// The action that the Player must perform in the current cycle
         /// </summary>
         [HideInInspector]
-        public Actions CurrentAction = Actions.None;
+        public Actions ToDoAction = Actions.None;
 
         /// <summary>
         /// The states that the Player can have

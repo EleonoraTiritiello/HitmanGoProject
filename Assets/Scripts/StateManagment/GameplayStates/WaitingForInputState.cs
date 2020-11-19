@@ -11,6 +11,8 @@ namespace HitmanGO
         {
             if (_inputManager == null) _inputManager = InputManager.GetInstance;
             if (_player == null) _player = GameManager.GetInstance.Player;
+
+            Debug.Log("Waiting for input");
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,13 +38,18 @@ namespace HitmanGO
             }
         }
 
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            Debug.Log($"Player TODO -> {_player.ToDoAction}");
+        }
+
         /// <summary>
         /// Set the action to be performed by the player
         /// </summary>
         /// <param name="action"> The action that needs to be performed </param>
         private void SetPlayerAction(PlayerController.Actions action)
         {
-            _player.CurrentAction = action;
+            _player.ToDoAction = action;
             LevelManger.GetInstance.ChangeState(LevelManger.States.OnCalculatingPlayerAction);
         }
     }

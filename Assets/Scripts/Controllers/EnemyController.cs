@@ -32,7 +32,7 @@ namespace HitmanGO
         }
 
         [HideInInspector]
-        public Actions CurrentAction = Actions.None;
+        public Actions ToDoAction = Actions.None;
 
         public Stack<Actions> ToDoActions = new Stack<Actions>();
 
@@ -51,12 +51,12 @@ namespace HitmanGO
         {
             if (PFC == null) PFC = GetComponent<PathFindingComponent>();
 
-            if (Die == null) Die += OnDie;
+            if (Die == null) Die += OnDie;          
 
             if (PFC.AdjustPosition == null) PFC.AdjustPosition = MoveToPosition;
 
             if (!LevelManger.GetInstance.IsEnemyInList(this))
-                LevelManger.GetInstance.AddEnemyToList(this);
+                LevelManger.GetInstance.AddEnemyToList(this);     
         }
 
         private void Start()
@@ -77,26 +77,6 @@ namespace HitmanGO
         #endregion
 
         #region Public Methods
-
-        public void StartFollowPath(PathFindingNode[] path)
-        {
-            StartCoroutine(FollowPath(path));
-        }
-
-        public IEnumerator FollowPath(PathFindingNode[] path)
-        {
-           foreach(PathFindingNode node in path)
-           {
-                StartCoroutine(Move(GridManager.GetInstance.GetNode(node.GridPosition).transform.position));
-                yield return new WaitForSeconds(1f);
-           }
-        }
-
-        public IEnumerator Move(Vector3 target)
-        {
-            MoveToPosition(target);
-            yield return new WaitForSeconds(1f);
-        }
 
         /// <summary>
         /// Set the current state

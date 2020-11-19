@@ -12,12 +12,14 @@ namespace HitmanGO
 
             CalculatePlayerAction();
 
+            Debug.Log($"Setting player action to -> {_player.ToDoAction}");
+
             LevelManger.GetInstance.ChangeState(LevelManger.States.OnCalculatingEnemyAction);
         }
 
         private void CalculatePlayerAction()
         {
-            switch (_player.CurrentAction)
+            switch (_player.ToDoAction)
             {
                 case PlayerController.Actions.None:
                     Debug.LogError("An error occurred while selecting the Player action");
@@ -25,28 +27,28 @@ namespace HitmanGO
                 case PlayerController.Actions.MoveUp:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.UpNode);
                     if (_player.PFC.GetTargetNode() == null)
-                        _player.CurrentAction = PlayerController.Actions.None;
+                        _player.ToDoAction = PlayerController.Actions.None;
                     else
                         VerifyKills();
                     break;
                 case PlayerController.Actions.MoveDown:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.DownNode);
                     if (_player.PFC.GetTargetNode() == null)
-                        _player.CurrentAction = PlayerController.Actions.None;
+                        _player.ToDoAction = PlayerController.Actions.None;
                     else
                         VerifyKills();
                     break;
                 case PlayerController.Actions.MoveLeft:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.LeftNode);
                     if (_player.PFC.GetTargetNode() == null)
-                        _player.CurrentAction = PlayerController.Actions.None;
+                        _player.ToDoAction = PlayerController.Actions.None;
                     else
                         VerifyKills();
                     break;
                 case PlayerController.Actions.MoveRight:
                     _player.PFC.SetTargetNode.Invoke(_player.PFC.RightNode);
                     if (_player.PFC.GetTargetNode() == null)
-                        _player.CurrentAction = PlayerController.Actions.None;
+                        _player.ToDoAction = PlayerController.Actions.None;
                     else
                         VerifyKills();
                     break;
@@ -66,7 +68,7 @@ namespace HitmanGO
                     EnemyController enemy = targetNodePopulation[i].GetComponent<EnemyController>();
 
                     if (enemy != null)
-                        enemy.CurrentAction = EnemyController.Actions.Die;
+                        enemy.ToDoAction = EnemyController.Actions.Die;
                 }
             }
         }

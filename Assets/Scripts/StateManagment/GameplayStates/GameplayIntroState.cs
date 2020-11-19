@@ -6,7 +6,7 @@ namespace HitmanGO
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            LevelManger.GetInstance.ChangeState(LevelManger.States.WaitingForInput);
+            LevelManger.GetInstance.ChangeState(LevelManger.States.OnCalculatingEnemyAction);
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
