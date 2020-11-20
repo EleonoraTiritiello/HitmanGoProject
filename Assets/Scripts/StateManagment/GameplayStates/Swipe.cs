@@ -14,12 +14,14 @@ public class Swipe : MonoBehaviour
     /// <summary>
     /// Bool
     /// </summary>
-    public bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
+    public bool tap, swipeLeft, swipeRight, swipeUp, swipeDown, playerSelect;
 
     /// <summary>
     /// Change the area where is possible cancel the action before the movement
     /// </summary>
     public float ActionDetection;
+
+    public GameObject target;
 
     #endregion
 
@@ -52,6 +54,16 @@ public class Swipe : MonoBehaviour
         CalculateDelta();
     }
 
+    void OnMouseOver()
+    {
+        playerSelect = true;
+    }
+    void OnMouseExit()
+    {
+        playerSelect = false;
+    }
+
+
     #endregion
 
     #region Calculate Delta
@@ -59,7 +71,7 @@ public class Swipe : MonoBehaviour
     /// <summary>
     /// Method to calculate the direction of the swipe
     /// </summary>
-    
+
     void CalculateDelta()
     {
         _swipeDelta = Vector2.zero;
@@ -102,7 +114,7 @@ public class Swipe : MonoBehaviour
     /// </summary>
     private void MouseInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && playerSelect == true)
             StartDrag(Input.mousePosition);
         else if (Input.GetMouseButtonUp(0))
             Reset();        
@@ -118,7 +130,7 @@ public class Swipe : MonoBehaviour
     private void MobileInput()
     {
 
-        if (Input.touches.Length > 0)
+        if (Input.touches.Length > 0 && playerSelect == true)
         {
             if (Input.touches[0].phase == TouchPhase.Began)          
                 StartDrag(Input.touches[0].position);
