@@ -34,6 +34,7 @@ namespace HitmanGO
         [SerializeField]
         private GameObject _boxSelection;
 
+
         [SerializeField]
         private Image _blackPanel;
 
@@ -50,7 +51,6 @@ namespace HitmanGO
             if (_optionsMenu.activeSelf) _optionsMenu.SetActive(false);
             if (_resetGame.activeSelf) _resetGame.SetActive(false);
             if (_boxSelection.activeSelf) _boxSelection.SetActive(false);
-
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace HitmanGO
 {
@@ -66,11 +67,12 @@ namespace HitmanGO
             Debug.Log("GooglePlay");
         }
 
-        public void OnGOButtonClicked()
+        public void OnGOButtonClicked(int levelIndex)
         {
             gameObject.SetActive(false);
             // UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.BoxSelections);
-            GameManager.GetInstance.ChangeState(GameManager.States.SelectLevel);
+            GameManager.GetInstance.ChangeState(GameManager.States.BoxSelectMenu);
+            SceneManager.LoadScene(levelIndex + 1);
         }
 
         public void OnExitButtonClicked()
