@@ -1,86 +1,14 @@
 ﻿using UnityEngine;
 
-public class Rock2 : MonoBehaviour
+/*public class Rock2 : MonoBehaviour
 {
-    [SerializeField]
-    private bool rockHere;
-    [SerializeField]
-    private bool rockAoEResizing;
-    [SerializeField]
-    private GameObject throwPosition;
-    [SerializeField]
-    private GameObject rockAoE;
-    [SerializeField]
-    private GameObject rockModel;
-    [SerializeField]
-    private GameObject normalStance;
-    [SerializeField]
-    private GameObject rockStance;
-    [SerializeField]
-    private GameObject rock1Stuff;
-    [SerializeField]
-    private Camera cam;
-    [HideInInspector]
-    public Transform _selection;
-
-    [SerializeField]
-    private GameObject throwableRock2;
-    [SerializeField]
-    private GameObject rockInHand;
-    //[HideInInspector]
-    public bool rockThrowedNorth;
-    //[HideInInspector]
-    public bool rockThrowedSouth;
-    //[HideInInspector]
-    public bool rockThrowedEast;
-    //[HideInInspector]
-    public bool rockThrowedWest;
-
-    [SerializeField]
-    private GameObject agent47;
-    private bool playerCanMove = true;
-
-    private void Start()
-    {
-        rockHere = false;
-        rockAoEResizing = false;
-    }
     private void Update()
     {
-        if (playerCanMove == false)
-        {
-            //il player non può muoversi
-        }
-        if (rockAoEResizing == true)
-        {
-            var finalScale = new Vector3(9f, 0.01f, 9f);
-            rockAoE.transform.localScale = Vector3.Lerp(rockAoE.transform.localScale, finalScale, 2f * Time.deltaTime);
-        }
         if (rockHere)
         {
             RockThrowSelection();
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            throwPosition.SetActive(true);
-            rockHere = true;
-            rockModel.SetActive(false);
-            normalStance.SetActive(false);
-            rockStance.SetActive(true);
-            playerCanMove = false;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            Destroy(rock1Stuff);
-        }
-    }
-
 
     private void RockThrowSelection()
     {
@@ -154,3 +82,4 @@ public class Rock2 : MonoBehaviour
         Invoke("ExitRockAoE", 3f);
     }
 }
+*/

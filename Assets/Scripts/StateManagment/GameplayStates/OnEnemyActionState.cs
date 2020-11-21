@@ -51,24 +51,28 @@ namespace HitmanGO
                     enemy.MoveToPosition(enemy.PFC.GetTargetNode().transform.position);
                     enemy.PFC.SetCurrentNode.Invoke(enemy.PFC.GetTargetNode());
                     VerifyGameOver(enemy);
+                    VerifyTargetReached(enemy);
                     break;
                 case EnemyController.Actions.MoveDown:
                     enemy.SetCurrentState(EnemyController.States.Moving);
                     enemy.MoveToPosition(enemy.PFC.GetTargetNode().transform.position);
                     enemy.PFC.SetCurrentNode.Invoke(enemy.PFC.GetTargetNode());
                     VerifyGameOver(enemy);
+                    VerifyTargetReached(enemy);
                     break;
                 case EnemyController.Actions.MoveLeft:
                     enemy.SetCurrentState(EnemyController.States.Moving);
                     enemy.MoveToPosition(enemy.PFC.GetTargetNode().transform.position);
                     enemy.PFC.SetCurrentNode.Invoke(enemy.PFC.GetTargetNode());
                     VerifyGameOver(enemy);
+                    VerifyTargetReached(enemy);
                     break;
                 case EnemyController.Actions.MoveRight:
                     enemy.SetCurrentState(EnemyController.States.Moving);
                     enemy.MoveToPosition(enemy.PFC.GetTargetNode().transform.position);
                     enemy.PFC.SetCurrentNode.Invoke(enemy.PFC.GetTargetNode());
                     VerifyGameOver(enemy);
+                    VerifyTargetReached(enemy);
                     break;
                 case EnemyController.Actions.FaceUp:
                     enemy.SetCurrentState(EnemyController.States.Idle);
@@ -106,6 +110,12 @@ namespace HitmanGO
                 _player.Die.Invoke();
                 LevelManger.GetInstance.ChangeState(LevelManger.States.GameOver);
             }
+        }
+
+        private void VerifyTargetReached(EnemyController enemy)
+        {
+            if (enemy.IsAlerted && enemy.PFC.GetCurrentNode() == enemy.TargetNode)
+                enemy.DeAlert();
         }
 
         private void UpdateEnemyArray()

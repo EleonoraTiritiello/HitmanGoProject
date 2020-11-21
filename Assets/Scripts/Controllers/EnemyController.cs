@@ -37,9 +37,19 @@ namespace HitmanGO
         public Stack<Actions> ToDoActions = new Stack<Actions>();
 
         public enum States { Setup, Idle, Moving }
-        public bool IsAlerted = false;
+        public bool IsAlerted { get; private set; }
 
         public States CurrentState { get; private set; }
+
+        [HideInInspector]
+        public Node TargetNode { get; private set; }
+
+        #endregion
+
+        #region Private Variables
+
+        [SerializeField]
+        private GameObject _alertIcon;
 
         #endregion
 
@@ -54,6 +64,8 @@ namespace HitmanGO
             if (Die == null) Die += OnDie;          
 
             if (PFC.AdjustPosition == null) PFC.AdjustPosition = MoveToPosition;
+
+            IsAlerted = false;
 
             if (!LevelManger.GetInstance.IsEnemyInList(this))
                 LevelManger.GetInstance.AddEnemyToList(this);     
@@ -77,6 +89,22 @@ namespace HitmanGO
         #endregion
 
         #region Public Methods
+
+        public void Alert(Node targetNode)
+        {
+            TargetNode = targetNode;
+            IsAlerted = true;
+            _alertIcon.SetActive(true);
+
+            Debug.LogWarning($"Enemy {name} alerted!");
+        }
+
+        public void DeAlert()
+        {
+            TargetNode = null;
+            IsAlerted = false;
+            _alertIcon.SetActive(false);
+        }
 
         /// <summary>
         /// Set the current state

@@ -8,11 +8,21 @@ namespace HitmanGO
     /// <summary>
     /// Class <c> PlayerController </c> contains the methods for player movement and its animations, inherits from <c> CharacterController </c>
     /// </summary>
+    [RequireComponent(typeof(MeshFilter))]
     public class PlayerController : CharacterController
     {
         #region Variables
 
         #region Public Variables
+
+        [HideInInspector]
+        public GameObject ThrowPositionUp;
+        [HideInInspector]
+        public GameObject ThrowPositionDown;
+        [HideInInspector]
+        public GameObject ThrowPositionLeft;
+        [HideInInspector]
+        public GameObject ThrowPositionRight;
 
         /// <summary>
         /// The actions that the Player can perform
@@ -25,6 +35,7 @@ namespace HitmanGO
             MoveLeft,
             MoveRight,
             Select,
+            PickupRock,
             Die,
         }
 
@@ -44,6 +55,7 @@ namespace HitmanGO
         /// </summary>
         public States CurrentState { get; private set; }
 
+        [Space(5)]
         #region Events
 
         public Action Select;
@@ -53,6 +65,15 @@ namespace HitmanGO
         #endregion
 
         #region Private Variables 
+
+        private MeshFilter _meshFilter;
+
+        [SerializeField]
+        private Mesh _defaultStance;
+        [SerializeField]
+        private Mesh _rockStance;
+
+        private GameObject _rock;
 
         #region Selection Animation
 
@@ -115,6 +136,10 @@ namespace HitmanGO
 
         private void Awake()
         {
+            if (_meshFilter == null) _meshFilter = transform.GetChild(0).GetComponent<MeshFilter>();
+
+            if (_rock == null) _rock = transform.GetChild(0).GetChild(0).gameObject;
+
             if (PFC == null) PFC = GetComponent<PathFindingComponent>();
 
             if (Select == null) Select = OnSelected;
@@ -125,6 +150,11 @@ namespace HitmanGO
 
         void Start()
         {
+            if (_defaultStance == null || _rockStance == null)
+                Debug.LogError("Non è stata impostata la mesh del player");
+
+            SetDefaultStance();
+
             SetCurrentState(States.Idle);
         }
 
@@ -139,6 +169,23 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public void ThrowRock(RockChecker rockChecker)
+        {
+            _rock.GetComponent<ThrowableRock>().AddForce(rockChecker);
+            SetDefaultStance();
+        }
+
+        public void SetDefaultStance()
+        {
+            _meshFilter.sharedMesh = _defaultStance;
+        }
+
+        public void SetRockStance()
+        {
+            _meshFilter.sharedMesh = _rockStance;
+            _rock.SetActive(true);
+        }
 
         /// <summary>
         /// Moves the Player to a given position while simultaneously executing an animation

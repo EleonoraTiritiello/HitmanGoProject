@@ -14,6 +14,11 @@ namespace HitmanGO
 
         #region Public Variables 
 
+        [HideInInspector]
+        public bool LevelCompleted;
+
+        public Node EndNode;
+
         public Action EnemyListModifyed;
 
         /// <summary>
@@ -39,6 +44,11 @@ namespace HitmanGO
         /// The list of enemies in the level
         /// </summary>
         private List<EnemyController> _enemies;
+
+        /// <summary>
+        /// The list of rocks in the level
+        /// </summary>
+        private List<Rock> _rocks;
 
         /// <summary>
         /// Component that contains the states of the gameplay
@@ -72,6 +82,8 @@ namespace HitmanGO
 
             if (_enemies == null)
                 _enemies = new List<EnemyController>();
+            if (_rocks == null)
+                _rocks = new List<Rock>();
         }
 
         private void Start()
@@ -84,6 +96,14 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public bool IsRockInList(Rock rock) => _rocks.Contains(rock);
+
+        public void AddRockToList(Rock rock) => _rocks.Add(rock);
+
+        public void RemoveRockFromList(Rock rock) => _rocks.Remove(rock);
+
+        public Rock[] GetRocksArray() => _rocks.ToArray();
 
         public bool IsEnemyInList(EnemyController enemy) => _enemies.Contains(enemy);
 

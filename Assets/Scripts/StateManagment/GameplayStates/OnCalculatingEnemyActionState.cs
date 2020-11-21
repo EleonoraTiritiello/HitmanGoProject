@@ -27,9 +27,6 @@ namespace HitmanGO
         {
             foreach (EnemyController enemy in _enemies)
             {
-                if (!enemy.IsAlerted)
-                    enemy.IsAlerted = true;
-
                 CalculateEnemyAction(enemy);
 
                 Debug.Log($"Setting {enemy.name} action to -> {enemy.ToDoAction}");
@@ -38,6 +35,8 @@ namespace HitmanGO
 
         private void CalculateEnemyAction(EnemyController enemy)
         {
+            enemy.ToDoAction = EnemyController.Actions.None;
+
             MoveTowardsPlayer(enemy);
 
             bool overrideAction = false;
@@ -45,7 +44,7 @@ namespace HitmanGO
             if (enemy.IsAlerted && enemy.ToDoActions.Count <= 0)
             {
                 Debug.LogWarning("Calculate path to player");
-                CalculatePathToNode(enemy, _player.PFC.GetCurrentNode());
+                CalculatePathToNode(enemy, enemy.TargetNode);
             }
 
             if(enemy.ToDoActions.Count > 0)
@@ -210,34 +209,14 @@ namespace HitmanGO
 
         private void MoveTowardsPlayer(EnemyController enemy)
         {
-            if (enemy.PFC.GetTargetNode() == enemy.PFC.UpNode)
-            {
-                if (enemy.FacingDirection != EnemyController.FacingDirections.Up)
-                    enemy.ToDoActions.Push(EnemyController.Actions.FaceUp);
-
+            if (_player.PFC.GetTargetNode() == enemy.PFC.UpNode && enemy.FacingDirection == EnemyController.FacingDirections.Up)
                 enemy.ToDoActions.Push(EnemyController.Actions.MoveUp);
-            }
-            else if (enemy.PFC.GetTargetNode() == enemy.PFC.DownNode)
-            {
-                if (enemy.FacingDirection != EnemyController.FacingDirections.Down)
-                    enemy.ToDoActions.Push(EnemyController.Actions.FaceDown);
-
+            else if (_player.PFC.GetTargetNode() == enemy.PFC.DownNode && enemy.FacingDirection == EnemyController.FacingDirections.Down)
                 enemy.ToDoActions.Push(EnemyController.Actions.MoveDown);
-            }
-            else if (enemy.PFC.GetTargetNode() == enemy.PFC.LeftNode)
-            {
-                if (enemy.FacingDirection != EnemyController.FacingDirections.Left)
-                    enemy.ToDoActions.Push(EnemyController.Actions.FaceLeft);
-
+            else if (_player.PFC.GetTargetNode() == enemy.PFC.LeftNode && enemy.FacingDirection == EnemyController.FacingDirections.Left)
                 enemy.ToDoActions.Push(EnemyController.Actions.MoveLeft);
-            }
-            else if (enemy.PFC.GetTargetNode() == enemy.PFC.RightNode)
-            {
-                if (enemy.FacingDirection != EnemyController.FacingDirections.Right)
-                    enemy.ToDoActions.Push(EnemyController.Actions.FaceRight);
-
+            else if (_player.PFC.GetTargetNode() == enemy.PFC.RightNode && enemy.FacingDirection == EnemyController.FacingDirections.Right)
                 enemy.ToDoActions.Push(EnemyController.Actions.MoveRight);
-            }
         }
 
         private void UpdateEnemyArray()

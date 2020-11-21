@@ -270,6 +270,12 @@ namespace HitmanGO
             {
                 if (nodePopulation[j] == GameManager.GetInstance.Player.PFC)
                     nodePopulation.Remove(nodePopulation[j]);
+
+                /*foreach(Rock rock in LevelManger.GetInstance.GetRocksArray())
+                {
+                    if (nodePopulation[j] == rock.PFC)
+                        nodePopulation.Remove(nodePopulation[j]);
+                }*/
             }
 
             if (nodePopulation.Count == 1)
