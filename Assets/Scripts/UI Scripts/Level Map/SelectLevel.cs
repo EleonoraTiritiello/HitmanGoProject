@@ -10,9 +10,14 @@ namespace HitmanGO
 
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
-            SceneManager.LoadScene(levelIndex + 2);
+            SceneManager.LoadScene(levelIndex + 3);
         }
+        public void OnResetButtonClicked(int levelIndex)
+        {
+            GameManager.GetInstance.ChangeState(GameManager.States.BoxSelectMenu);
 
+            SceneManager.LoadScene(levelIndex + 1);
+        }
     }
 
 }
