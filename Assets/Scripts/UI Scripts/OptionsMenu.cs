@@ -1,10 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace HitmanGO
 {
     public class OptionsMenu : MonoBehaviour
     {
+        #region Public Variables
+
+        public int textureQuality;
+        public int resolutionIndex;
+        public int vSync;
+
+        // List of horizontal resolutions to include
+            int[] resolutions = new int[] { 600, 800, 1024, 1280, 1400, 1600, 1920 };
+
+        public Resolution displayResolution;
+
+        #endregion
+
         #region Private Variables
 
         [SerializeField]
@@ -43,31 +59,59 @@ namespace HitmanGO
         private GameObject vSyncOffObject;
         private bool vSyncEnable = true;
 
+        [SerializeField]
+        private GameObject resolution1;
+        [SerializeField]
+        private GameObject resolution2;
+        private bool resolution1Bool = true;
+        
+        [SerializeField]
+        private GameObject fullScreenObject;
+        [SerializeField]
+        private GameObject windowObject;
+        private bool fullScreenMode = true;
+
+        [SerializeField]
+        private GameObject resolutionChangePage1;
+        [SerializeField]
+        private GameObject resolutionChangePage2;
+        private int resolution = 0;
+
+        [SerializeField]
+        private GameObject optionMenu;
+
 
         #endregion
 
-        public void BackButtonPressed()
-        {
-            //Sequenza quando viene premuto il pulsante back(forse era meglio una coroutine ma sono designer)
-            StartCoroutine(UIMenu.GetInstance.FadeIn());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelAppears());
-            StartCoroutine(UIMenu.GetInstance.FadeOut());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelDisappears());
+        #region Private Methods 
 
-            Debug.Log("BackButtonClicked");
+        private void FadeIn()
+        {
+
+            //cambia l'alpha del pannello nero a 1(totalmente nero) in X secondi(secondo paramentro) dopo averla impostata a 0
+            _blackPanel.canvasRenderer.SetAlpha(0f);
+            _blackPanel.CrossFadeAlpha(1, 0.4f, true);
         }
 
-
-        public void ResetGameButtonPressed()
+        private void FadeOut()
         {
-            //Sequenza quando viene premuto il pulsante resetGame(forse era meglio una coroutine ma sono designer)
-            StartCoroutine(UIMenu.GetInstance.FadeIn());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelAppears());
-            StartCoroutine(UIMenu.GetInstance.FadeOut());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelDisappears());
-            ResetConfirmAppears();
 
-            Debug.Log("ResetButtonClicked");
+            //cambia l'alpha del pannello nero a 0(totalmente trasparente) in X secondi(secondo paramentro)
+            _blackPanel.CrossFadeAlpha(0, 0.4f, false);
+        }
+
+        private void BlackPanelAppears()
+        {
+
+            //disattiva il gameobject del pannello nero
+
+            _blackObject.SetActive(true);
+        }
+
+        private void BlackPanelDisappears()
+        {
+            //attiva il gameobject del pannello nero
+            _blackObject.SetActive(false);
         }
 
         private void ResetConfirmAppears()
@@ -76,17 +120,41 @@ namespace HitmanGO
             resetConfirmMenu.SetActive(true);
         }
 
+        #endregion
+
         private void Awake()
         {
-            OnSoundOnButtonClicked();
-            OnMusicOnButtonClicked();
-            OnQualityHighButtonClicked();
-            OnVSyncOnButtonClicked();
+            Screen.fullScreen = true;
+        }
+
+        public void BackButtonPressed()
+        {
+            //Sequenza quando viene premuto il pulsante back(forse era meglio una coroutine ma sono designer)
+            BlackPanelAppears();
+            FadeIn();
+            BlackPanelDisappears();
+            FadeOut();
+            Debug.Log("BackButtonClicked");
+        }
+
+        public void ResetGameButtonPressed()
+        {
+            //Sequenza quando viene premuto il pulsante resetGame(forse era meglio una coroutine ma sono designer)
+
+            BlackPanelAppears();
+            FadeIn();
+            BlackPanelDisappears();
+            FadeOut();
+
+            ResetConfirmAppears();
+
+            Debug.Log("ResetButtonClicked");
         }
 
         public void OnBackButtonClicked()
         {
             gameObject.SetActive(false);
+            BackButtonPressed();
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.MainMenu);
         }
 
@@ -123,6 +191,8 @@ namespace HitmanGO
             vSyncEnable = true;
             vSyncOffObject.SetActive(false);
             vSyncOnObject.SetActive(true);
+
+            QualitySettings.vSyncCount = 1;
         }
 
         public void OnVSyncOffButtonClicked()
@@ -130,6 +200,8 @@ namespace HitmanGO
             vSyncEnable = false;
             vSyncOffObject.SetActive(true);
             vSyncOnObject.SetActive(false);
+
+            QualitySettings.vSyncCount = 0;
         }
 
         public void OnSupportButtonClicked()
@@ -145,6 +217,7 @@ namespace HitmanGO
         public void OnResetGameButtonClicked()
         {
             gameObject.SetActive(false);
+            ResetGameButtonPressed();
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.ResetGame);
         }
 
@@ -153,19 +226,120 @@ namespace HitmanGO
             Debug.Log("Credits");
         }
 
-        public void OnQualityLowButtonClicked()
+        public void OnQualityButtonClicked()
         {
-            qualityHigh = false;
-            qualityLowObject.SetActive(true);
-            qualityHighObject.SetActive(false);
+            if(qualityHigh == true)
+            {
+                qualityLowObject.SetActive(true);
+                qualityHighObject.SetActive(false);
+                qualityHigh = false;
+                QualitySettings.SetQualityLevel(0);
+            }
+            else if (qualityHigh == false)
+            {
+                qualityLowObject.SetActive(false);
+                qualityHighObject.SetActive(true);
+                qualityHigh = true;
+                QualitySettings.SetQualityLevel(5);
+            }
+        }
+
+        public void FullScreenWindowedMode()
+        {
+
+            Screen.fullScreen = !Screen.fullScreen;
+            if(fullScreenMode == true)
+            {
+                fullScreenObject.SetActive(false);
+                windowObject.SetActive(true);
+                fullScreenMode = false;
+
+            }
+            else if(fullScreenMode == false)
+            {
+                fullScreenObject.SetActive(true);
+                windowObject.SetActive(false);
+                fullScreenMode = true;
+            }
 
         }
 
-        public void OnQualityHighButtonClicked()
+
+        public void OnResolutionButtonClicked()
         {
-            qualityHigh = true;
-            qualityLowObject.SetActive(false);
-            qualityHighObject.SetActive(true);
+            if (resolution1Bool == true)
+            {
+
+                resolution1.SetActive(false);
+                resolution2.SetActive(true);
+                resolution1Bool = false;
+            }
+            else if (resolution1Bool == false)
+            {
+
+                resolution1.SetActive(true);
+                resolution2.SetActive(false);
+                resolution1Bool = true;
+
+            }
+        }
+
+        public void ToResolutionConfirm()
+        {
+            if (resolution == 0 && resolution1Bool == false)
+            {
+                resolutionChangePage1.SetActive(true);
+                resolutionChangePage2.SetActive(true);
+                optionMenu.SetActive(false);
+                Screen.SetResolution(1680, 1050, true);
+
+            }
+            else if (resolution == 1 && resolution1Bool == true)
+            {
+                resolutionChangePage1.SetActive(true);
+                resolutionChangePage2.SetActive(true);
+                optionMenu.SetActive(false);
+                Screen.SetResolution(1920, 1080, true);
+            }
+        }
+
+        public void ConfirmResolutionChange()
+        {
+            if (resolution == 0)
+            {
+                resolutionChangePage1.SetActive(false);
+                resolutionChangePage2.SetActive(false);
+                optionMenu.SetActive(true);
+
+                resolution = 1;
+            }
+            else if (resolution == 1)
+            {
+                resolutionChangePage1.SetActive(false);
+                resolutionChangePage2.SetActive(false);
+                optionMenu.SetActive(true);
+
+                resolution = 0;
+            }
+        }
+
+        public void CancelResolutionChange()
+        {
+            if (resolution == 0)
+            {
+                resolutionChangePage1.SetActive(false);
+                resolutionChangePage2.SetActive(false);
+                Screen.SetResolution(1920, 1080, true);
+                optionMenu.SetActive(true);
+
+            }
+            else if (resolution == 1)
+            {
+                resolutionChangePage1.SetActive(false);
+                resolutionChangePage2.SetActive(false);
+                Screen.SetResolution(1680, 1050, true);
+                optionMenu.SetActive(true);
+            }
         }
 
         public void OnChangeLanguageButtonClicked()

@@ -22,13 +22,42 @@ namespace HitmanGO
         public void BackButtonPressed()
         {
             //Sequenza quando viene premuto il pulsante back(forse era meglio una coroutine ma sono designer)
-            StartCoroutine(UIMenu.GetInstance.FadeIn());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelAppears());
-            StartCoroutine(UIMenu.GetInstance.FadeOut());
-            StartCoroutine(UIMenu.GetInstance.BlackPanelDisappears());
+            BlackPanelAppears();
+            FadeIn();
+            BlackPanelDisappears();
+            FadeOut();
 
             Debug.Log("BackButtonClicked");
 
+        }
+
+        private void FadeIn()
+        {
+
+            //cambia l'alpha del pannello nero a 1(totalmente nero) in X secondi(secondo paramentro) dopo averla impostata a 0
+            _blackPanel.canvasRenderer.SetAlpha(0f);
+            _blackPanel.CrossFadeAlpha(1, 0.4f, true);
+        }
+
+        private void FadeOut()
+        {
+
+            //cambia l'alpha del pannello nero a 0(totalmente trasparente) in X secondi(secondo paramentro)
+            _blackPanel.CrossFadeAlpha(0, 0.4f, false);
+        }
+
+        private void BlackPanelAppears()
+        {
+
+            //disattiva il gameobject del pannello nero
+
+            _blackObject.SetActive(true);
+        }
+
+        private void BlackPanelDisappears()
+        {
+            //attiva il gameobject del pannello nero
+            _blackObject.SetActive(false);
         }
 
         public void BoxSelected()
@@ -41,6 +70,7 @@ namespace HitmanGO
         public void OnBackButtonClicked()
         {
             gameObject.SetActive(false);
+            BackButtonPressed();
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.MainMenu);
         }
 
