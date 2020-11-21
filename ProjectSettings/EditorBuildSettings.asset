@@ -8,12 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 74fbf543f91b50c4baf7981df9479a28
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mobile_BoxSelection.unity
     guid: c66aff836e9ce374a802ef8fe395a598
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Mobile_MapScene.unity
     guid: fb515fac357f52f498e07597e5e26a62
+  - enabled: 1
+    path: Assets/Scenes/PC_BoxSelect.unity
+    guid: e0ba3768ed122e24eb2e2929bb43342a
+  - enabled: 1
+    path: Assets/Scenes/PC_MapScene.unity
+    guid: ea97848764e6837488cb6aaf4fc0d3a8
   - enabled: 1
     path: Assets/Scenes/GameplayScene.unity
     guid: b8f08770d65a92f4695ef89da1ac8105
