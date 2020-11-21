@@ -235,7 +235,7 @@ RectTransform:
   m_Children:
   - {fileID: 1732505179734116309}
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 11
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -307,7 +307,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 8
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1732505179305371240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79a6f78eeea8eef4fa815fbb75c36052, type: 3}
+  m_Script: {fileID: 11500000, guid: 069f7896dab9432468603f3ad03a4c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   optionButton: {fileID: 1732505180526229964}
@@ -370,8 +370,8 @@ MonoBehaviour:
   loading: {fileID: 1732505179228802079}
   completed1: {fileID: 1732505180642943075}
   completed2: {fileID: 1732505179967465618}
-  completed3: {fileID: 1732505179326475381}
-  completed4: {fileID: 1732505180451960089}
+  completed3: {fileID: 1732505180451960089}
+  completed4: {fileID: 1732505179326475381}
   blackPanelObject: {fileID: 1732505180431004801}
   blackPanelImage: {fileID: 1732505180431004802}
 --- !u!1 &1732505179307389685
@@ -525,7 +525,7 @@ RectTransform:
   m_Children:
   - {fileID: 1732505181114338807}
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 16
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -730,7 +730,7 @@ RectTransform:
   m_LocalScale: {x: 0.23888999, y: 0.23888999, z: 0.23888999}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 12
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -908,15 +908,15 @@ RectTransform:
   - {fileID: 1732505180225503026}
   - {fileID: 1732505180619612350}
   - {fileID: 1732505179839631557}
-  - {fileID: 1732505179291539653}
-  - {fileID: 1732505180815157961}
-  - {fileID: 1732505180180521916}
-  - {fileID: 1732505179228802072}
   - {fileID: 1732505179411511723}
   - {fileID: 1732505180642943068}
   - {fileID: 1732505179967465619}
   - {fileID: 1732505180451960090}
   - {fileID: 1732505179326475382}
+  - {fileID: 1732505179291539653}
+  - {fileID: 1732505180815157961}
+  - {fileID: 1732505180180521916}
+  - {fileID: 1732505179228802072}
   - {fileID: 1732505180192625269}
   - {fileID: 1732505180431004925}
   m_Father: {fileID: 1732505179305371242}
@@ -1435,7 +1435,7 @@ RectTransform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 14
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1639,7 +1639,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 10
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2047,7 +2047,7 @@ RectTransform:
   - {fileID: 1732505179209325596}
   - {fileID: 1732505180062827746}
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 15
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2404,7 +2404,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2742,7 +2742,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1732505179595991813}
-  m_RootOrder: 9
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
