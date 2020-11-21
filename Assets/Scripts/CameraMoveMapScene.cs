@@ -9,81 +9,62 @@ namespace HitmanGO
     {
         #region Variables
 
-        #region Public Variables
-
         [SerializeField] private Camera _cam;
-        public GameObject UpLeftLimit, DownRightLimit;
-        public float speedY = 2f;
-        public float speedX = 2f;
-
-        public int[] values;
+        Vector3 touchStart;
+        public float zoomOutMin = 30, zoomOutMax = 50, zoomSpeedPc = 10, zoomSpeedMobile = 1;
         #endregion
 
-        #region Private Variables
+        #region Unity CallBacks
 
-        private float _newPositionX = 0f;
-        private float _newPositionY = 0f;
-        #endregion
-        #endregion
-
-        #region Unity Callbacks
-        void Start()
+        private void Update()
         {
-            transform.position = new Vector3(_newPositionY, _newPositionX, 0f);
+            CheckExecuteInput();
         }
+        #endregion
 
-        void Update()
+        #region CheckExecuteInput
+
+        void CheckExecuteInput()
         {
-            SwipeMap();
-            ZoomIn();
-            ZoomOut();
-        }
-
-        #region Zoom In/Out
-
-        void ZoomIn()
-        {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (_cam.fieldOfView == 5.5f)
-                    _cam.fieldOfView = 5f;
-                if (_cam.fieldOfView == 6.5f)
-                    _cam.fieldOfView = 5.5f;
-                if (_cam.fieldOfView == 8f)
-                    _cam.fieldOfView = 6.5f;
+                touchStart = _cam.ScreenToWorldPoint(Input.mousePosition);
             }
-        }
-        void ZoomOut()
-        {
-            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            if (Input.touchCount == 2)
             {
-                if (_cam.fieldOfView == 6.5f)
-                    _cam.fieldOfView = 8f;
-                if (_cam.fieldOfView == 5.5f)
-                    _cam.fieldOfView = 6.5f;
-                if (_cam.fieldOfView == 5f)
-                    _cam.fieldOfView = 5.5f;
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
+
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+                float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+                float difference = currentMagnitude - prevMagnitude;
+
+                Zoom(difference * 0.01f);
             }
-        }
-        #endregion
-
-        #endregion
-
-        #region Methods
-
-        #region SwipeMap
-        private void SwipeMap()
-        {
-            if (Input.GetMouseButton(0))
+            else
+                if (Input.GetMouseButton(0))
             {
-                _newPositionX -= speedY * Input.GetAxis("Mouse Y");
-                _newPositionY -= speedX * Input.GetAxis("Mouse X");
-                transform.position = new Vector3(_newPositionY, _newPositionX, 0f);
-                _cam.transform.position = new Vector3(Mathf.Clamp(_cam.transform.position.x, UpLeftLimit.transform.position.x, UpLeftLimit.transform.position.y), Mathf.Clamp(_cam.transform.position.y, DownRightLimit.transform.position.y, DownRightLimit.transform.position.x));
+                Vector3 direction = touchStart - _cam.ScreenToWorldPoint(Input.mousePosition);
+                _cam.transform.position += direction;
+                _cam.transform.position = new Vector3(Mathf.Clamp(_cam.transform.position.x, -45, 45), Mathf.Clamp(_cam.transform.position.y, -32, 50), transform.position.z);
+
             }
+
+            Zoom(Input.GetAxis("Mouse ScrollWheel"));
+
         }
         #endregion
 
+        #region Zoom
+
+        void Zoom(float increment)
+        {
+            _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize - increment * (zoomSpeedPc * zoomSpeedMobile), zoomOutMin, zoomOutMax);
+        }
         #endregion
     }
 }

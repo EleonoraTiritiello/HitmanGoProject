@@ -1583,6 +1583,7 @@ GameObject:
   - component: {fileID: 1493300479}
   - component: {fileID: 1493300478}
   - component: {fileID: 1493300481}
+  - component: {fileID: 1493300482}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1621,11 +1622,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 8
-  orthographic: 0
-  orthographic size: 5
+  near clip plane: 0
+  far clip plane: 2222
+  field of view: 52.8
+  orthographic: 1
+  orthographic size: 50
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1669,11 +1670,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cam: {fileID: 1493300479}
-  UpLeftLimit: {fileID: 132420216}
-  DownRightLimit: {fileID: 424953312}
-  speedY: 0.5
-  speedX: 0.5
-  values: 
+  zoomOutMin: 30
+  zoomOutMax: 50
+  zoomSpeedPc: 10
+  zoomSpeedMobile: 1
+--- !u!114 &1493300482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493300477}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0c41904fc7a3d428334e3a0dc16010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cam: {fileID: 1493300479}
+  zoomOutMin: 30
+  zoomOutMax: 50
+  zoomSpeedPc: 10
+  zoomSpeedMobile: 1
 --- !u!1 &1536315517
 GameObject:
   m_ObjectHideFlags: 0
