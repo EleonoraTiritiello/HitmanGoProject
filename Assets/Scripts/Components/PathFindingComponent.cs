@@ -48,7 +48,7 @@ namespace HitmanGO
         /// <summary>
         /// Returns the list of <c> PathFindingComponent </c> which have as <c> _targetNode </c> the same node as this component
         /// </summary>
-        public PathFindingComponent[] TargetNodePopulation { get { return PathFindingManager.GetInstance.GetNodePopulation(_targetNode); } }
+        public PathFindingComponent[] TargetNodePopulation { get { return PathFindingManager.GetInstance.GetNodePopulation(_targetNode).ToArray(); } }
 
         #endregion
 
@@ -76,8 +76,8 @@ namespace HitmanGO
 
         private void Awake()
         {
-            if (!PathFindingManager.GetInstance.Contains(this))
-                PathFindingManager.GetInstance.AddPFC(this);
+            if (!PathFindingManager.GetInstance.PFCList.Contains(this))
+                PathFindingManager.GetInstance.PFCList.Add(this);
 
             if (SetCurrentNode == null) SetCurrentNode = OnCurrentNodeSetted;
             if (SetTargetNode == null) SetTargetNode = OnTargetNodeSetted;
@@ -86,6 +86,18 @@ namespace HitmanGO
         private void Start()
         {
             Initialize();
+
+            PathFindingManager.GetInstance.ArrangePFCComponents(_currentNode);
+        }
+
+        private void OnDestroy()
+        {
+            if (PathFindingManager.GetInstance.PFCList.Contains(this))
+                PathFindingManager.GetInstance.PFCList.Remove(this);
+
+            if (AdjustPosition != null) AdjustPosition = null;
+            if (SetCurrentNode != null) SetCurrentNode = null;
+            if (SetTargetNode != null) SetTargetNode = null;
         }
 
         #endregion
@@ -93,6 +105,25 @@ namespace HitmanGO
         #region Methods
 
         #region Public Methods
+
+        public EnemyController.FacingDirections GetAdjacentNodeDirection(Node node)
+        {
+            if (_currentNode == null)
+                Debug.LogError("Non è stato settato nessun nodo corrente");
+
+            if (node == UpNode)
+                return EnemyController.FacingDirections.Up;
+            else if (node == DownNode)
+                return EnemyController.FacingDirections.Down;
+            else if (node == LeftNode)
+                return EnemyController.FacingDirections.Left;
+            else if (node == RightNode)
+                return EnemyController.FacingDirections.Right;
+            else
+                Debug.LogError($"Il nodo '{node}' non è un nodo adiacente al nodo '{_currentNode}'");
+
+            return EnemyController.FacingDirections.Up;
+        }
 
         #region Getters
 

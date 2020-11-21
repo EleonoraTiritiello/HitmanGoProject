@@ -5,25 +5,24 @@ using DG.Tweening;
 
 namespace HitmanGO
 {
-    [RequireComponent(typeof(PathFindingComponent))]
     /// <summary>
     /// Class <c> PlayerController </c> contains the methods for player movement and its animations, inherits from <c> CharacterController </c>
     /// </summary>
+    [RequireComponent(typeof(MeshFilter))]
     public class PlayerController : CharacterController
     {
         #region Variables
 
         #region Public Variables
 
-        /// <summary>
-        /// The reference to the <c> PathFindingComponent </c>
-        /// </summary>
-        public PathFindingComponent PFC { get; private set; }
-
-        /// <summary>
-        /// The duration of the movement
-        /// </summary>
-        public readonly float MovementDuration = 0.5f;
+        [HideInInspector]
+        public GameObject ThrowPositionUp;
+        [HideInInspector]
+        public GameObject ThrowPositionDown;
+        [HideInInspector]
+        public GameObject ThrowPositionLeft;
+        [HideInInspector]
+        public GameObject ThrowPositionRight;
 
         /// <summary>
         /// The actions that the Player can perform
@@ -36,6 +35,7 @@ namespace HitmanGO
             MoveLeft,
             MoveRight,
             Select,
+            PickupRock,
             Die,
         }
 
@@ -43,19 +43,19 @@ namespace HitmanGO
         /// The action that the Player must perform in the current cycle
         /// </summary>
         [HideInInspector]
-        public Actions CurrentAction = Actions.None;
+        public Actions ToDoAction = Actions.None;
 
         /// <summary>
         /// The states that the Player can have
         /// </summary>
-        public enum States {SetupState, Idle, Selected, Moving}
+        public enum States {Setup, Idle, Selected, Moving}
 
         /// <summary>
         /// The current state of the Player
         /// </summary>
-        [HideInInspector]
-        public States CurrentState = States.SetupState;
+        public States CurrentState { get; private set; }
 
+        [Space(5)]
         #region Events
 
         public Action Select;
@@ -65,6 +65,15 @@ namespace HitmanGO
         #endregion
 
         #region Private Variables 
+
+        private MeshFilter _meshFilter;
+
+        [SerializeField]
+        private Mesh _defaultStance;
+        [SerializeField]
+        private Mesh _rockStance;
+
+        private GameObject _rock;
 
         #region Selection Animation
 
@@ -127,17 +136,32 @@ namespace HitmanGO
 
         private void Awake()
         {
-            if (Select == null) Select = OnSelected;
-            if (Die == null) Die = OnDie;
+            if (_meshFilter == null) _meshFilter = transform.GetChild(0).GetComponent<MeshFilter>();
+
+            if (_rock == null) _rock = transform.GetChild(0).GetChild(0).gameObject;
 
             if (PFC == null) PFC = GetComponent<PathFindingComponent>();
+
+            if (Select == null) Select = OnSelected;
+            if (Die == null) Die = OnDie;
 
             if (GameManager.GetInstance.Player != this) GameManager.GetInstance.Player = this;
         }
 
         void Start()
         {
+            if (_defaultStance == null || _rockStance == null)
+                Debug.LogError("Non è stata impostata la mesh del player");
+
+            SetDefaultStance();
+
             SetCurrentState(States.Idle);
+        }
+
+        private void OnDestroy()
+        {
+            if (Select != null) Select = null;
+            if (Die != null) Die = null;
         }
 
         #endregion
@@ -146,14 +170,31 @@ namespace HitmanGO
 
         #region Public Methods
 
+        public void ThrowRock(RockChecker rockChecker)
+        {
+            _rock.GetComponent<ThrowableRock>().AddForce(rockChecker);
+            SetDefaultStance();
+        }
+
+        public void SetDefaultStance()
+        {
+            _meshFilter.sharedMesh = _defaultStance;
+        }
+
+        public void SetRockStance()
+        {
+            _meshFilter.sharedMesh = _rockStance;
+            _rock.SetActive(true);
+        }
+
         /// <summary>
         /// Moves the Player to a given position while simultaneously executing an animation
         /// </summary>
         /// <param name="targetPosition"> The position that the Player must reach </param>
         /// <param name="movementDuration"> The duration of the movement </param>
-        public override void MoveToPosition(Vector3 targetPosition, float movementDuration)
+        public override void MoveToPosition(Vector3 targetPosition)
         {
-            base.MoveToPosition(targetPosition, movementDuration);
+            base.MoveToPosition(targetPosition);
             StartCoroutine(PlayMovementAnimation(targetPosition));
         }
 
@@ -161,10 +202,7 @@ namespace HitmanGO
         /// Set the current state
         /// </summary>
         /// <param name="state"> The state you want to set </param>
-        public void SetCurrentState(States state)
-        {
-            CurrentState = state;
-        }
+        public void SetCurrentState(States state) => CurrentState = state;
 
         /// <summary>
         /// A callback that is called when the player dies

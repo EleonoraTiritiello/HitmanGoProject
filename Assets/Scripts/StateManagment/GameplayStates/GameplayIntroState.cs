@@ -6,7 +6,10 @@ namespace HitmanGO
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            LevelManger.GetInstance.ChangeState(LevelManger.States.WaitingForInput);
+            //Fai l'animazione della camera
+            //Crea il percorso
+
+            Debug.Log("Gameplay Intro");
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

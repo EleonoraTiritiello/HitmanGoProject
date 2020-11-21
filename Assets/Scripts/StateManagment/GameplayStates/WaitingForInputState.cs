@@ -11,17 +11,27 @@ namespace HitmanGO
         {
             if (_inputManager == null) _inputManager = InputManager.GetInstance;
             if (_player == null) _player = GameManager.GetInstance.Player;
+
+             Debug.Log("Waiting for input");
+
+            if (_player.CurrentState == PlayerController.States.Idle)
+            {
+                foreach (Rock rock in LevelManger.GetInstance.GetRocksArray())
+                {
+                    if (_player.PFC.GetCurrentNode() == rock.PFC.GetCurrentNode())
+                        SetPlayerAction(PlayerController.Actions.PickupRock);
+                }
+            }
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (_player.CurrentState == PlayerController.States.Idle)
             {
-                if (Input.GetKeyDown(_inputManager.SelectPlayerKey))
-                    SetPlayerAction(PlayerController.Actions.Select);
-
-                if (Input.GetKeyDown(_inputManager.DieKey))
-                    SetPlayerAction(PlayerController.Actions.Die);
+                if (Input.GetKeyDown(_inputManager.SelectPlayerKey)) {
+                    if (_player.ToDoAction != PlayerController.Actions.PickupRock)
+                        SetPlayerAction(PlayerController.Actions.Select);
+                }
             }
             else if (_player.CurrentState == PlayerController.States.Selected)
             {
@@ -36,9 +46,18 @@ namespace HitmanGO
             }
         }
 
+        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            Debug.Log($"Player TODO -> {_player.ToDoAction}");
+        }
+
+        /// <summary>
+        /// Set the action to be performed by the player
+        /// </summary>
+        /// <param name="action"> The action that needs to be performed </param>
         private void SetPlayerAction(PlayerController.Actions action)
         {
-            _player.CurrentAction = action;
+            _player.ToDoAction = action;
             LevelManger.GetInstance.ChangeState(LevelManger.States.OnCalculatingPlayerAction);
         }
     }

@@ -43,7 +43,7 @@ namespace HitmanGO
         /// A structure that saves in which directions the node can connect to other nodes
         /// </summary>
         [SerializeField]
-        private EnabledConnections _enabledConnections = default; 
+        private Directions _enabledConnections = default; 
 
         #endregion
 

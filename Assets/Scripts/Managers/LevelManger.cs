@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace HitmanGO
 {
@@ -12,6 +13,14 @@ namespace HitmanGO
         #region Variables
 
         #region Public Variables 
+
+        [HideInInspector]
+        public bool LevelCompleted;
+
+        public Node EndNode;
+
+        public Action EnemyListModifyed;
+
         /// <summary>
         /// Gameplay states
         /// </summary>
@@ -26,9 +35,21 @@ namespace HitmanGO
             GameOver
 
         }
+
         #endregion
 
         #region Private Variables
+
+        /// <summary>
+        /// The list of enemies in the level
+        /// </summary>
+        private List<EnemyController> _enemies;
+
+        /// <summary>
+        /// The list of rocks in the level
+        /// </summary>
+        private List<Rock> _rocks;
+
         /// <summary>
         /// Component that contains the states of the gameplay
         /// </summary>
@@ -59,6 +80,10 @@ namespace HitmanGO
             if (_animator == null)
                 _animator = GetComponent<Animator>();
 
+            if (_enemies == null)
+                _enemies = new List<EnemyController>();
+            if (_rocks == null)
+                _rocks = new List<Rock>();
         }
 
         private void Start()
@@ -72,6 +97,34 @@ namespace HitmanGO
 
         #region Public Methods
 
+        public bool IsRockInList(Rock rock) => _rocks.Contains(rock);
+
+        public void AddRockToList(Rock rock) => _rocks.Add(rock);
+
+        public void RemoveRockFromList(Rock rock) => _rocks.Remove(rock);
+
+        public Rock[] GetRocksArray() => _rocks.ToArray();
+
+        public bool IsEnemyInList(EnemyController enemy) => _enemies.Contains(enemy);
+
+        public void AddEnemyToList(EnemyController enemy)
+        {
+            _enemies.Add(enemy);
+
+            if (EnemyListModifyed != null)
+                EnemyListModifyed.Invoke();
+        }
+
+        public void RemoveEnemyFromList(EnemyController enemy)
+        {
+            _enemies.Remove(enemy);
+
+            if (EnemyListModifyed != null)
+                EnemyListModifyed.Invoke();
+        }
+
+        public EnemyController[] GetEnemiesArray() => _enemies.ToArray();
+
         /// <summary>
         /// Change the current Gameplay state
         /// </summary>
@@ -79,8 +132,8 @@ namespace HitmanGO
         public void ChangeState(States state)
         {
             _animator.SetTrigger(_animatorTriggers[state]);
-
         }
+
         #endregion
 
         #region Private Methods
@@ -97,5 +150,3 @@ namespace HitmanGO
     }
 
 }
-
-

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HitmanGO
 {
@@ -42,6 +40,11 @@ namespace HitmanGO
         /// <c> Keycode </c> for die
         /// </summary>
         public KeyCode DieKey = KeyCode.G;
+
+        /// <summary>
+        /// Int for the left click
+        /// </summary>
+        public int MouseLeftClick = 0;
 
         #endregion
     }
