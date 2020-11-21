@@ -49,7 +49,7 @@ namespace HitmanGO
             if (!_mainMenu.activeSelf) _mainMenu.SetActive(true);
             if (_optionsMenu.activeSelf) _optionsMenu.SetActive(false);
             if (_resetGame.activeSelf) _resetGame.SetActive(false);
-            if (_boxSelection.activeSelf) _boxSelection.SetActive(false);
+          
         }
 
         #endregion
