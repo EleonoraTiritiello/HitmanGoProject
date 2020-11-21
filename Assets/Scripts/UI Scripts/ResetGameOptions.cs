@@ -20,10 +20,11 @@ namespace HitmanGO
             //Sequenza quando viene premuto il pulsante back
             BlackPanelAppears();
             FadeIn();
-            BlackPanelDisappears();
-            FadeOut();
+            Invoke("ChangeUIToOptions", 0.4f);
+            Invoke("OptionsMenuAppears", 0.4f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("BlackPanelDisappears", 1f);
 
-            Debug.Log("BackButtonClicked");
         }
 
         private void FadeIn()
@@ -75,7 +76,9 @@ namespace HitmanGO
             // StartCoroutine(UIMenu.GetInstance.BlackPanelDisappears());
 
             BackButtonPressed();
-            OptionsMenuAppears();
+        }
+        private void ChangeUIToOptions()
+        {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.OptionsMenu);
         }
 

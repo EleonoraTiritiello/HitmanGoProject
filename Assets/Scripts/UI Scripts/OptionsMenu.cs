@@ -32,13 +32,13 @@ namespace HitmanGO
         [SerializeField]
         private GameObject soundOffObject;
         private bool soundEnabled = true;
-       
+
         [SerializeField]
         private GameObject musicOnObject;
         [SerializeField]
         private GameObject musicOffObject;
         private bool musicEnabled = true;
-       
+
         [SerializeField]
         private GameObject qualityHighObject;
         [SerializeField]
@@ -56,7 +56,7 @@ namespace HitmanGO
         [SerializeField]
         private GameObject resolution2;
         private bool resolution1Bool = true;
-        
+
         [SerializeField]
         private GameObject fullScreenObject;
         [SerializeField]
@@ -124,9 +124,11 @@ namespace HitmanGO
             //Sequenza quando viene premuto il pulsante back(forse era meglio una coroutine ma sono designer)
             BlackPanelAppears();
             FadeIn();
-            BlackPanelDisappears();
-            FadeOut();
-            Debug.Log("BackButtonClicked");
+            Invoke("ChangeUIToMainMenu", 0.4f);
+            Invoke("DeactivateOptions", 0.4f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("BlackPanelDisappears", 1f);
+
         }
 
         public void ResetGameButtonPressed()
@@ -135,19 +137,25 @@ namespace HitmanGO
 
             BlackPanelAppears();
             FadeIn();
-            BlackPanelDisappears();
-            FadeOut();
-
-            ResetConfirmAppears();
-
-            Debug.Log("ResetButtonClicked");
+            Invoke("ChangeUIToResetMenu", 0.4f);
+            Invoke("DeactivateOptions", 0.4f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("BlackPanelDisappears", 1f);
         }
 
         public void OnBackButtonClicked()
         {
-            gameObject.SetActive(false);
             BackButtonPressed();
+        }
+
+        private void ChangeUIToMainMenu()
+        {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.MainMenu);
+        }
+
+        private void DeactivateOptions()
+        {
+            gameObject.SetActive(false);
         }
 
         public void OnSoundOnButtonClicked()
@@ -208,8 +216,10 @@ namespace HitmanGO
 
         public void OnResetGameButtonClicked()
         {
-            gameObject.SetActive(false);
             ResetGameButtonPressed();
+        }
+        private void ChangeUIToResetMenu()
+        {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.ResetGame);
         }
 
@@ -220,7 +230,7 @@ namespace HitmanGO
 
         public void OnQualityButtonClicked()
         {
-            if(qualityHigh == true)
+            if (qualityHigh == true)
             {
                 qualityLowObject.SetActive(true);
                 qualityHighObject.SetActive(false);
@@ -240,14 +250,14 @@ namespace HitmanGO
         {
 
             Screen.fullScreen = !Screen.fullScreen;
-            if(fullScreenMode == true)
+            if (fullScreenMode == true)
             {
                 fullScreenObject.SetActive(false);
                 windowObject.SetActive(true);
                 fullScreenMode = false;
 
             }
-            else if(fullScreenMode == false)
+            else if (fullScreenMode == false)
             {
                 fullScreenObject.SetActive(true);
                 windowObject.SetActive(false);
@@ -280,59 +290,118 @@ namespace HitmanGO
         {
             if (resolution == 0 && resolution1Bool == false)
             {
-                resolutionChangePage1.SetActive(true);
-                resolutionChangePage2.SetActive(true);
-                optionMenu.SetActive(false);
-                Screen.SetResolution(1680, 1050, true);
-
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChangeCheck1", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
             }
             else if (resolution == 1 && resolution1Bool == true)
             {
-                resolutionChangePage1.SetActive(true);
-                resolutionChangePage2.SetActive(true);
-                optionMenu.SetActive(false);
-                Screen.SetResolution(1920, 1080, true);
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChangeCheck2", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
             }
         }
+        private void ResolutionChangeCheck1()
+        {
+            resolutionChangePage1.SetActive(true);
+            resolutionChangePage2.SetActive(true);
+            optionMenu.SetActive(false);
+            Screen.SetResolution(1680, 1050, true);
+
+        }
+        private void ResolutionChangeCheck2()
+        {
+            resolutionChangePage1.SetActive(true);
+            resolutionChangePage2.SetActive(true);
+            optionMenu.SetActive(false);
+            Screen.SetResolution(1920, 1080, true);
+
+        }
+
 
         public void ConfirmResolutionChange()
         {
             if (resolution == 0)
             {
-                resolutionChangePage1.SetActive(false);
-                resolutionChangePage2.SetActive(false);
-                optionMenu.SetActive(true);
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChange1Confirmed", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
 
-                resolution = 1;
             }
             else if (resolution == 1)
             {
-                resolutionChangePage1.SetActive(false);
-                resolutionChangePage2.SetActive(false);
-                optionMenu.SetActive(true);
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChange2Confirmed", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
 
-                resolution = 0;
             }
         }
+
+        private void ResolutionChange1Confirmed()
+        {
+            resolutionChangePage1.SetActive(false);
+            resolutionChangePage2.SetActive(false);
+            optionMenu.SetActive(true);
+
+            resolution = 1;
+
+        }
+        private void ResolutionChange2Confirmed()
+        {
+            resolutionChangePage1.SetActive(false);
+            resolutionChangePage2.SetActive(false);
+            optionMenu.SetActive(true);
+
+            resolution = 0;
+
+        }
+
 
         public void CancelResolutionChange()
         {
             if (resolution == 0)
             {
-                resolutionChangePage1.SetActive(false);
-                resolutionChangePage2.SetActive(false);
-                Screen.SetResolution(1920, 1080, true);
-                optionMenu.SetActive(true);
-
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChange1Canceled", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
             }
             else if (resolution == 1)
             {
-                resolutionChangePage1.SetActive(false);
-                resolutionChangePage2.SetActive(false);
-                Screen.SetResolution(1680, 1050, true);
-                optionMenu.SetActive(true);
+                BlackPanelAppears();
+                FadeIn();
+                Invoke("ResolutionChange2Canceled", 0.4f);
+                Invoke("FadeOut", 0.5f);
+                Invoke("BlackPanelDisappears", 1f);
             }
         }
+
+        private void ResolutionChange1Canceled()
+        {
+            resolutionChangePage1.SetActive(false);
+            resolutionChangePage2.SetActive(false);
+            Screen.SetResolution(1920, 1080, true);
+            optionMenu.SetActive(true);
+
+        }
+        private void ResolutionChange2Canceled()
+        {
+            resolutionChangePage1.SetActive(false);
+            resolutionChangePage2.SetActive(false);
+            Screen.SetResolution(1680, 1050, true);
+            optionMenu.SetActive(true);
+
+        }
+
 
         public void OnChangeLanguageButtonClicked()
         {
