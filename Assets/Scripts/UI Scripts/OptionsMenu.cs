@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace HitmanGO
@@ -13,11 +10,6 @@ namespace HitmanGO
         public int textureQuality;
         public int resolutionIndex;
         public int vSync;
-
-        // List of horizontal resolutions to include
-            int[] resolutions = new int[] { 600, 800, 1024, 1280, 1400, 1600, 1920 };
-
-        public Resolution displayResolution;
 
         #endregion
 
