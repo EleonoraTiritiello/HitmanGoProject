@@ -1021,6 +1021,10 @@ MonoBehaviour:
   zoomOutMax: 50
   zoomSpeedPc: 10
   zoomSpeedMobile: 1
+  LeftLimit: -45
+  RightLimit: 45
+  UpperLimit: 33
+  DownLimit: -32
 --- !u!1 &1528457282
 GameObject:
   m_ObjectHideFlags: 0

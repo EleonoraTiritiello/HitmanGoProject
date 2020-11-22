@@ -7,12 +7,14 @@ namespace HitmanGO
         private InputManager _inputManager;
         private PlayerController _player;
 
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (_inputManager == null) _inputManager = InputManager.GetInstance;
             if (_player == null) _player = GameManager.GetInstance.Player;
 
-             Debug.Log("Waiting for input");
+
+            Debug.Log("Waiting for input");
 
             if (_player.CurrentState == PlayerController.States.Idle)
             {
