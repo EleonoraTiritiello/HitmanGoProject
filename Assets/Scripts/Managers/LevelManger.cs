@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HitmanGO
 {
@@ -67,7 +68,7 @@ namespace HitmanGO
             {States.OnPlayerAction, "GoToOnPlayerAction"},
             {States.OnEnemyAction, "GoToOnEnemyAction"},
             {States.GameOver, "GoToGameOver"}
-              
+
         };
         #endregion
 
@@ -142,6 +143,11 @@ namespace HitmanGO
         {
             ChangeState(States.GameOver);
             Debug.Log("Game Over");
+            Invoke("ReloadLevel", 2f);
+        }
+        private void ReloadLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         #endregion

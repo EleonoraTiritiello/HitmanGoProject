@@ -67,7 +67,7 @@ namespace HitmanGO
         [SerializeField]
         private Image segment14;
 
-        private int phaseNumber;
+        private int phaseNumber = 99;
 
         public void Start()
         {
@@ -100,6 +100,12 @@ namespace HitmanGO
             segment12.fillAmount = 0;
             segment13.fillAmount = 0;
             segment14.fillAmount = 0;
+            Invoke("StartDelay", 2f);
+
+        }
+        private void StartDelay()
+        {
+            phaseNumber = 0;
         }
 
         public void Update()

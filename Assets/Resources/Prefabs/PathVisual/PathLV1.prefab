@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeFillTimeCoefficient: 0.1
-  segmentFillTimeCoefficient: 0.4
+  segmentFillTimeCoefficient: 0.2
   node1: {fileID: 5905743607230780151}
   node2: {fileID: 5905743607068138321}
   node3: {fileID: 5905743607604705109}

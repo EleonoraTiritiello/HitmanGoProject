@@ -16,6 +16,13 @@ namespace HitmanGO
         [SerializeField]
         private GameObject _blackObject;
 
+        [SerializeField]
+        private GameObject quitConfirm1;
+        [SerializeField]
+        private GameObject quitConfirm2;
+
+
+
         #endregion
 
 
@@ -38,6 +45,12 @@ namespace HitmanGO
             gameObject.SetActive(false);
 
         }
+        private void ActivateMainMenu()
+        {
+            gameObject.SetActive(true);
+
+        }
+
         public void OnAchievementButtonClicked()
         {
         }
@@ -62,6 +75,40 @@ namespace HitmanGO
         }
 
         public void OnExitButtonClicked()
+        {
+            BlackPanelAppears();
+            FadeIn();
+            Invoke("QuitConfirmAppear", 0.4f);
+            Invoke("DeactivateMainMenu", 0.4f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("BlackPanelDisappears", 1f);
+
+        }
+        private void QuitConfirmAppear()
+        {
+            quitConfirm1.SetActive(true);
+            quitConfirm2.SetActive(true);
+
+        }
+        private void QuitConfirmDisappear()
+        {
+            quitConfirm1.SetActive(false);
+            quitConfirm2.SetActive(false);
+
+        }
+
+
+        public void CancelExit()
+        {
+            BlackPanelAppears();
+            FadeIn();
+            Invoke("QuitConfirmDisappear", 0.4f);
+            Invoke("ActivateMainMenu", 0.4f);
+            Invoke("FadeOut", 0.5f);
+            Invoke("BlackPanelDisappears", 1f);
+
+        }
+        public void ConfirmExit()
         {
             Application.Quit();
         }

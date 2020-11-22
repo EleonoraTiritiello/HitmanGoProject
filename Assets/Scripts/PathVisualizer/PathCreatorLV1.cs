@@ -20,7 +20,7 @@ namespace HitmanGO
         [SerializeField]
         private Image segment2;
 
-        private int phaseNumber;
+        private int phaseNumber = 99;
 
         public void Start()
         {
@@ -29,6 +29,7 @@ namespace HitmanGO
             node3.fillAmount = 0;
             segment1.fillAmount = 0;
             segment2.fillAmount = 0;
+            Invoke("StartDelay", 5f);
         }
 
         public void Update()
@@ -62,7 +63,10 @@ namespace HitmanGO
                 LevelManger.GetInstance.ChangeState(LevelManger.States.WaitingForInput);
             }
         }
-
+        private void StartDelay()
+        {
+            phaseNumber = 0;
+        }
         private void Node1fill()
         {
             node1.fillAmount += 1.0f / nodeFillTimeCoefficient * Time.deltaTime;
