@@ -12,6 +12,7 @@ namespace HitmanGO
         [SerializeField] private Camera _cam;
         Vector3 touchStart;
         public float zoomOutMin = 30, zoomOutMax = 50, zoomSpeedPc = 10, zoomSpeedMobile = 1;
+        public float LeftLimit, RightLimit, UpperLimit, DownLimit;
         #endregion
 
         #region Unity CallBacks
@@ -50,7 +51,7 @@ namespace HitmanGO
             {
                 Vector3 direction = touchStart - _cam.ScreenToWorldPoint(Input.mousePosition);
                 _cam.transform.position += direction;
-                _cam.transform.position = new Vector3(Mathf.Clamp(_cam.transform.position.x, -45, 45), Mathf.Clamp(_cam.transform.position.y, -32, 50), transform.position.z);
+                _cam.transform.position = new Vector3(Mathf.Clamp(_cam.transform.position.x, LeftLimit, RightLimit), Mathf.Clamp(_cam.transform.position.y, DownLimit, UpperLimit), transform.position.z);
 
             }
 
