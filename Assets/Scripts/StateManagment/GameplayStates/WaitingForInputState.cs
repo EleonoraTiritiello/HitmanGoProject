@@ -19,13 +19,14 @@ namespace HitmanGO
 
             if (_player.CurrentState == PlayerController.States.Idle)
             {
-                foreach (Rock rock in LevelManger.GetInstance.GetRocksArray())
-                {
-                    if (_player.PFC.GetCurrentNode() == rock.PFC.GetCurrentNode())
-                        SetPlayerAction(PlayerController.Actions.PickupRock);
+
+                    foreach (Rock rock in LevelManger.GetInstance.GetRocksArray())
+                    {
+                        if (_player.PFC.GetCurrentNode() == rock.PFC.GetCurrentNode())
+                            SetPlayerAction(PlayerController.Actions.PickupRock);
+                    }
                 }
-            }
-            if (_player == null) _player = GameManager.GetInstance.Player;
+            
             if (_swipeControl == null) _swipeControl = _player.GetComponent<Swipe>();
         }
 
