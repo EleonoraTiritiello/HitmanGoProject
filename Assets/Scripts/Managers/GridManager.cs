@@ -21,6 +21,8 @@ namespace HitmanGO
             "Es. If the nodes have been placed at a distance of 4 units from each other, this value must be set to 4")]
         public byte WorldTransformDivider = 1;
 
+        public Node[] Nodes { get { return _nodes.ToArray(); } }
+
         #endregion
 
         #region Private Variables
@@ -35,6 +37,28 @@ namespace HitmanGO
         #endregion
 
         #region Public Methods
+
+        public Node[] GetAdjacentNodes(Node node, bool bypassNullException = false)
+        {
+            Node[] nodes = new Node[4];
+
+            nodes[0] = GetAdjacentNode(node, Vector2Int.up, bypassNullException);
+            nodes[1] = GetAdjacentNode(node, Vector2Int.down, bypassNullException);
+            nodes[2] = GetAdjacentNode(node, Vector2Int.left, bypassNullException);
+            nodes[3] = GetAdjacentNode(node, Vector2Int.right, bypassNullException);
+
+            return nodes;
+        }
+
+        public Node GetAdjacentNode(Node node, Vector2Int direction, bool bypassNullException = false)
+        {
+            if (node == null)
+                throw new NoNodeException("You're trying to get a node adjacent to a node that doesn't exist");
+
+            Node adjacentNode = GetNode(node.GridPosition + direction, bypassNullException);
+
+            return adjacentNode;
+        }
 
         /// <summary>
         /// Get an array of nodes adjacent and connected to a given <c> Node </c>

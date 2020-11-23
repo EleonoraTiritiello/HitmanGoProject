@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class throwableRock2 : MonoBehaviour
+/*public class throwableRock2 : MonoBehaviour
 {
     [SerializeField]
     private GameObject rock;
@@ -48,4 +48,4 @@ public class throwableRock2 : MonoBehaviour
     {
         Destroy(rock);
     }
-}
+}*/

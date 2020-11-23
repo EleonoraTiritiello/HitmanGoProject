@@ -23,6 +23,9 @@ namespace HitmanGO
         /// </summary>
         public enum States
         {
+            MainMenu,
+            BoxSelectMenu,
+            SelectLevel,
             Gameplay
         }
 
@@ -39,6 +42,9 @@ namespace HitmanGO
         /// </summary>
         private readonly Dictionary<States, string> _animatorTriggers = new Dictionary<States, string>
         {
+            {States.MainMenu,"GoToMainMenu"},
+            {States.BoxSelectMenu, "GoToBoxSelectMenu"},
+            {States.SelectLevel,"GoToSelectLevel"},
             {States.Gameplay, "GoToGameplay"}
         };
 
