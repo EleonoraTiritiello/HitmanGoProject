@@ -628,12 +628,12 @@ PrefabInstance:
     - target: {fileID: 2777574993889680989, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.024222968
+      value: -0.024222966
       objectReference: {fileID: 0}
     - target: {fileID: 2777574993889680989, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.006609469
+      value: -0.0066094687
       objectReference: {fileID: 0}
     - target: {fileID: 2777574994045160187, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
@@ -698,17 +698,17 @@ PrefabInstance:
     - target: {fileID: 2777574995202858873, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.059239734
+      value: -0.059239756
       objectReference: {fileID: 0}
     - target: {fileID: 2777574995202858873, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.26273945
+      value: 0.26273948
       objectReference: {fileID: 0}
     - target: {fileID: 2777574995202858873, guid: 1608348dc4630184ab13246379ad9fb3,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.016164131
+      value: -0.016164135
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1608348dc4630184ab13246379ad9fb3, type: 3}
@@ -3024,17 +3024,17 @@ PrefabInstance:
     - target: {fileID: 142880112304407936, guid: ce904b0935c9fb14295c138c59f9f246,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.93586
       objectReference: {fileID: 0}
     - target: {fileID: 142880112304407936, guid: ce904b0935c9fb14295c138c59f9f246,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.93586
       objectReference: {fileID: 0}
     - target: {fileID: 142880112304407936, guid: ce904b0935c9fb14295c138c59f9f246,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.93586
       objectReference: {fileID: 0}
     - target: {fileID: 770199202678382394, guid: ce904b0935c9fb14295c138c59f9f246,
         type: 3}
