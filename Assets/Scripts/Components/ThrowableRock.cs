@@ -56,31 +56,22 @@ namespace HitmanGO
 
             Vector3 targetPosition = rockChecker.transform.position;
 
-            Vector2 speed = new Vector2((targetPosition.x - _startingPosition.x) / _movementDuration, 9.81f * _movementDuration / 2 - _startingPosition.y);
+            Node playerNode = GameManager.GetInstance.Player.PFC.GetCurrentNode();
+            Node targetNode = GridManager.GetInstance.GetNearestNode(targetPosition);
 
-            bool upDown = false;
+            Vector2 speed = new Vector2(-((targetPosition.x - transform.position.x) / _movementDuration), 9.81f * _movementDuration / 2 - transform.position.y);
 
-            if (targetPosition.x < transform.position.x)
-                speed.x = -speed.x;
-            else if (targetPosition.z > transform.position.z)
-            {
-                speed.x = (targetPosition.z - _startingPosition.z) / _movementDuration;
-                upDown = true;
-            }
-            else if (targetPosition.z < transform.position.z)
-            {
-                speed.x = -((targetPosition.z - _startingPosition.z) / _movementDuration);
-                upDown = true;
-            }
+            if (targetNode.GridPosition.y != playerNode.GridPosition.y)
+                speed.x = -((targetPosition.z - transform.position.z) / _movementDuration);
 
             Vector3 position = _startingPosition;
 
             while(time < _movementDuration + 1f)
             {
-                if(upDown)
-                    position.x = _startingPosition.z + speed.x * time;
-                else
+                if (targetNode.GridPosition.y == playerNode.GridPosition.y)
                     position.x = _startingPosition.x + speed.x * time;
+                else
+                    position.z = _startingPosition.z + speed.x * time;
 
                 position.y = _startingPosition.y + speed.y * time - 0.5f * 9.81f * Mathf.Pow(time, 2f);
 

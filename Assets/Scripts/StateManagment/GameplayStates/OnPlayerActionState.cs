@@ -26,24 +26,28 @@ namespace HitmanGO
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    VerifyKills();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveDown:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    VerifyKills();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveLeft:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    VerifyKills();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveRight:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    VerifyKills();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.Select:
@@ -78,6 +82,19 @@ namespace HitmanGO
         {
             if (_player.PFC.GetCurrentNode() == LevelManger.GetInstance.EndNode)
                 LevelManger.GetInstance.LevelCompleted = true;
+        }
+
+        private void VerifyKills()
+        {
+            EnemyController currentEnemy = null;
+
+            foreach(PathFindingComponent pfc in PathFindingManager.GetInstance.GetNodePopulation(_player.PFC.GetCurrentNode()))
+            {
+                currentEnemy = pfc.transform.GetComponent<EnemyController>();
+
+                if (currentEnemy != null)
+                    currentEnemy.Die.Invoke();
+            }
         }
 
         private void ShowThrowPositions()
