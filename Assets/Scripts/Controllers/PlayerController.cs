@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using DG.Tweening;
 using System;
-using DG.Tweening;
+using System.Collections;
+using UnityEngine;
 
 namespace HitmanGO
 {
@@ -23,6 +23,10 @@ namespace HitmanGO
         public GameObject ThrowPositionLeft;
         [HideInInspector]
         public GameObject ThrowPositionRight;
+
+        public Action Move;
+        public Action PickUpRock;
+        public Action ThrowRockEvent;
 
         /// <summary>
         /// The actions that the Player can perform
@@ -48,7 +52,7 @@ namespace HitmanGO
         /// <summary>
         /// The states that the Player can have
         /// </summary>
-        public enum States {Setup, Idle, Selected, Moving}
+        public enum States { Setup, Idle, Selected, Moving }
 
         /// <summary>
         /// The current state of the Player
@@ -221,7 +225,7 @@ namespace HitmanGO
         /// </summary>
         private void OnSelected()
         {
-            StopCoroutine(OnCharacterSelectedAnimation());        
+            StopCoroutine(OnCharacterSelectedAnimation());
             StartCoroutine(OnCharacterSelectedAnimation());
         }
 
@@ -246,14 +250,14 @@ namespace HitmanGO
         {
             Sequence sequence = DOTween.Sequence();
 
-            if(targetPosition.z > transform.position.z || targetPosition.x > transform.position.x)
+            if (targetPosition.z > transform.position.z || targetPosition.x > transform.position.x)
                 sequence.Append(transform.DORotate(new Vector3(-_movementAnimationRotationAmount.x, transform.rotation.eulerAngles.y - _movementAnimationRotationAmount.y, -_movementAnimationRotationAmount.z), MovementDuration / 10 * 2));
             else if (targetPosition.z <= transform.position.z || targetPosition.x <= transform.position.x)
                 sequence.Append(transform.DORotate(new Vector3(_movementAnimationRotationAmount.x, transform.rotation.eulerAngles.y + _movementAnimationRotationAmount.y, _movementAnimationRotationAmount.z), MovementDuration / 10 * 2));
 
             sequence.Append(transform.DOShakeRotation(MovementDuration / 10 * 6, strength: _movementAnimationShakeStrength, vibrato: 6, randomness: 70));
             sequence.Append(transform.DORotate(new Vector3(0, transform.rotation.eulerAngles.y, 0), MovementDuration / 10 * 2));
-            
+
             yield return new WaitForSeconds(MovementDuration);
 
             SetCurrentState(States.Idle);

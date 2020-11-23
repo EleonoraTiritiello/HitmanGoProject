@@ -40,24 +40,27 @@ namespace HitmanGO
         private GameObject blackPanelObject;
         [SerializeField]
         private Image blackPanelImage;
+
+        private void Awake()
+        {
+            LevelManger.GetInstance.CompleteLevel += OnLevelCompleted;
+        }
+
         private void Start()
         {
             BlackPanelAppears();
             FadeOut();
             Invoke("BlackPanelDisappears", 0.5f);
         }
-        private void Update()
-        {
-            if (LevelManger.GetInstance.LevelCompleted == true)
-            {
-                completed1.SetActive(true);
-                completed2.SetActive(true);
-                completed3.SetActive(true);
-                completed4.SetActive(true);
-                UI1Disappears();
-                UI2Disappears();
 
-            }
+        private void OnLevelCompleted()
+        {
+            completed1.SetActive(true);
+            completed2.SetActive(true);
+            completed3.SetActive(true);
+            completed4.SetActive(true);
+            UI1Disappears();
+            UI2Disappears();
         }
         public void RestartButtonPressed()
         {

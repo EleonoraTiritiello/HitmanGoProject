@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace HitmanGO
@@ -19,6 +17,7 @@ namespace HitmanGO
         public void FadeToNextLevel()
         {
             FadeToLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            GameManager.GetInstance.ChangeState(GameManager.States.BoxSelectMenu);
         }
         public void FadeToPreviousLevel()
         {

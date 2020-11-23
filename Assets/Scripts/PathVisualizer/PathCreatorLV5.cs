@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace HitmanGO
 {
-    public class PathCreatorLV5 : MonoBehaviour
+    public class PathCreatorLV5 : PathCreator
     {
         [SerializeField]
         private float nodeFillTimeCoefficient;
@@ -61,9 +61,7 @@ namespace HitmanGO
         private Image segment12;
 
 
-        private int phaseNumber = 99;
-
-        public void Start()
+        public void Awake()
         {
             node1.fillAmount = 0;
             node2.fillAmount = 0;
@@ -90,13 +88,8 @@ namespace HitmanGO
             segment10.fillAmount = 0;
             segment11.fillAmount = 0;
             segment12.fillAmount = 0;
-            Invoke("StartDelay", 3f);
 
 
-        }
-        private void StartDelay()
-        {
-            phaseNumber = 0;
         }
 
         public void Update()

@@ -3092,6 +3092,11 @@ PrefabInstance:
       propertyPath: EndNode
       value: 
       objectReference: {fileID: 100362671}
+    - target: {fileID: 1852219576914514206, guid: c51fc13d86342444687c0f05981415e4,
+        type: 3}
+      propertyPath: PathCreator
+      value: 
+      objectReference: {fileID: 1884373827}
     - target: {fileID: 7357538465320856543, guid: c51fc13d86342444687c0f05981415e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4190,12 +4195,12 @@ PrefabInstance:
     - target: {fileID: 46653309516541003, guid: 8774039787955df4287e21f0b27ef137,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.07184283
+      value: 0.071842864
       objectReference: {fileID: 0}
     - target: {fileID: 46653309516541003, guid: 8774039787955df4287e21f0b27ef137,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.034754723
+      value: -0.034754742
       objectReference: {fileID: 0}
     - target: {fileID: 46653309568390414, guid: 8774039787955df4287e21f0b27ef137,
         type: 3}
@@ -5160,6 +5165,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1884373825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1884373827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8848473621192198283, guid: 6acbafc6dc34e9545851fa56a91b64bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1884373825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a94738a8fd19514fb2d2d9d2bcd268f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939126099
 GameObject:
   m_ObjectHideFlags: 0

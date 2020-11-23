@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HitmanGO
@@ -17,6 +18,8 @@ namespace HitmanGO
         /// </summary>
         [HideInInspector]
         public PlayerController Player;
+
+        public Action GoToMainMenu;
 
         /// <summary>
         /// Game states
@@ -56,11 +59,11 @@ namespace HitmanGO
 
         public void Awake()
         {
-            if(_animator == null)
+            if (_animator == null)
             {
                 _animator = GetComponent<Animator>();
             }
-            
+
         }
 
         #endregion

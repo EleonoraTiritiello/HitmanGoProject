@@ -6,7 +6,8 @@ namespace HitmanGO
     {
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-                GameManager.GetInstance.ChangeState(GameManager.States.MainMenu);
+            GameManager.GetInstance.GoToMainMenu.Invoke();
+            GameManager.GetInstance.ChangeState(GameManager.States.MainMenu);
         }
     }
 }

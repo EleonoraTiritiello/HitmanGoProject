@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections;
+using UnityEngine;
 
 namespace HitmanGO
 {
@@ -16,6 +16,10 @@ namespace HitmanGO
         public enum FacingDirections { Up, Down, Left, Right }
 
         public FacingDirections FacingDirection = FacingDirections.Up;
+
+        public Action AlertEvent;
+
+        public Action Rotate;
 
         public enum Actions
         {
@@ -61,14 +65,14 @@ namespace HitmanGO
         {
             if (PFC == null) PFC = GetComponent<PathFindingComponent>();
 
-            if (Die == null) Die += OnDie;          
+            if (Die == null) Die += OnDie;
 
             if (PFC.AdjustPosition == null) PFC.AdjustPosition = MoveToPosition;
 
             IsAlerted = false;
 
             if (!LevelManger.GetInstance.IsEnemyInList(this))
-                LevelManger.GetInstance.AddEnemyToList(this);     
+                LevelManger.GetInstance.AddEnemyToList(this);
         }
 
         private void Start()

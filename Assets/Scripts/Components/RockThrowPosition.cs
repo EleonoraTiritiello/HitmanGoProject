@@ -32,6 +32,7 @@ namespace HitmanGO
                 {
                     if (Input.GetMouseButtonDown(InputManager.GetInstance.MouseLeftClick))
                     {
+                        GameManager.GetInstance.Player.ThrowRockEvent.Invoke();
                         GameManager.GetInstance.Player.ThrowRock(_rockChecker);
                     }
                 }

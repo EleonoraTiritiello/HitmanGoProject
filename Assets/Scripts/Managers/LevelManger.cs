@@ -22,6 +22,12 @@ namespace HitmanGO
 
         public Action EnemyListModifyed;
 
+        public Action CompleteLevel;
+
+        public PathCreator PathCreator;
+
+
+
         /// <summary>
         /// Gameplay states
         /// </summary>
@@ -85,6 +91,10 @@ namespace HitmanGO
                 _enemies = new List<EnemyController>();
             if (_rocks == null)
                 _rocks = new List<Rock>();
+            if (CompleteLevel == null)
+            {
+                CompleteLevel = OnLevelCompleted;
+            }
         }
 
         private void Start()
@@ -148,6 +158,11 @@ namespace HitmanGO
         private void ReloadLevel()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void OnLevelCompleted()
+        {
+            LevelCompleted = true;
         }
 
         #endregion

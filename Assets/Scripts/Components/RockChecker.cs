@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace HitmanGO
 {
@@ -62,22 +62,24 @@ namespace HitmanGO
 
             List<PathFindingComponent> pfcs;
 
-            foreach(Node node in adjacentNodes)
+            foreach (Node node in adjacentNodes)
             {
-                if(node != null)
+                if (node != null)
                 {
                     pfcs = PathFindingManager.GetInstance.GetNodePopulation(node);
 
-                    foreach(PathFindingComponent pfc in pfcs)
+                    foreach (PathFindingComponent pfc in pfcs)
                     {
                         EnemyController enemy = pfc.transform.GetComponent<EnemyController>();
 
-                        if(enemy != null)
+                        if (enemy != null)
+                        {
+                            enemy.AlertEvent.Invoke();
                             enemy.Alert(currentNode);
+                        }
                     }
                 }
             }
-
             GameManager.GetInstance.Player.ThrowPositionUp.SetActive(false);
             GameManager.GetInstance.Player.ThrowPositionDown.SetActive(false);
             GameManager.GetInstance.Player.ThrowPositionLeft.SetActive(false);

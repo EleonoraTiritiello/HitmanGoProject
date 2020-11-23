@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2304943998771640036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2304943998771640025}
+  - component: {fileID: 2304943998771640026}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2304943998771640025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304943998771640036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2304943998771640026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304943998771640036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17fcdc6c83f88b4b8de06348815af6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - clipName: LevelComplete_OneCard
+    clip: {fileID: 8300000, guid: 9ffd5551f1d9dd94ba1a0e3f439091a2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: CreationNodes
+    clip: {fileID: 8300000, guid: 8aa5c4e6c623f224284b31dade038315, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: MenuSoundtrack
+    clip: {fileID: 8300000, guid: cd4a7229cc86c5c41af629c5ee3fc162, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: SelectedButton
+    clip: {fileID: 8300000, guid: 66e584bbb375f9145811f673c6ebd0f3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: FinishLevel
+    clip: {fileID: 8300000, guid: 80a60aa56da236040a4afdd94881df4d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: StartCinematic
+    clip: {fileID: 8300000, guid: eda5866a996b20e42bed0a69a9ed298a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: EndCinematic
+    clip: {fileID: 8300000, guid: 490c30cdd7f7e3b42b64cd9362bfaf7b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: MovingPlayer
+    clip: {fileID: 8300000, guid: 8195d4772929a39469b9c91d18885e6e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: DefeatPlayer
+    clip: {fileID: 8300000, guid: 7cd2a1599a773184e897156d37990f84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: DefeatOpponent
+    clip: {fileID: 8300000, guid: a79ab414abb50ae459a26ffaa2583954, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: TakeStone
+    clip: {fileID: 8300000, guid: 0d028d031db61054f8c47e422982d292, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: GameSoundtrack_1_5
+    clip: {fileID: 8300000, guid: b12df7362ed10604ea25c267d1984846, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: ThrowsStone
+    clip: {fileID: 8300000, guid: 72bf893126242a744ac5e6eb674a9a1b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: InterrogativeSound
+    clip: {fileID: 8300000, guid: 5f40ce4188f6d2b479cee3243feba80f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: Stamp
+    clip: {fileID: 8300000, guid: 5decc9c3b6397e54790bd4cd1c0b8f99, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: GameSoundtrack
+    clip: {fileID: 8300000, guid: 76b36bec87c7e2045ad07cfa6965b9df, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    mixer: {fileID: -150502216539988258, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: LevelComplete_ThreeCards
+    clip: {fileID: 8300000, guid: 63a94ad6110b31f44a89f4cfe3da0deb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: ThreeEnemyDefeated
+    clip: {fileID: 8300000, guid: 9c768786cade7c04798e895ae68cae1e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}
+  - clipName: EnemyRotation
+    clip: {fileID: 8300000, guid: bd7434505c856ff4d8d961c9ba5eadd1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    mixer: {fileID: 8142433344810773741, guid: 980f2071e9d8e904cb8c8c66f19f43f6, type: 2}

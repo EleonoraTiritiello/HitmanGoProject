@@ -10,7 +10,7 @@ namespace HitmanGO
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (_player == null) _player = GameManager.GetInstance.Player;
-            if(_enemies == null)
+            if (_enemies == null)
             {
                 UpdateEnemyArray();
                 LevelManger.GetInstance.EnemyListModifyed += UpdateEnemyArray;
@@ -26,13 +26,13 @@ namespace HitmanGO
         /// </summary>
         private void PerformEnemiesActions()
         {
-            for(int i = 0; i < _enemies.Length; i++)
+            for (int i = 0; i < _enemies.Length; i++)
             {
                 Debug.Log($"{_enemies[i].name} -> {_enemies[i].ToDoAction}");
                 PerformEnemyAction(_enemies[i]);
             }
 
-            foreach(EnemyController enemy in _enemies)
+            foreach (EnemyController enemy in _enemies)
             {
                 PathFindingManager.GetInstance.ArrangePFCComponents(enemy.PFC.GetCurrentNode());
             }
@@ -78,24 +78,28 @@ namespace HitmanGO
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.zero);
                     enemy.FacingDirection = EnemyController.FacingDirections.Up;
+                    enemy.Rotate.Invoke();
                     break;
                 case EnemyController.Actions.FaceDown:
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.up * 180f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Down;
+                    enemy.Rotate.Invoke();
                     break;
                 case EnemyController.Actions.FaceLeft:
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.up * 90f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Left;
+                    enemy.Rotate.Invoke();
                     break;
                 case EnemyController.Actions.FaceRight:
                     enemy.SetCurrentState(EnemyController.States.Idle);
                     enemy.RotateTowards(Vector3.up * 90f);
                     enemy.FacingDirection = EnemyController.FacingDirections.Right;
+                    enemy.Rotate.Invoke();
                     break;
                 case EnemyController.Actions.Die:
-                    if(enemy.Die != null)
+                    if (enemy.Die != null)
                         enemy.Die.Invoke();
                     break;
                 default:
@@ -105,7 +109,7 @@ namespace HitmanGO
 
         private void VerifyGameOver(EnemyController enemy)
         {
-            if(enemy.PFC.GetTargetNode() == _player.PFC.GetCurrentNode())
+            if (enemy.PFC.GetTargetNode() == _player.PFC.GetCurrentNode())
             {
                 _player.Die.Invoke();
                 LevelManger.GetInstance.ChangeState(LevelManger.States.GameOver);

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace HitmanGO
 {
@@ -26,28 +26,32 @@ namespace HitmanGO
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    _player.Move.Invoke();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveDown:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    _player.Move.Invoke();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveLeft:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    _player.Move.Invoke();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.MoveRight:
                     _player.SetCurrentState(PlayerController.States.Moving);
                     _player.MoveToPosition(_player.PFC.GetTargetNode().transform.position);
                     _player.PFC.SetCurrentNode.Invoke(_player.PFC.GetTargetNode());
+                    _player.Move.Invoke();
                     VerifyTargetReached();
                     break;
                 case PlayerController.Actions.Select:
-                    if(_player.Select != null)
+                    if (_player.Select != null)
                         _player.Select.Invoke();
                     break;
                 case PlayerController.Actions.PickupRock:
@@ -63,10 +67,11 @@ namespace HitmanGO
                             Destroy(rock.gameObject);
                     }
 
-                    ShowThrowPositions();             
+                    ShowThrowPositions();
+                    _player.PickUpRock.Invoke();
                     break;
                 case PlayerController.Actions.Die:
-                    if(_player.Die != null)
+                    if (_player.Die != null)
                         _player.Die.Invoke();
                     break;
                 default:
@@ -77,7 +82,8 @@ namespace HitmanGO
         private void VerifyTargetReached()
         {
             if (_player.PFC.GetCurrentNode() == LevelManger.GetInstance.EndNode)
-                LevelManger.GetInstance.LevelCompleted = true;
+                LevelManger.GetInstance.CompleteLevel.Invoke();
+
         }
 
         private void ShowThrowPositions()
