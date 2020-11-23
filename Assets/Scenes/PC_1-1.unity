@@ -1533,12 +1533,12 @@ PrefabInstance:
     - target: {fileID: 6352616613275616102, guid: f7088d881cf2c0145bc500125eafd35b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.07665186
+      value: 0.076651864
       objectReference: {fileID: 0}
     - target: {fileID: 6352616613275616102, guid: f7088d881cf2c0145bc500125eafd35b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.029688446
+      value: -0.029688448
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7088d881cf2c0145bc500125eafd35b, type: 3}
@@ -2332,7 +2332,7 @@ GameObject:
   - component: {fileID: 1008461270}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

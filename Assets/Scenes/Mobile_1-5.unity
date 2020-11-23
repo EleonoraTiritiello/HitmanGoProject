@@ -1962,37 +1962,42 @@ PrefabInstance:
     - target: {fileID: 7259675824139412048, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.35004318
+      value: 0.35004315
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824139412048, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24320996
+      value: 0.24320993
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824139412048, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7428955
+      value: 0.74289554
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259675824139412048, guid: 4c796d05612c4f34dadf2835140b0d55,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5161637
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824172077743, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3365083
+      value: 0.33650833
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824172077743, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.520491
+      value: -0.52049094
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824172077743, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.23380592
+      value: 0.23380595
       objectReference: {fileID: 0}
     - target: {fileID: 7259675824172077743, guid: 4c796d05612c4f34dadf2835140b0d55,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.74912363
+      value: 0.7491236
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c796d05612c4f34dadf2835140b0d55, type: 3}
@@ -3026,7 +3031,7 @@ GameObject:
   - component: {fileID: 1281285004}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3123,7 +3128,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281285003}
-  m_LocalRotation: {x: 0.42475122, y: -0.07556316, z: 0.03560443, w: 0.90144825}
+  m_LocalRotation: {x: 0.4247512, y: -0.07556309, z: 0.035604395, w: 0.90144825}
   m_LocalPosition: {x: 0.675, y: 13.81, z: -1.9045825}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

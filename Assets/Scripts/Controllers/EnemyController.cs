@@ -112,6 +112,13 @@ namespace HitmanGO
         /// <param name="state"> The state you want to set </param>
         public void SetCurrentState(States state) => CurrentState = state;
 
+        public override void OnDie()
+        {
+            //Animazione di morte
+
+            base.OnDie();
+        }
+
         #endregion
 
         #region Private Methods
@@ -155,6 +162,7 @@ namespace HitmanGO
             if (PFC.GetTargetNode() == null)
                 Debug.LogError($"The enemy '{name}' does not look in any direction");
         }
+
 
         #endregion
     }
