@@ -15,11 +15,12 @@ namespace HitmanGO
         public float LeftLimit, RightLimit, UpperLimit, DownLimit;
         #endregion
 
-        #region Unity CallBacks
+        #region Unity CallBacks 
 
         private void Update()
         {
             CheckExecuteInput();
+
         }
         #endregion
 

@@ -337,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 8879812210621442810, guid: 946da5c32e826e94badfe094a17bf303,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.18847656
+      value: 236.01978
       objectReference: {fileID: 0}
     - target: {fileID: 8879812210621442810, guid: 946da5c32e826e94badfe094a17bf303,
         type: 3}
@@ -738,12 +738,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1610145278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2876968226958992059, guid: 1052fb7a1f5f3f147b72664687609548,
+    type: 3}
+  m_PrefabInstance: {fileID: 1263539395}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1610145283
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610145278}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a99e30677dfeac649a8cbc48b9d69344, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1860741757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8879812211080273568, guid: 946da5c32e826e94badfe094a17bf303,
     type: 3}
   m_PrefabInstance: {fileID: 784168325}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1861142660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8879812211374325469, guid: 946da5c32e826e94badfe094a17bf303,
+    type: 3}
+  m_PrefabInstance: {fileID: 784168325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1861142665
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861142660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a99e30677dfeac649a8cbc48b9d69344, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2139221264
 GameObject:
   m_ObjectHideFlags: 0

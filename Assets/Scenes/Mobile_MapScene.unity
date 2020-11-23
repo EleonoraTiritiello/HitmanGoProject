@@ -1055,6 +1055,10 @@ MonoBehaviour:
   zoomOutMax: 50
   zoomSpeedPc: 10
   zoomSpeedMobile: 1
+  LeftLimit: -20
+  RightLimit: 20
+  UpperLimit: 25
+  DownLimit: -25
 --- !u!114 &1493300482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,11 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0c41904fc7a3d428334e3a0dc16010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cam: {fileID: 1493300479}
-  zoomOutMin: 30
-  zoomOutMax: 50
-  zoomSpeedPc: 10
-  zoomSpeedMobile: 1
 --- !u!1 &1603176880
 GameObject:
   m_ObjectHideFlags: 0
