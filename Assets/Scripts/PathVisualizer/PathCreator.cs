@@ -13,6 +13,9 @@ namespace HitmanGO
         {
             StartDelayEvent.Invoke();
             Invoke("StartDelay", 5f);
+
+            AudioManager.Instance.PlaySound("CreationNodes");
+            AudioManager.Instance.PlaySound("StartCinematic");
         }
         public virtual void StartDelay()
         {

@@ -13,6 +13,8 @@ namespace HitmanGO
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 2);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         public void OnResetButtonClicked(int levelIndex)
@@ -21,6 +23,8 @@ namespace HitmanGO
             GameManager.GetInstance.ChangeState(GameManager.States.MainMenu);
 
             SceneManager.LoadScene(levelIndex + 0);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
     }
 }

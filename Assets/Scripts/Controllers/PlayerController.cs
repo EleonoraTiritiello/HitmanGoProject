@@ -178,6 +178,8 @@ namespace HitmanGO
         {
             _rock.GetComponent<ThrowableRock>().AddForce(rockChecker);
             SetDefaultStance();
+
+            AudioManager.Instance.PlaySound("ThrowsStone");
         }
 
         public void SetDefaultStance()
@@ -200,6 +202,8 @@ namespace HitmanGO
         {
             base.MoveToPosition(targetPosition);
             StartCoroutine(PlayMovementAnimation(targetPosition));
+
+            AudioManager.Instance.PlaySound("MovingPlayer");
         }
 
         /// <summary>
@@ -214,6 +218,8 @@ namespace HitmanGO
         public override void OnDie()
         {
             PlayDieAnimation();
+
+            AudioManager.Instance.PlaySound("DefeatPlayer");
         }
 
         #endregion

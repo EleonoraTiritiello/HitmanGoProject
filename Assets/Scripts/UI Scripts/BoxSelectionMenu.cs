@@ -27,7 +27,11 @@ namespace HitmanGO
             BlackPanelDisappears();
             FadeOut();
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
+
             Debug.Log("BackButtonClicked");
+
 
         }
 
@@ -65,13 +69,20 @@ namespace HitmanGO
             //inserire interazione con lo SceneManager. Il tasto con questa funzione sarà l'immagine della box
             SceneManager.LoadScene(1);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         public void OnBackButtonClicked()
         {
             gameObject.SetActive(false);
             BackButtonPressed();
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
+
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.MainMenu);
+
+
         }
 
 

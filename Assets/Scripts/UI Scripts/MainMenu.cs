@@ -25,6 +25,13 @@ namespace HitmanGO
 
         #endregion
 
+        private void Awake()
+        {
+
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+        }
 
         public void OnOptionsButtonClicked()
         {
@@ -34,11 +41,15 @@ namespace HitmanGO
             Invoke("DeactivateMainMenu", 0.4f);
             Invoke("FadeOut", 0.5f);
             Invoke("BlackPanelDisappears", 1f);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
 
         private void ChangeUIToOptions()
         {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.OptionsMenu);
+          
         }
         private void DeactivateMainMenu()
         {
@@ -71,7 +82,10 @@ namespace HitmanGO
         {
             gameObject.SetActive(false);
             // UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.BoxSelections);
+            AudioManager.Instance.PlaySound("SelectedButton");
             GameManager.GetInstance.ChangeState(GameManager.States.BoxSelectMenu);
+
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
         }
 
         public void OnExitButtonClicked()
@@ -82,6 +96,8 @@ namespace HitmanGO
             Invoke("DeactivateMainMenu", 0.4f);
             Invoke("FadeOut", 0.5f);
             Invoke("BlackPanelDisappears", 1f);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
 
         }
         private void QuitConfirmAppear()
@@ -95,6 +111,7 @@ namespace HitmanGO
             quitConfirm1.SetActive(false);
             quitConfirm2.SetActive(false);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
 
@@ -110,6 +127,8 @@ namespace HitmanGO
         }
         public void ConfirmExit()
         {
+            AudioManager.Instance.PlaySound("SelectedButton");
+
             Application.Quit();
         }
         private void FadeIn()

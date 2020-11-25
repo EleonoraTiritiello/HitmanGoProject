@@ -101,6 +101,9 @@ namespace HitmanGO
             _alertIcon.SetActive(true);
 
             Debug.LogWarning($"Enemy {name} alerted!");
+
+            AudioManager.Instance.PlaySound("InterrogativeSound");
+
         }
 
         public void DeAlert()
@@ -155,6 +158,7 @@ namespace HitmanGO
                 default:
                     break;
             }
+            AudioManager.Instance.PlaySound("EnemyRotation");
 
             if (PFC.GetTargetNode() == null)
                 Debug.LogError($"The enemy '{name}' does not look in any direction");

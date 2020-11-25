@@ -18,6 +18,8 @@ namespace HitmanGO
             BlackPanelAppears();
             FadeIn();
             Invoke("ToLevel1", 0.4f);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         private void ToLevel1()
@@ -26,6 +28,9 @@ namespace HitmanGO
 
             SceneManager.LoadScene(levelIndex + 3);
 
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack");
+
         }
         public void OnLevel2ButtonClicked()
         {
@@ -33,12 +38,17 @@ namespace HitmanGO
             FadeIn();
             Invoke("ToLevel2", 0.4f);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ToLevel2()
         {
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 4);
+
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack");
 
         }
 
@@ -48,12 +58,17 @@ namespace HitmanGO
             FadeIn();
             Invoke("ToLevel3", 0.4f);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ToLevel3()
         {
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 5);
+
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack");
 
         }
 
@@ -63,6 +78,8 @@ namespace HitmanGO
             FadeIn();
             Invoke("ToLevel4", 0.4f);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ToLevel4()
         {
@@ -70,6 +87,9 @@ namespace HitmanGO
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 6);
+
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack");
 
         }
 
@@ -79,12 +99,17 @@ namespace HitmanGO
             FadeIn();
             Invoke("ToLevel5", 0.4f);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ToLevel5()
         {
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 7);
+
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack_1_5");
 
         }
 
@@ -94,12 +119,17 @@ namespace HitmanGO
             FadeIn();
             Invoke("ToLevel6", 0.4f);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ToLevel6()
         {
             GameManager.GetInstance.ChangeState(GameManager.States.Gameplay);
 
             SceneManager.LoadScene(levelIndex + 8);
+
+            AudioManager.Instance.StopSound("MenuSoundtrack");
+            AudioManager.Instance.PlaySound("GameSoundtrack");
 
         }
 
@@ -111,6 +141,10 @@ namespace HitmanGO
             GameManager.GetInstance.ChangeState(GameManager.States.BoxSelectMenu);
 
             SceneManager.LoadScene(levelIndex + 1);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.StopSound("GameSoundtrack");
+            AudioManager.Instance.StopSound("GameSoundtrack_1_5");
         }
         private void FadeIn()
         {

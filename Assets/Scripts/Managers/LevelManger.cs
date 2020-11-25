@@ -94,6 +94,8 @@ namespace HitmanGO
             if (CompleteLevel == null)
             {
                 CompleteLevel = OnLevelCompleted;
+
+                AudioManager.Instance.PlaySound("LevelComplete_OneCard");
             }
         }
 
@@ -154,10 +156,14 @@ namespace HitmanGO
             ChangeState(States.GameOver);
             Debug.Log("Game Over");
             Invoke("ReloadLevel", 2f);
+
+            AudioManager.Instance.PlaySound("FinishLevel");
         }
         private void ReloadLevel()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+            AudioManager.Instance.PlaySound("FinishLevel");
         }
 
         private void OnLevelCompleted()

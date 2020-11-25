@@ -117,6 +117,10 @@ namespace HitmanGO
         private void Awake()
         {
             Screen.fullScreen = true;
+
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         public void BackButtonPressed()
@@ -146,11 +150,40 @@ namespace HitmanGO
         public void OnBackButtonClicked()
         {
             BackButtonPressed();
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
         }
 
         private void ChangeUIToMainMenu()
         {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.MainMenu);
+
+            if(soundEnabled == true)
+            {
+                soundEnabled = false;
+                AudioManager.Instance.PlaySound("MenuSoundtrack");
+               
+            }
+            else if (soundEnabled == false)
+            {
+                soundEnabled = true;
+                AudioManager.Instance.StopSound("MenuSoundtrack");
+                
+            }
+
+            if (musicEnabled == true)
+            {
+                musicEnabled = false;
+                AudioManager.Instance.PlaySound("MenuSoundtrack");
+
+            }
+            else if (musicEnabled == false)
+            {
+                musicEnabled = true;
+                AudioManager.Instance.StopSound("MenuSoundtrack");
+
+            }
         }
 
         private void DeactivateOptions()
@@ -163,6 +196,9 @@ namespace HitmanGO
             soundEnabled = true;
             soundOffObject.SetActive(false);
             soundOnObject.SetActive(true);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
         }
 
         public void OnSoundOffButtonClicked()
@@ -170,6 +206,9 @@ namespace HitmanGO
             soundEnabled = false;
             soundOffObject.SetActive(true);
             soundOnObject.SetActive(false);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.StopSound("MenuSoundtrack");
         }
 
         public void OnMusicOnButtonClicked()
@@ -177,6 +216,9 @@ namespace HitmanGO
             musicEnabled = true;
             musicOffObject.SetActive(false);
             musicOnObject.SetActive(true);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
         }
 
         public void OnMusicOffButtonClicked()
@@ -184,6 +226,9 @@ namespace HitmanGO
             musicEnabled = false;
             musicOffObject.SetActive(true);
             musicOnObject.SetActive(false);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.StopSound("MenuSoundtrack");
         }
 
         public void OnVSyncOnButtonClicked()
@@ -193,6 +238,8 @@ namespace HitmanGO
             vSyncOnObject.SetActive(true);
 
             QualitySettings.vSyncCount = 1;
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         public void OnVSyncOffButtonClicked()
@@ -202,6 +249,8 @@ namespace HitmanGO
             vSyncOnObject.SetActive(false);
 
             QualitySettings.vSyncCount = 0;
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
         public void OnSupportButtonClicked()
@@ -217,10 +266,13 @@ namespace HitmanGO
         public void OnResetGameButtonClicked()
         {
             ResetGameButtonPressed();
+
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
         private void ChangeUIToResetMenu()
         {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.ResetGame);
+
         }
 
         public void OnCreditsButtonClicked()
@@ -236,6 +288,8 @@ namespace HitmanGO
                 qualityHighObject.SetActive(false);
                 qualityHigh = false;
                 QualitySettings.SetQualityLevel(0);
+
+                AudioManager.Instance.PlaySound("SelectedButton");
             }
             else if (qualityHigh == false)
             {
@@ -243,6 +297,8 @@ namespace HitmanGO
                 qualityHighObject.SetActive(true);
                 qualityHigh = true;
                 QualitySettings.SetQualityLevel(5);
+
+                AudioManager.Instance.PlaySound("SelectedButton");
             }
         }
 
@@ -256,12 +312,16 @@ namespace HitmanGO
                 windowObject.SetActive(true);
                 fullScreenMode = false;
 
+                AudioManager.Instance.PlaySound("SelectedButton");
+
             }
             else if (fullScreenMode == false)
             {
                 fullScreenObject.SetActive(true);
                 windowObject.SetActive(false);
                 fullScreenMode = true;
+
+                AudioManager.Instance.PlaySound("SelectedButton");
             }
 
         }
@@ -275,6 +335,8 @@ namespace HitmanGO
                 resolution1.SetActive(false);
                 resolution2.SetActive(true);
                 resolution1Bool = false;
+
+                AudioManager.Instance.PlaySound("SelectedButton");
             }
             else if (resolution1Bool == false)
             {
@@ -282,6 +344,8 @@ namespace HitmanGO
                 resolution1.SetActive(true);
                 resolution2.SetActive(false);
                 resolution1Bool = true;
+
+                AudioManager.Instance.PlaySound("SelectedButton");
 
             }
         }
@@ -312,6 +376,8 @@ namespace HitmanGO
             optionMenu.SetActive(false);
             Screen.SetResolution(1680, 1050, true);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ResolutionChangeCheck2()
         {
@@ -319,6 +385,8 @@ namespace HitmanGO
             resolutionChangePage2.SetActive(true);
             optionMenu.SetActive(false);
             Screen.SetResolution(1920, 1080, true);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
 
         }
 
@@ -353,6 +421,8 @@ namespace HitmanGO
 
             resolution = 1;
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ResolutionChange2Confirmed()
         {
@@ -362,6 +432,7 @@ namespace HitmanGO
 
             resolution = 0;
 
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
 
@@ -374,6 +445,7 @@ namespace HitmanGO
                 Invoke("ResolutionChange1Canceled", 0.4f);
                 Invoke("FadeOut", 0.5f);
                 Invoke("BlackPanelDisappears", 1f);
+
             }
             else if (resolution == 1)
             {
@@ -392,6 +464,8 @@ namespace HitmanGO
             Screen.SetResolution(1920, 1080, true);
             optionMenu.SetActive(true);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
         }
         private void ResolutionChange2Canceled()
         {
@@ -400,6 +474,7 @@ namespace HitmanGO
             Screen.SetResolution(1680, 1050, true);
             optionMenu.SetActive(true);
 
+            AudioManager.Instance.PlaySound("SelectedButton");
         }
 
 

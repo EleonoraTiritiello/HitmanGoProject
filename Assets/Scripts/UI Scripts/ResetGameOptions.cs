@@ -65,6 +65,8 @@ namespace HitmanGO
         public void OnVButtonClicked()
         {
             //Inserire il behaviour che resetta il gioco
+            AudioManager.Instance.PlaySound("SelectedButton");
+
             Debug.Log("VButtonClicked");
         }
 
@@ -75,11 +77,16 @@ namespace HitmanGO
             // StartCoroutine(UIMenu.GetInstance.BlackPanelAppears());
             // StartCoroutine(UIMenu.GetInstance.BlackPanelDisappears());
 
+            AudioManager.Instance.PlaySound("SelectedButton");
+
             BackButtonPressed();
         }
         private void ChangeUIToOptions()
         {
             UIMenu.GetInstance.ChangeMenu(UIMenu.Menus.OptionsMenu);
+
+            AudioManager.Instance.PlaySound("SelectedButton");
+            AudioManager.Instance.PlaySound("MenuSoundtrack");
         }
 
     }
