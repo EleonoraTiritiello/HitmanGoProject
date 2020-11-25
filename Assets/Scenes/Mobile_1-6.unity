@@ -1052,7 +1052,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2656,6 +2656,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3545101935132743886, guid: 060f2b0d2bab4cc459c9890e8383c4b1,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 444342534}
     - target: {fileID: 3598140811761311460, guid: 060f2b0d2bab4cc459c9890e8383c4b1,
         type: 3}
       propertyPath: FacingDirection
@@ -2752,6 +2757,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3545101935132743886, guid: 060f2b0d2bab4cc459c9890e8383c4b1,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 444342534}
     - target: {fileID: 3598140811761311460, guid: 060f2b0d2bab4cc459c9890e8383c4b1,
         type: 3}
       propertyPath: FacingDirection
@@ -3049,24 +3059,22 @@ PrefabInstance:
     - target: {fileID: 1724652871284757670, guid: 4e3f4217b1872364e8baefd6a874370a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.044691544
+      value: -0.044691574
       objectReference: {fileID: 0}
     - target: {fileID: 1724652871284757670, guid: 4e3f4217b1872364e8baefd6a874370a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.026981601
+      value: 0.026981616
       objectReference: {fileID: 0}
     - target: {fileID: 1724652872055951217, guid: 4e3f4217b1872364e8baefd6a874370a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.04564218
       value: -0.045642152
       objectReference: {fileID: 0}
     - target: {fileID: 1724652872055951217, guid: 4e3f4217b1872364e8baefd6a874370a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.025340386
-      value: 0.025340373
+      value: 0.025340376
       objectReference: {fileID: 0}
     - target: {fileID: 1724652872946636020, guid: 4e3f4217b1872364e8baefd6a874370a,
         type: 3}
@@ -3167,6 +3175,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 568998144374956573, guid: e2a262e5aa49ed940aa62f7594b36c41,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 444342534}
     - target: {fileID: 5768840860639305946, guid: e2a262e5aa49ed940aa62f7594b36c41,
         type: 3}
       propertyPath: m_Name
@@ -4340,7 +4353,7 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 444342534}
     - target: {fileID: 3188157543578617202, guid: 8a238fb95cb4a064185bad03d303752b,
         type: 3}
       propertyPath: FacingDirection
