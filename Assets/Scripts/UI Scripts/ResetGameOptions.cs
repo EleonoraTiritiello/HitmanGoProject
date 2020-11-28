@@ -65,6 +65,7 @@ namespace HitmanGO
         public void OnVButtonClicked()
         {
             //Inserire il behaviour che resetta il gioco
+            PlayerPrefs.SetInt("CurrentLevelIndex", -1);
             Debug.Log("VButtonClicked");
         }
 
