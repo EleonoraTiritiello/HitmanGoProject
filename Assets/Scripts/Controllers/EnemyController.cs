@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 
 namespace HitmanGO
 {
@@ -13,9 +14,11 @@ namespace HitmanGO
 
         #region Public Variables
 
-        public enum FacingDirections { Up, Down, Left, Right }
+        public enum FacingDirections { Up, Down, Left, Right, No }
 
         public FacingDirections FacingDirection = FacingDirections.Up;
+
+        public GameObject DiePosition;
 
         public enum Actions
         {
@@ -50,6 +53,8 @@ namespace HitmanGO
 
         [SerializeField]
         private GameObject _alertIcon;
+        [SerializeField]
+        private Vector3 _dieAnimationVector;
 
         #endregion
 
@@ -114,10 +119,28 @@ namespace HitmanGO
 
         public override void OnDie()
         {
-            //Animazione di morte
-
+            FacingDirection = FacingDirections.No;
+            transform.DOMove(transform.up * 50, 1.3f);
             base.OnDie();
+            //StartCoroutine("Caca");
+            //transform.DOPunchRotation(_dieAnimationVector, 1);
+
         }
+        /*
+        public IEnumerator Caca()
+        {
+            yield return new WaitForSeconds(0.5f);
+            gameObject.transform.DOScale(new Vector3(0.000001f, 0.000001f, 0.000001f), 0.1f);
+            transform.DOMove(transform.up * 50, 1);
+            yield return new WaitForSeconds(1 + 0.5f);
+            gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f);
+            transform.DOMove(_dieAnimationVector, 1);
+            //yield return new WaitForSeconds(1);
+            //GetComponent<Animator>().enabled = false;
+            //transform.DOMove(DiePosition.transform.position, 1);
+
+        }
+        */
 
         #endregion
 
@@ -155,6 +178,8 @@ namespace HitmanGO
                         transform.rotation = Quaternion.Euler(Vector3.up * 90f);
                     }
                     break;
+                case FacingDirections.No:
+                    break;
                 default:
                     break;
             }
@@ -162,8 +187,6 @@ namespace HitmanGO
             if (PFC.GetTargetNode() == null)
                 Debug.LogError($"The enemy '{name}' does not look in any direction");
         }
-
-
         #endregion
     }
 }
